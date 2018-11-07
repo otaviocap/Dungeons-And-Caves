@@ -1,3 +1,6 @@
+# Don't track content of these folders
 .git/
 .idea/
+OldFiles/
+Fonts/
 Files/__pycache__/
