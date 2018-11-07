@@ -1,3 +1,3 @@
-
-*.xml
-.idea/Pygame-project.iml
+.git/
+.idea/
+Files/__pycache__/
