@@ -1,0 +1,10 @@
+{
+    "debug": false,
+    "fps": 60,
+    "fullscreen": false,
+    "screenSize": [
+        1200,
+        720
+    ],
+    "volume": 100
+}
