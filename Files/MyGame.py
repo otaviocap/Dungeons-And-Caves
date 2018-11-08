@@ -7,6 +7,8 @@ from interpreter import interpreter
 class game():
 
     def __init__(self):
+        #Variaveis iniciais
+
         pygame.init()
         self.configs = interpreter('configs')
         self.hab1cooldown = 10

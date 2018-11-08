@@ -9,7 +9,7 @@ class Bullet(pygame.sprite.Sprite):
         self.size = (10, 10)
         self.screenSize = screenSize
         self.color = (0, 255, 0)
-        self.image = pygame.image.load('../assets/bullet.png')
+        self.image = pygame.image.load('../Assets/bullet.png')
         self.image = pygame.transform.scale(self.image, self.size)
         self.transformImgSide()
         self.rect = self.image.get_rect()
