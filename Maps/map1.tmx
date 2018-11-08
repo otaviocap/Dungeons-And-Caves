@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="31" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="17" nextobjectid="21">
- <tileset firstgid="1" source="Tilesets/TiledSets/Dungeon3-16x16.tsx"/>
- <tileset firstgid="257" source="Tilesets/TiledSets/Dungeon3-16x16-itens.tsx"/>
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="31" height="16" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="78">
+ <tileset firstgid="1" source="Dungeon3-16x16.tsx"/>
+ <tileset firstgid="257" source="Dungeon3-16x16-itens.tsx"/>
  <tileset firstgid="513" source="Tilesets/TiledSets/sewer1-16x16.tsx"/>
  <layer id="10" name="UnderGround" width="31" height="16">
   <data encoding="csv">
@@ -93,9 +93,9 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,590,588,0,0,589,592,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,574,0,0,576,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,590,0,0,592,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,120,0,0,118,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,120,0,0,118,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,120,0,0,118,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -143,27 +143,51 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="9" name="Object Layer 1">
-  <object id="3" name="spawn" x="288" y="170.667">
+ <objectgroup id="9" name="walls" visible="0">
+  <object id="17" name="wall" x="464" y="60" width="5.33333" height="84"/>
+  <object id="18" name="wall" x="448" y="125.333" width="16" height="18.6667"/>
+  <object id="19" name="wall" x="448" y="144" width="5.33333" height="48"/>
+  <object id="20" name="wall" x="368" y="173.333" width="79.9997" height="18.6667"/>
+  <object id="21" name="wall" x="364" y="124" width="4" height="68"/>
+  <object id="22" name="wall" x="336" y="124" width="28" height="20"/>
+  <object id="23" name="wall" x="332" y="108" width="4" height="36"/>
+  <object id="24" name="wall" x="304" y="108" width="28" height="20"/>
+  <object id="25" name="wall" x="244" y="108" width="28" height="20"/>
+  <object id="26" name="wall" x="240" y="108" width="4" height="64"/>
+  <object id="28" name="wall" x="196" y="156" width="44" height="16"/>
+  <object id="29" name="wall" x="192" y="156" width="4" height="52"/>
+  <object id="30" name="wall" x="180" y="188" width="12" height="20"/>
+  <object id="31" name="wall" x="176" y="188" width="4" height="36"/>
+  <object id="32" name="wall" x="32" y="204" width="144" height="20"/>
+  <object id="33" name="wall" x="28" y="28" width="4" height="196"/>
+  <object id="36" name="wall" x="32" y="28" width="160" height="20"/>
+  <object id="37" name="wall" x="240" y="28" width="4" height="52"/>
+  <object id="38" name="wall" x="244" y="60" width="220" height="20"/>
+  <object id="54" name="wall" x="208" y="28" width="32" height="20"/>
+  <object id="56" name="wall" x="368" y="80" width="32" height="16"/>
+  <object id="57" name="wall" x="384" y="96" width="16" height="16"/>
+  <object id="58" name="wall" x="208" y="172" width="32" height="20"/>
+  <object id="59" name="wall" x="196" y="192" width="172" height="16"/>
+  <object id="55" name="wall" type="life" x="192" y="28" width="16" height="20"/>
+ </objectgroup>
+ <objectgroup id="17" name="holes" visible="0">
+  <object id="63" name="hole" x="48" y="64" width="48" height="16"/>
+  <object id="64" name="hole" x="48" y="80" width="16" height="96"/>
+  <object id="65" name="hole" x="64" y="160" width="80" height="32"/>
+  <object id="66" name="hole" x="144" y="128" width="16" height="48"/>
+  <object id="67" name="hole" x="80" y="96" width="16" height="48"/>
+  <object id="68" name="hole" x="96" y="128" width="48" height="16"/>
+  <object id="69" name="hole" x="368" y="128" width="16" height="44"/>
+  <object id="70" name="hole" x="384" y="128" width="48" height="16"/>
+  <object id="71" name="hole" x="384" y="160" width="48" height="12"/>
+  <object id="72" name="hole" x="432" y="128" width="16" height="44"/>
+ </objectgroup>
+ <objectgroup id="18" name="triggers">
+  <object id="74" name="spawn" x="288" y="171">
    <point/>
   </object>
-  <object id="4" name="end" x="440" y="103.667"/>
-  <object id="9" name="door" x="272" y="120" width="32" height="10.6667"/>
-  <object id="10" x="96" y="64">
-   <polygon points="0,0 0,16 -32,16 -32,96 48,96 48,80 -16,80 -16,32 0,32 0,64 64,64 64,112 48,112 48,128 -32,128 -32,112 -48,112 -48,0"/>
-  </object>
-  <object id="11" x="29.3333" y="29.3333">
-   <polygon points="0,0 210.667,0 210.667,18.6667 0,18.6667"/>
-  </object>
-  <object id="15" x="240" y="29.3333">
-   <polygon points="0,0 5.33333,0 5.33333,50.6667 0,50.6667"/>
-  </object>
-  <object id="16" x="245.333" y="61.3333">
-   <polygon points="0,0 218.667,0 218.667,18.6667 0,18.6667"/>
-  </object>
-  <object id="17" x="464" y="61.3333" width="5.33333" height="82.6667"/>
-  <object id="18" x="448" y="125.333" width="16" height="18.6667"/>
-  <object id="19" x="448" y="144" width="5.33333" height="48"/>
-  <object id="20" x="365.333" y="173.333" width="82.6667" height="18.6667"/>
+  <object id="75" name="end" x="440" y="104"/>
+  <object id="76" name="door" x="272" y="120.333" width="32" height="10.6667"/>
+  <object id="77" name="chest" x="128" y="144.333" width="16" height="16"/>
  </objectgroup>
 </map>

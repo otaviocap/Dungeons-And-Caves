@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.2" tiledversion="1.2.0" name="Dungeon3-16x16-itens" tilewidth="16" tileheight="16" tilecount="256" columns="16">
- <image source="../Dungeon3-16x16-itens.png" width="256" height="256"/>
+ <image source="../Assets/Dungeon3-16x16-itens.png" width="256" height="256"/>
  <tile id="152">
   <animation>
    <frame tileid="152" duration="100"/>
