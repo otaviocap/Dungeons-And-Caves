@@ -6,9 +6,9 @@ class Player():
         self.size = (sizeX, sizeY)
         self.rect = pygame.Rect(x, y, sizeX, sizeY)
         self.cooldown = 0
-        self.image = pygame.image.load('../assets/character.png')
+        self.image = pygame.image.load('../Assets/character.png')
         self.image = pygame.transform.scale(self.image, (self.getSize()[0]**2, self.getSize()[1]**2))
-        self.original = pygame.image.load('../assets/character.gif')
+        self.original = pygame.image.load('../Assets/character.gif')
         self.original = pygame.transform.scale(self.original, (self.getSize()[0] ** 2, self.getSize()[1] ** 2))
         self.transformImgSide()
         self.gunBarrel = [100, 100]
