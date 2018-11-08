@@ -143,7 +143,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="9" name="walls" visible="0">
+ <objectgroup id="9" name="walls">
   <object id="17" name="wall" x="464" y="60" width="5.33333" height="84"/>
   <object id="18" name="wall" x="448" y="125.333" width="16" height="18.6667"/>
   <object id="19" name="wall" x="448" y="144" width="5.33333" height="48"/>
@@ -170,7 +170,7 @@
   <object id="59" name="wall" x="196" y="192" width="172" height="16"/>
   <object id="55" name="wall" type="life" x="192" y="28" width="16" height="20"/>
  </objectgroup>
- <objectgroup id="17" name="holes" visible="0">
+ <objectgroup id="17" name="holes">
   <object id="63" name="hole" x="48" y="64" width="48" height="16"/>
   <object id="64" name="hole" x="48" y="80" width="16" height="96"/>
   <object id="65" name="hole" x="64" y="160" width="80" height="32"/>
