@@ -2,6 +2,7 @@ import pygame
 from Player import Player
 from Bullet import Bullet
 from interpreter import interpreter
+from map import tiledMap
 
 
 class game():
@@ -19,6 +20,9 @@ class game():
         self.screenSize = self.configs.getParameter('screenSize')
         self.fps = self.configs.getParameter('fps')
         self.screen = pygame.display.set_mode(self.screenSize)
+        self.map = tiledMap('../Maps/map1.tmx')
+        self.mapImg = self.map.makeMap()
+        self.mapRect = self.mapImg.get_rect()
         pygame.display.set_caption("My Game")
 
         self.clock = pygame.time.Clock()
@@ -104,6 +108,11 @@ class game():
         self.clock.tick(self.fps)
         self.velocity = 2
         self.screen.fill((0, 0, 0))
+        self.map2x = self.mapImg
+        for i in range(3):
+            temp = pygame.transform.scale2x(self.map2x)
+            self.map2x = temp
+        self.screen.blit(self.map2x, (30, 30))
         for i in self.bullets.sprites():
             i.go()
             # pygame.draw.rect(screen, i.getColor(), i.rect)
