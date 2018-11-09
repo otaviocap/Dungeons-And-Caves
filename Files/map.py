@@ -25,3 +25,8 @@ class tiledMap:
 
     def getProportions(self):
         return (self.height, self.width)
+
+class wall(pygame.sprite.Sprite):
+    def __init__(self, game, x, y, z, h):
+        self.groups = game.walls
+

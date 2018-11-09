@@ -61,6 +61,8 @@ class game():
             self.player.move(0, self.velocity)
 
 
+
+
         if self.player.checkCooldown():
             if key[pygame.K_LEFT] or key[pygame.K_RIGHT] or key[pygame.K_UP] or key[pygame.K_DOWN]:
                 if self.mag == 0:
@@ -109,10 +111,10 @@ class game():
         self.velocity = 2
         self.screen.fill((0, 0, 0))
         self.map2x = self.mapImg
-        for i in range(3):
+        for i in range(2):
             temp = pygame.transform.scale2x(self.map2x)
             self.map2x = temp
-        self.screen.blit(self.map2x, (30, 30))
+        self.screen.blit(self.mapImg, (30, 30))
         for i in self.bullets.sprites():
             i.go()
             # pygame.draw.rect(screen, i.getColor(), i.rect)

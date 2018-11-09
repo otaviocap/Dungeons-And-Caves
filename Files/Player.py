@@ -17,8 +17,9 @@ class Player():
     def move(self, dx, dy):
         if dx != 0:
             self.move_single_axis(dx, 0)
-        if dy != 0:
+        elif dy != 0:
             self.move_single_axis(0, dy)
+
 
     def move_single_axis(self, dx, dy):
         self.rect.x += dx
@@ -73,3 +74,23 @@ class Player():
 
     def getGunBarrel(self):
         return self.gunBarrel
+
+    def collide_with_walls(self, dir):
+        if dir == 'x':
+            hits = pg.sprite.spritecollide(self, self.game.walls, False)
+            if hits:
+                if self.vx > 0:
+                    self.x = hits[0].rect.left - self.rect.width
+                if self.vx < 0:
+                    self.x = hits[0].rect.right
+                self.vx = 0
+                self.rect.x = self.x
+        if dir == 'y':
+            hits = pg.sprite.spritecollide(self, self.game.walls, False)
+            if hits:
+                if self.vy > 0:
+                    self.y = hits[0].rect.top - self.rect.height
+                if self.vy < 0:
+                    self.y = hits[0].rect.bottom
+                self.vy = 0
+                self.rect.y = self.y
