@@ -3,6 +3,7 @@ from Player import Player
 from Bullet import Bullet
 from interpreter import interpreter
 from map import tiledMap
+from camera import Camera
 
 
 class game():
@@ -23,6 +24,7 @@ class game():
         self.map = tiledMap('../Maps/map1.tmx')
         self.mapImg = self.map.makeMap()
         self.mapRect = self.mapImg.get_rect()
+        self.camera = Camera(self.mapRect.x, self.mapRect.y)
         pygame.display.set_caption("My Game")
 
         self.clock = pygame.time.Clock()
@@ -35,6 +37,7 @@ class game():
         while not self.done:
             self.events()
             self.update()
+            self.draw()
 
         pygame.quit()
 
@@ -109,24 +112,23 @@ class game():
     def update(self):
         self.clock.tick(self.fps)
         self.velocity = 2
-        self.screen.fill((0, 0, 0))
-        self.map2x = self.mapImg
-        for i in range(2):
-            temp = pygame.transform.scale2x(self.map2x)
-            self.map2x = temp
-        self.screen.blit(self.mapImg, (30, 30))
+        self.camera.update(self.player)
         for i in self.bullets.sprites():
             i.go()
-            # pygame.draw.rect(screen, i.getColor(), i.rect)
-            self.screen.blit(i.getImg(), (i.getPos()[0] - i.getImg().get_rect().center[0], i.getPos()[1] - i.getImg().get_rect().center[1]))
             if i.rect.x >= self.screenSize[0] or i.rect.y >= self.screenSize[1] or i.rect.x <= 0 or i.rect.y <= 0:
                 self.bullets.remove(i)
-        # pygame.draw.rect(screen, (97,49,108), player.rect)
         self.player.goCooldown()
+        pygame.display.set_caption(str(self.ammo) + '/' + str(self.mag) + str(self.bullets) + 'FPS = ' + str(self.clock.get_fps()))
+
+    def draw(self):
+        self.screen.fill((0, 0, 0))
+        self.screen.blit(self.mapImg, (30, 30))
+        for i in self.bullets.sprites():
+            self.screen.blit(i.getImg(), (i.getPos()[0] - i.getImg().get_rect().center[0], i.getPos()[1] - i.getImg().get_rect().center[1]))
         self.screen.blit(self.player.getImg(), (self.player.getPos()[0] - self.player.getImg().get_rect().center[0], self.player.getPos()[1] - self.player.getImg().get_rect().center[1]))
         pygame.display.flip()
-        pygame.display.set_caption(str(self.ammo) + '/' + str(self.mag) + str(self.bullets) + 'FPS = ' + str(self.clock.get_fps()))
-        print(self.ammo, '/', self.mag)
+
+
 
 if __name__ == '__main__':
     a = game()
