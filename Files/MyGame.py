@@ -21,19 +21,31 @@ class game():
         self.screenSize = self.configs.getParameter('screenSize')
         self.fps = self.configs.getParameter('fps')
         self.screen = pygame.display.set_mode(self.screenSize)
+        pygame.display.set_caption("My Game")
+        self.clock = pygame.time.Clock()
+        self.done = False
         self.map = tiledMap('../Maps/map1.tmx')
         self.mapImg = self.map.makeMap()
         self.mapRect = self.mapImg.get_rect()
-        self.camera = Camera(self.mapRect.x, self.mapRect.y)
-        pygame.display.set_caption("My Game")
-
-        self.clock = pygame.time.Clock()
-        self.done = False
+        self.allSprites = pygame.sprite.Group()
+        self.walls = pygame.sprite.Group()
         self.bullets = pygame.sprite.Group()
-        self.player = Player(0, 0)
+        self.camera = Camera(self.mapRect.x, self.mapRect.y)
         self.mag = 10
 
+    def new(self):
+        for i in self.map.tmdata.objects:
+            print(i)
+            if i.name == 'spawn':
+                self.player = Player(i.x, i.y)
+            if i.name == 'wall':
+                pass
+                #Obstacle(self, i.x, i.y,i.width, i.height)
+        self.allSprites.add(self.player)
+        self.camera = Camera(self.mapRect.width, self.mapRect.height)
+
     def gameRun(self):
+        self.new()
         while not self.done:
             self.events()
             self.update()
@@ -83,6 +95,7 @@ class game():
                         bullet.rect.x = self.player.rect.x - 35
                         bullet.rect.y = self.player.rect.y + 25
                         self.bullets.add(bullet)
+                        self.allSprites.add(bullet)
                         self.player.setCooldown(self.hab1cooldown)
 
                     elif key[pygame.K_RIGHT]:
@@ -91,6 +104,7 @@ class game():
                         bullet.rect.x = self.player.rect.x + 40
                         bullet.rect.y = self.player.rect.y + 27
                         self.bullets.add(bullet)
+                        self.allSprites.add(bullet)
                         self.player.setCooldown(self.hab1cooldown)
 
                     elif key[pygame.K_UP]:
@@ -99,6 +113,7 @@ class game():
                         bullet.rect.x = self.player.rect.x + 26
                         bullet.rect.y = self.player.rect.y - 40
                         self.bullets.add(bullet)
+                        self.allSprites.add(bullet)
                         self.player.setCooldown(self.hab1cooldown)
 
                     elif key[pygame.K_DOWN]:
@@ -107,6 +122,7 @@ class game():
                         bullet.rect.x = self.player.rect.x - 25
                         bullet.rect.y = self.player.rect.y + 30
                         self.bullets.add(bullet)
+                        self.allSprites.add(bullet)
                         self.player.setCooldown(self.hab1cooldown)
 
     def update(self):
@@ -117,15 +133,15 @@ class game():
             i.go()
             if i.rect.x >= self.screenSize[0] or i.rect.y >= self.screenSize[1] or i.rect.x <= 0 or i.rect.y <= 0:
                 self.bullets.remove(i)
+                self.allSprites.remove(i)
         self.player.goCooldown()
         pygame.display.set_caption(str(self.ammo) + '/' + str(self.mag) + str(self.bullets) + 'FPS = ' + str(self.clock.get_fps()))
 
     def draw(self):
         self.screen.fill((0, 0, 0))
-        self.screen.blit(self.mapImg, (30, 30))
-        for i in self.bullets.sprites():
-            self.screen.blit(i.getImg(), (i.getPos()[0] - i.getImg().get_rect().center[0], i.getPos()[1] - i.getImg().get_rect().center[1]))
-        self.screen.blit(self.player.getImg(), (self.player.getPos()[0] - self.player.getImg().get_rect().center[0], self.player.getPos()[1] - self.player.getImg().get_rect().center[1]))
+        self.screen.blit(self.mapImg, self.camera.apply_rect(self.mapRect))
+        for i in self.allSprites.sprites():
+            self.screen.blit(i.getImg(), self.camera.apply(i))
         pygame.display.flip()
 
 

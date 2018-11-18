@@ -27,6 +27,15 @@ class tiledMap:
         return (self.height, self.width)
 
 class wall(pygame.sprite.Sprite):
-    def __init__(self, game, x, y, z, h):
+
+    def __init__(self, game, x, y, w, h):
+        super().__init__(self, self.groups)
         self.groups = game.walls
+        self.game = game
+        self.rect = pygame.Rect(x, y, w, h)
+        self.hit_rect = self.rect
+        self.x = x
+        self.y = y
+        self.rect.x = x
+        self.rect.y = y
 

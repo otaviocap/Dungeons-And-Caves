@@ -1,7 +1,8 @@
 import pygame
 
-class Player():
+class Player(pygame.sprite.Sprite):
     def __init__(self, x=0, y=0, sizeX=10, sizeY=10):
+        super().__init__()
         self.direction = 'right'
         self.size = (sizeX, sizeY)
         self.rect = pygame.Rect(x, y, sizeX, sizeY)
@@ -19,7 +20,9 @@ class Player():
             self.move_single_axis(dx, 0)
         elif dy != 0:
             self.move_single_axis(0, dy)
-
+    def changeSpawn(self, x, y):
+        self.rect.x = x
+        self.rect.y = y
 
     def move_single_axis(self, dx, dy):
         self.rect.x += dx
@@ -94,3 +97,4 @@ class Player():
                     self.y = hits[0].rect.bottom
                 self.vy = 0
                 self.rect.y = self.y
+
