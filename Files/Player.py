@@ -3,10 +3,9 @@ import pygame
 class Player(pygame.sprite.Sprite):
     def __init__(self, game, x=0, y=0, sizeX=10, sizeY=10):
         super().__init__()
-        self.direction = 'right'
-        self.size = (sizeX, sizeY)
+        self.direction = 'left'
         self.game = game
-        self.image = pygame.image.load('../Assets/character2.png')
+        self.image = pygame.image.load('../Assets/character.png')
         self.image = pygame.transform.scale(self.image, (self.image.get_size()[0], self.image.get_size()[1]))
         self.rect = pygame.Rect(x, y, self.image.get_rect().width, self.image.get_rect().height)
         self.cooldown = 0
@@ -22,6 +21,7 @@ class Player(pygame.sprite.Sprite):
         # self.gunBarrel = [X , Y]
 
     def update(self):
+        self.goCooldown()
         self.move()
         self.x += self.vx
         self.y += self.vy
@@ -94,13 +94,6 @@ class Player(pygame.sprite.Sprite):
             pass
         else:
             self.cooldown -= 1
-
-    def getSize(self):
-        return self.size
-
-    def setSize(self, size, screen):
-        self.size += size
-        pygame.transform.scale(screen, self.size)
 
     def getImg(self):
         return self.image

@@ -5,7 +5,7 @@ class interpreter():
     def __init__(self, name='configs'):
         a = {
             'debug': False,
-            'screenSize': (1200, 720),
+            'screenSize': (720, 480),
             'volume': 100,
             'fullscreen': False,
             'fps': 60

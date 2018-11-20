@@ -35,6 +35,8 @@ class game():
         self.bullets = pygame.sprite.Group()
         self.camera = Camera(self.mapRect.x, self.mapRect.y)
         self.mag = 10
+        self.debugStatus = self.data.getParameter('debug')
+        print(self.debugStatus)
 
     def new(self):
         for i in self.map.tmdata.objects:
@@ -51,9 +53,8 @@ class game():
         while not self.done:
             self.events()
             self.update()
-            self.draw()
             self.debug()
-
+            self.draw()
         pygame.quit()
 
 
@@ -97,10 +98,7 @@ class game():
         self.clock.tick(self.fps)
         self.velocity = 2
         self.camera.update(self.player)
-        for i in self.bullets.sprites():
-            i.update()
-        self.player.goCooldown()
-        self.player.update()
+        self.allSprites.update()
         pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps()))
 
     def draw(self):
@@ -113,7 +111,7 @@ class game():
         pygame.display.flip()
 
     def debug(self):
-        if self.data.getParameter('debug'):
+        if self.debugStatus:
             temp = pygame.Surface((self.player.rect.width, self.player.rect.height))
             temp.fill((255, 255, 255))
             self.screen.blit(temp, self.camera.apply(self.player))

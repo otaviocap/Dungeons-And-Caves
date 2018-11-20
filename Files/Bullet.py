@@ -18,11 +18,9 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.speed = speed
         self.direction = direction
-        self.rect.x = self.game.player.rect.centerx
-        self.rect.y = self.game.player.rect.centery
+        self.rect.x = self.game.player.rect.center[0]
+        self.rect.y = self.game.player.rect.center[1]
         self.starTime = pygame.time.get_ticks()
-        self.update()
-
 
     def update(self):
         if pygame.sprite.spritecollide(self, self.game.walls, False) or (pygame.time.get_ticks() - self.starTime) >= 1000:
