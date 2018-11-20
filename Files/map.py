@@ -1,5 +1,6 @@
 import pytmx as px
 import pygame
+import pytmx.pytmx
 
 class tiledMap:
 
@@ -9,33 +10,34 @@ class tiledMap:
         self.height = tm.height * tm.tileheight
         self.tmdata = tm
 
-    def render(self, surface):
+
+    def render(self, surface, game):
         ti = self.tmdata.get_tile_image_by_gid
+        tempSurface3 = pygame.Surface(surface.get_size(), pygame.SRCALPHA)
+        tempSurface2 = pygame.Surface(surface.get_size(), pygame.SRCALPHA)
         for layers in self.tmdata.visible_layers:
-            if isinstance(layers, px.TiledTileLayer):
+            if layers.name == 'UpperCharacter':
+                if isinstance(layers, px.TiledTileLayer):
+                    for x, y, gid in layers:
+                        tile = ti(gid)
+                        if tile:
+                            if gid == 0:
+                                pass
+                            else:
+                                tempSurface2.blit(tile, (x * self.tmdata.tilewidth, y * self.tmdata.tileheight))
+                    self.upperLayer = tempSurface2
+            elif isinstance(layers, px.TiledTileLayer):
                 for x, y, gid in layers:
                     tile = ti(gid)
                     if tile:
-                        surface.blit(tile, (x * self.tmdata.tilewidth, y * self.tmdata.tileheight))
+                        tempSurface3.blit(tile, (x * self.tmdata.tilewidth, y * self.tmdata.tileheight))
+                self.underLayer = tempSurface3
 
-    def makeMap(self):
+
+    def makeMap(self, game):
         tempSurface = pygame.Surface((self.width, self.height))
-        self.render(tempSurface)
+        self.render(tempSurface, game)
         return tempSurface
 
     def getProportions(self):
         return (self.height, self.width)
-
-class wall(pygame.sprite.Sprite):
-
-    def __init__(self, game, x, y, w, h):
-        super().__init__(self, self.groups)
-        self.groups = game.walls
-        self.game = game
-        self.rect = pygame.Rect(x, y, w, h)
-        self.hit_rect = self.rect
-        self.x = x
-        self.y = y
-        self.rect.x = x
-        self.rect.y = y
-

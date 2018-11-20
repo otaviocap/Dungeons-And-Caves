@@ -3,22 +3,29 @@ import pygame
 
 class Bullet(pygame.sprite.Sprite):
 
-    def __init__(self, direction, speed, screenSize):
+    def __init__(self, direction, speed, screenSize, game):
         super().__init__()
+        self.game = game
+        self.game.bullets.add(self)
+        self.game.allSprites.add(self)
         self.direction = direction
         self.size = (10, 10)
         self.screenSize = screenSize
         self.color = (0, 255, 0)
-        self.image = pygame.image.load('../Assets/bullet.png')
+        self.image = pygame.image.load('../Assets/magic.png')
         self.image = pygame.transform.scale(self.image, self.size)
         self.transformImgSide()
         self.rect = self.image.get_rect()
         self.speed = speed
         self.direction = direction
-        self.go()
+        self.rect.x = self.game.player.rect.centerx
+        self.rect.y = self.game.player.rect.centery
+        self.update()
 
 
-    def go(self):
+    def update(self):
+        if pygame.sprite.spritecollide(self, self.game.walls, False):
+            self.kill()
         if self.rect.x < self.screenSize[0]:
             if self.direction == "down":
                 self.rect.y += self.speed
