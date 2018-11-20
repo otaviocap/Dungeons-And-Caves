@@ -181,7 +181,7 @@
   <object id="72" name="hole" x="432" y="128" width="16" height="48"/>
  </objectgroup>
  <objectgroup id="18" name="triggers">
-  <object id="74" name="spawn" x="288" y="171">
+  <object id="74" name="spawn" x="181.333" y="90.6667">
    <point/>
   </object>
   <object id="75" name="end" x="432" y="96" width="16" height="16"/>
