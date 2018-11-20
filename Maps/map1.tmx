@@ -159,13 +159,13 @@
   <object id="31" name="wall" x="176" y="192" width="4" height="32"/>
   <object id="32" name="wall" x="32" y="208" width="144" height="16"/>
   <object id="33" name="wall" x="28" y="28" width="4" height="196"/>
-  <object id="36" name="wall" x="32" y="28" width="160" height="20"/>
-  <object id="37" name="wall" x="240" y="28" width="4" height="52"/>
-  <object id="38" name="wall" x="244" y="60" width="220" height="20"/>
-  <object id="54" name="wall" x="208" y="28" width="32" height="20"/>
-  <object id="56" name="wall" x="368" y="80" width="32" height="16"/>
+  <object id="36" name="wall" x="32" y="28" width="160" height="6.66667"/>
+  <object id="37" name="wall" x="240" y="28" width="4" height="38.6667"/>
+  <object id="38" name="wall" x="244" y="60" width="220" height="6.66667"/>
+  <object id="54" name="wall" x="208" y="28" width="32" height="6.66667"/>
+  <object id="56" name="wall" x="368" y="66.6667" width="32" height="29.3333"/>
   <object id="58" name="wall" x="208" y="172" width="32" height="20"/>
-  <object id="59" name="wall" x="196" y="192" width="140" height="16"/>
+  <object id="59" name="wall" x="196" y="192" width="166.667" height="16"/>
   <object id="55" name="wall" type="life" x="192" y="28" width="16" height="20"/>
  </objectgroup>
  <objectgroup id="17" name="holes">
