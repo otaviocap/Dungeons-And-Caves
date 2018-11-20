@@ -99,7 +99,7 @@ class game():
         self.velocity = 2
         self.camera.update(self.player)
         self.allSprites.update()
-        pygame.display.set_caption(str(self.allSprites) + 'FPS = ' + str(self.clock.get_fps()))
+        pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps()))
 
     def draw(self):
         self.screen.fill((0, 0, 0))

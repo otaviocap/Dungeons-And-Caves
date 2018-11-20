@@ -5,7 +5,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.direction = 'left'
         self.game = game
-        self.image = pygame.image.load('../Assets/character.png')
+        self.image = pygame.image.load('../Assets/character2.png')
         self.image = pygame.transform.scale(self.image, (self.image.get_size()[0], self.image.get_size()[1]))
         self.rect = pygame.Rect(x, y, self.image.get_rect().width, self.image.get_rect().height)
         self.cooldown = 0
