@@ -99,9 +99,6 @@ class game():
         self.camera.update(self.player)
         for i in self.bullets.sprites():
             i.update()
-            if i.rect.x >= self.screenSize[0] or i.rect.y >= self.screenSize[1] or i.rect.x <= 0 or i.rect.y <= 0:
-                self.bullets.remove(i)
-                self.allSprites.remove(i)
         self.player.goCooldown()
         self.player.update()
         pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps()))

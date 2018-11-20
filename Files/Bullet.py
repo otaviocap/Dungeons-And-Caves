@@ -20,21 +20,21 @@ class Bullet(pygame.sprite.Sprite):
         self.direction = direction
         self.rect.x = self.game.player.rect.centerx
         self.rect.y = self.game.player.rect.centery
+        self.starTime = pygame.time.get_ticks()
         self.update()
 
 
     def update(self):
-        if pygame.sprite.spritecollide(self, self.game.walls, False):
+        if pygame.sprite.spritecollide(self, self.game.walls, False) or (pygame.time.get_ticks() - self.starTime) >= 1000:
             self.kill()
-        if self.rect.x < self.screenSize[0]:
-            if self.direction == "down":
-                self.rect.y += self.speed
-            elif self.direction == "up":
-                self.rect.y -= self.speed
-            elif self.direction == "left":
-                self.rect.x -= self.speed
-            elif self.direction == "right":
-                self.rect.x += self.speed
+        elif self.direction == "down":
+            self.rect.y += self.speed
+        elif self.direction == "up":
+            self.rect.y -= self.speed
+        elif self.direction == "left":
+            self.rect.x -= self.speed
+        elif self.direction == "right":
+            self.rect.x += self.speed
 
     def getColor(self):
         return self.color
