@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.2" tiledversion="1.2.0" name="Dungeon3-16x16-itens2" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
  <image source="../Assets/Dungeon3-16x16-itens2.png" width="512" height="512"/>
+ <terraintypes>
+  <terrain name="Ground" tile="130"/>
+ </terraintypes>
  <tile id="36">
   <animation>
    <frame tileid="36" duration="100"/>
@@ -28,4 +31,12 @@
    <frame tileid="70" duration="100"/>
   </animation>
  </tile>
+ <tile id="129" terrain="0,0,0,0"/>
+ <tile id="130" terrain="0,0,0,0"/>
+ <tile id="131" terrain="0,0,0,0"/>
+ <tile id="161" terrain="0,0,0,0"/>
+ <tile id="162" terrain="0,0,0,0"/>
+ <tile id="163" terrain="0,0,0,0"/>
+ <tile id="193" terrain="0,0,0,0"/>
+ <tile id="194" terrain="0,0,0,0"/>
 </tileset>
