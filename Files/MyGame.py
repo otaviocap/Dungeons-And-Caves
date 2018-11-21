@@ -4,6 +4,8 @@ from Bullet import *
 from interpreter import *
 from map import *
 from camera import *
+from hud import *
+from end import *
 
 
 class game():
@@ -25,28 +27,36 @@ class game():
         pygame.display.set_caption("My Game")
         self.clock = pygame.time.Clock()
         self.done = False
-        self.map = tiledMap('../Maps/map1.tmx')
+        self.mag = 10
+        self.debugStatus = self.data.getParameter('debug')
+        self.mapsAlreadyPlayed = []
+        print(self.debugStatus)
+
+    def new(self, mapPath = '../Maps/map1.tmx'):
+        self.mapPath = mapPath
+        self.map = tiledMap(mapPath)
         self.frontSprites = pygame.sprite.Group()
         self.backSprites = pygame.sprite.Group()
         self.mapImg = self.map.makeMap(self)
         self.mapRect = self.mapImg.get_rect()
         self.allSprites = pygame.sprite.Group()
+        self.triggers = pygame.sprite.Group()
+        self.players = pygame.sprite.Group()
         self.walls = pygame.sprite.Group()
         self.bullets = pygame.sprite.Group()
         self.camera = Camera(self.mapRect.x, self.mapRect.y)
-        self.mag = 10
-        self.debugStatus = self.data.getParameter('debug')
-        print(self.debugStatus)
-
-    def new(self):
         for i in self.map.tmdata.objects:
             if i.name == 'spawn':
                 self.player = Player(self, i.x, i.y)
             if i.name == 'wall':
                 Wall(self, i.x, i.y, i.width, i.height)
-        self.allSprites.add(self.player)
+            if i.name == 'end':
+                End(self, i.x, i.y, i.width, i.height)
+        self.hud = Hud(self)
         self.camera = Camera(self.mapRect.width, self.mapRect.height)
         print(self.walls)
+        print(self.triggers)
+        print()
 
     def gameRun(self):
         self.new()
@@ -59,12 +69,19 @@ class game():
 
 
     def events(self):
+        key = pygame.key.get_pressed()
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                 self.done = True
             if e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE:
                 self.done = True
-        key = pygame.key.get_pressed()
+            if e.type == pygame.KEYDOWN and e.key == pygame.K_0:
+                self.player.life += 1
+            elif e.type == pygame.KEYDOWN and e.key == pygame.K_9:
+                self.player.life -= 1
+
+
+
         if self.player.checkCooldown():
             if key[pygame.K_LEFT] or key[pygame.K_RIGHT] or key[pygame.K_UP] or key[pygame.K_DOWN]:
                 if self.mag == 0:
@@ -99,6 +116,7 @@ class game():
         self.velocity = 2
         self.camera.update(self.player)
         self.allSprites.update()
+        self.triggers.update()
         pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps()))
 
     def draw(self):
@@ -106,8 +124,8 @@ class game():
         self.screen.blit(self.map.underLayer, self.camera.apply_rect(self.mapRect))
         for i in self.allSprites.sprites():
             self.screen.blit(i.getImg(), self.camera.apply(i))
-
         self.screen.blit(self.map.upperLayer, self.camera.apply_rect(self.mapRect))
+        self.hud.draw()
         pygame.display.flip()
 
     def debug(self):

@@ -5,6 +5,10 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.direction = 'left'
         self.game = game
+        self.game.allSprites.add(self)
+        self.game.players.add(self)
+        self.life = 6
+        self.maxLife = 8
         self.image = pygame.image.load('../Assets/character2.png')
         self.image = pygame.transform.scale(self.image, (self.image.get_size()[0], self.image.get_size()[1]))
         self.rect = pygame.Rect(x, y, self.image.get_rect().width, self.image.get_rect().height)
@@ -23,6 +27,8 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.goCooldown()
         self.move()
+        if self.life >= self.maxLife:
+            self.life = self.maxLife
         self.x += self.vx
         self.y += self.vy
         self.rect.x = self.x
