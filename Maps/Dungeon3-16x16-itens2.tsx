@@ -31,9 +31,23 @@
    <frame tileid="70" duration="100"/>
   </animation>
  </tile>
+ <tile id="100">
+  <animation>
+   <frame tileid="100" duration="100"/>
+   <frame tileid="101" duration="100"/>
+   <frame tileid="102" duration="100"/>
+  </animation>
+ </tile>
  <tile id="129" terrain="0,0,0,0"/>
  <tile id="130" terrain="0,0,0,0"/>
  <tile id="131" terrain="0,0,0,0"/>
+ <tile id="132">
+  <animation>
+   <frame tileid="132" duration="100"/>
+   <frame tileid="133" duration="100"/>
+   <frame tileid="134" duration="100"/>
+  </animation>
+ </tile>
  <tile id="161" terrain="0,0,0,0"/>
  <tile id="162" terrain="0,0,0,0"/>
  <tile id="163" terrain="0,0,0,0"/>
