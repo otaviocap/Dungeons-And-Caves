@@ -29,6 +29,8 @@ class Player(pygame.sprite.Sprite):
         self.move()
         if self.life >= self.maxLife:
             self.life = self.maxLife
+        if self.life <= 0:
+            self.life = 0
         self.x += self.vx
         self.y += self.vy
         self.rect.x = self.x

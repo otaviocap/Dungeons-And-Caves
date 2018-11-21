@@ -1,6 +1,7 @@
 import pygame
 from glob import glob
 from random import choice
+import os
 
 class End(pygame.sprite.Sprite):
 
@@ -13,6 +14,8 @@ class End(pygame.sprite.Sprite):
         self.game = game
         self.game.triggers.add(self)
         self.rect = pygame.Rect(x, y, self.w, self.h)
+        self.maps = [f for f in glob('../Maps/map*.tmx') if not os.path.basename(f).startswith('mapBoss')]
+        self.bossMaps = glob('../Maps/mapBoss*.tmx')
 
     def update(self):
         if pygame.sprite.spritecollide(self, self.game.players, False):
@@ -20,13 +23,13 @@ class End(pygame.sprite.Sprite):
             self.game.new(newMap)
 
     def getChoosed(self):
-        self.maps = glob('../Maps/*.tmx')
         self.choosed = choice(self.maps)
-        if self.game.mapsAlreadyPlayed == self.maps:
+        if len(self.game.mapsAlreadyPlayed) == len(self.maps):
             self.game.mapsAlreadyPlayed.clear()
-        else:
-            while self.choosed in self.game.mapsAlreadyPlayed:
-                self.choosed = choice(self.maps)
-            self.game.mapsAlreadyPlayed.append(self.choosed)
+            self.choosed = choice(self.bossMaps)
+            return self.choosed
+        while self.choosed in self.game.mapsAlreadyPlayed:
+            self.choosed = choice(self.maps)
+        self.game.mapsAlreadyPlayed.append(self.choosed)
         return self.choosed
 

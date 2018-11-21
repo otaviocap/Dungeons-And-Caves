@@ -15,11 +15,9 @@ class game():
 
         pygame.init()
         self.data = interpreter('configs')
-        self.hab1cooldown = 10
+        self.hab1cooldown = 30
         self.speedB = 5
         self.velocity = 1
-        self.ammo = 45
-        self.magCapacity = 10
         self.screenSize = self.data.getParameter('screenSize')
         self.fps = self.data.getParameter('fps')
         self.screen = pygame.display.set_mode(self.screenSize)
@@ -29,7 +27,7 @@ class game():
         self.done = False
         self.mag = 10
         self.debugStatus = self.data.getParameter('debug')
-        self.mapsAlreadyPlayed = []
+        self.mapsAlreadyPlayed = ['../Maps\\map1.tmx']
         print(self.debugStatus)
 
     def new(self, mapPath = '../Maps/map1.tmx'):
@@ -56,7 +54,7 @@ class game():
         self.camera = Camera(self.mapRect.width, self.mapRect.height)
         print(self.walls)
         print(self.triggers)
-        print()
+        print(self.mapsAlreadyPlayed)
 
     def gameRun(self):
         self.new()
@@ -79,37 +77,28 @@ class game():
                 self.player.life += 1
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_9:
                 self.player.life -= 1
+            elif e.type == pygame.KEYDOWN and e.key == pygame.K_8:
+                self.player.maxLife += 2
+            elif e.type == pygame.KEYDOWN and e.key == pygame.K_7:
+                self.player.maxLife -= 2
 
 
 
         if self.player.checkCooldown():
-            if key[pygame.K_LEFT] or key[pygame.K_RIGHT] or key[pygame.K_UP] or key[pygame.K_DOWN]:
-                if self.mag == 0:
-                    if not self.ammo == 0:
-                        self.ammo -= self.magCapacity
-                        self.mag = self.magCapacity
-                        self.player.setCooldown(50)
-                    else:
-                        pass
-                else:
-                    self.mag -= 1
-                    if key[pygame.K_LEFT]:
-                        Bullet('left', self.speedB, self.screenSize, self)
-                        self.player.setDirection('left')
-                        self.player.setCooldown(self.hab1cooldown)
-
-                    elif key[pygame.K_RIGHT]:
-                        Bullet('right', self.speedB, self.screenSize, self)
-                        self.player.setDirection('right')
-                        self.player.setCooldown(self.hab1cooldown)
-
-                    elif key[pygame.K_UP]:
-                        Bullet('up', self.speedB, self.screenSize, self)
-                        self.player.setCooldown(self.hab1cooldown)
-
-                    elif key[pygame.K_DOWN]:
-                        Bullet('down', self.speedB, self.screenSize, self)
-                        self.player.setCooldown(self.hab1cooldown)
+                if key[pygame.K_LEFT]:
+                    Bullet('left', self.speedB, self.screenSize, self)
+                    self.player.setDirection('left')
+                    self.player.setCooldown(self.hab1cooldown)
+                elif key[pygame.K_RIGHT]:
+                    Bullet('right', self.speedB, self.screenSize, self)
+                    self.player.setDirection('right')
+                    self.player.setCooldown(self.hab1cooldown)
+                elif key[pygame.K_UP]:
+                    Bullet('up', self.speedB, self.screenSize, self)
+                    self.player.setCooldown(self.hab1cooldown)
+                elif key[pygame.K_DOWN]:
+                    Bullet('down', self.speedB, self.screenSize, self)
+                    self.player.setCooldown(self.hab1cooldown)
 
     def update(self):
         self.clock.tick(self.fps)

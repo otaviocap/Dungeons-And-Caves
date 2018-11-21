@@ -777,38 +777,38 @@
    <point/>
   </object>
  </objectgroup>
- <objectgroup id="11" name="spikes" visible="0">
-  <object id="70" name="spike" type="no" x="608" y="800" width="16" height="16"/>
-  <object id="71" name="spike" type="no" x="624" y="800" width="16" height="16"/>
-  <object id="72" name="spike" type="no" x="640" y="800" width="16" height="16"/>
-  <object id="73" name="spike" type="no" x="656" y="800" width="16" height="16"/>
-  <object id="74" name="spike" type="no" x="672" y="800" width="16" height="16"/>
-  <object id="75" name="spike" type="no" x="688" y="800" width="16" height="16"/>
-  <object id="76" name="spike" type="no" x="688" y="816" width="16" height="16"/>
-  <object id="77" name="spike" type="no" x="688" y="832" width="16" height="16"/>
-  <object id="78" name="spike" type="no" x="688" y="848" width="16" height="16"/>
-  <object id="79" name="spike" type="no" x="688" y="864" width="16" height="16"/>
-  <object id="80" name="spike" type="no" x="688" y="880" width="16" height="16"/>
-  <object id="81" name="spike" type="no" x="672" y="880" width="16" height="16"/>
-  <object id="82" name="spike" type="no" x="656" y="880" width="16" height="16"/>
-  <object id="83" name="spike" type="no" x="640" y="880" width="16" height="16"/>
-  <object id="84" name="spike" type="no" x="624" y="880" width="16" height="16"/>
-  <object id="85" name="spike" type="no" x="608" y="864" width="16" height="16"/>
-  <object id="86" name="spike" type="no" x="608" y="848" width="16" height="16"/>
-  <object id="87" name="spike" type="no" x="608" y="880" width="16" height="16"/>
-  <object id="88" name="spike" type="no" x="608" y="832" width="16" height="16"/>
-  <object id="89" name="spike" type="no" x="608" y="816" width="16" height="16"/>
-  <object id="90" name="spike" type="yes" x="624" y="816" width="16" height="16"/>
-  <object id="91" name="spike" type="yes" x="640" y="816" width="16" height="16"/>
-  <object id="92" name="spike" type="yes" x="672" y="816" width="16" height="16"/>
-  <object id="93" name="spike" type="yes" x="656" y="816" width="16" height="16"/>
-  <object id="94" name="spike" type="yes" x="624" y="832" width="16" height="16"/>
-  <object id="95" name="spike" type="yes" x="624" y="848" width="16" height="16"/>
-  <object id="96" name="spike" type="yes" x="624" y="864" width="16" height="16"/>
-  <object id="97" name="spike" type="yes" x="656" y="864" width="16" height="16"/>
-  <object id="98" name="spike" type="yes" x="640" y="864" width="16" height="16"/>
-  <object id="99" name="spike" type="yes" x="672" y="864" width="16" height="16"/>
-  <object id="100" name="spike" type="yes" x="672" y="832" width="16" height="16"/>
-  <object id="101" name="spike" type="yes" x="672" y="848" width="16" height="16"/>
+ <objectgroup id="11" name="spikes">
+  <object id="70" name="spike" type="off" x="608" y="800" width="16" height="16"/>
+  <object id="71" name="spike" type="off" x="624" y="800" width="16" height="16"/>
+  <object id="72" name="spike" type="off" x="640" y="800" width="16" height="16"/>
+  <object id="73" name="spike" type="off" x="656" y="800" width="16" height="16"/>
+  <object id="74" name="spike" type="off" x="672" y="800" width="16" height="16"/>
+  <object id="75" name="spike" type="off" x="688" y="800" width="16" height="16"/>
+  <object id="76" name="spike" type="off" x="688" y="816" width="16" height="16"/>
+  <object id="77" name="spike" type="off" x="688" y="832" width="16" height="16"/>
+  <object id="78" name="spike" type="off" x="688" y="848" width="16" height="16"/>
+  <object id="79" name="spike" type="off" x="688" y="864" width="16" height="16"/>
+  <object id="80" name="spike" type="off" x="688" y="880" width="16" height="16"/>
+  <object id="81" name="spike" type="off" x="672" y="880" width="16" height="16"/>
+  <object id="82" name="spike" type="off" x="656" y="880" width="16" height="16"/>
+  <object id="83" name="spike" type="off" x="640" y="880" width="16" height="16"/>
+  <object id="84" name="spike" type="off" x="624" y="880" width="16" height="16"/>
+  <object id="85" name="spike" type="off" x="608" y="864" width="16" height="16"/>
+  <object id="86" name="spike" type="off" x="608" y="848" width="16" height="16"/>
+  <object id="87" name="spike" type="off" x="608" y="880" width="16" height="16"/>
+  <object id="88" name="spike" type="off" x="608" y="832" width="16" height="16"/>
+  <object id="89" name="spike" type="off" x="608" y="816" width="16" height="16"/>
+  <object id="90" name="spike" type="on" x="624" y="816" width="16" height="16"/>
+  <object id="91" name="spike" type="on" x="640" y="816" width="16" height="16"/>
+  <object id="92" name="spike" type="on" x="672" y="816" width="16" height="16"/>
+  <object id="93" name="spike" type="on" x="656" y="816" width="16" height="16"/>
+  <object id="94" name="spike" type="on" x="624" y="832" width="16" height="16"/>
+  <object id="95" name="spike" type="on" x="624" y="848" width="16" height="16"/>
+  <object id="96" name="spike" type="on" x="624" y="864" width="16" height="16"/>
+  <object id="97" name="spike" type="on" x="656" y="864" width="16" height="16"/>
+  <object id="98" name="spike" type="on" x="640" y="864" width="16" height="16"/>
+  <object id="99" name="spike" type="on" x="672" y="864" width="16" height="16"/>
+  <object id="100" name="spike" type="on" x="672" y="832" width="16" height="16"/>
+  <object id="101" name="spike" type="on" x="672" y="848" width="16" height="16"/>
  </objectgroup>
 </map>

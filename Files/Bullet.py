@@ -23,9 +23,10 @@ class Bullet(pygame.sprite.Sprite):
         self.starTime = pygame.time.get_ticks()
 
     def update(self):
-        if pygame.sprite.spritecollide(self, self.game.walls, False) or (pygame.time.get_ticks() - self.starTime) >= 1000:
-            self.kill()
-        elif self.direction == "down":
+        if (pygame.time.get_ticks() - self.starTime) >= 30:
+            if pygame.sprite.spritecollide(self, self.game.walls, False) or (pygame.time.get_ticks() - self.starTime) >= 1000:
+                self.kill()
+        if self.direction == "down":
             self.rect.y += self.speed
         elif self.direction == "up":
             self.rect.y -= self.speed

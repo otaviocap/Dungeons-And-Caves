@@ -13,7 +13,7 @@ class tiledMap:
 
     def render(self, surface, game):
         ti = self.tmdata.get_tile_image_by_gid
-        tempSurface3 = pygame.Surface(surface.get_size(), pygame.SRCALPHA)
+        tempSurface3 = pygame.Surface(surface.get_size())
         tempSurface2 = pygame.Surface(surface.get_size(), pygame.SRCALPHA)
         for layers in self.tmdata.visible_layers:
             if layers.name == 'UpperCharacter':
