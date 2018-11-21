@@ -1,5 +1,5 @@
 import pygame
-from interpreter import interpreter
+from Interpreter import Interpreter
 
 class Camera():
 
@@ -7,7 +7,7 @@ class Camera():
         self.camera = pygame.Rect(0,0, width, height)
         self.width = width
         self.height = height
-        self.data = interpreter()
+        self.data = Interpreter()
         self.screenWidth = self.data.getParameter('screenSize')[0]
         self.screenHeight = self.data.getParameter('screenSize')[1]
 

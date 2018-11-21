@@ -3,9 +3,11 @@ import pygame
 class Player(pygame.sprite.Sprite):
     def __init__(self, game, x=0, y=0, sizeX=10, sizeY=10):
         super().__init__()
+        self.dashM = 50
         self.direction = 'left'
         self.game = game
         self.game.allSprites.add(self)
+        self.hab1cooldown = 30
         self.game.players.add(self)
         self.life = 6
         self.maxLife = 8
@@ -20,12 +22,14 @@ class Player(pygame.sprite.Sprite):
         self.velocity = 2
         self.x = x
         self.y = y
+        self.spawnX = x
+        self.spawnY = y
         self.w = sizeX
         self.h = sizeY
         # self.gunBarrel = [X , Y]
 
     def update(self):
-        self.goCooldown()
+        self.goCooldownHab1()
         self.move()
         if self.life >= self.maxLife:
             self.life = self.maxLife
@@ -44,17 +48,21 @@ class Player(pygame.sprite.Sprite):
 
         key = pygame.key.get_pressed()
         if key[pygame.K_LSHIFT]:
-            self.velocity = 3
+            self.dash()
         elif key[pygame.K_LCTRL]:
             self.velocity = 1
         if key[pygame.K_a]:
             self.vx = -self.velocity
+            self.direction = 'left'
         if key[pygame.K_d]:
             self.vx = self.velocity
+            self.direction = 'right'
         if key[pygame.K_w]:
             self.vy = -self.velocity
+            self.direction = 'up'
         if key[pygame.K_s]:
             self.vy = self.velocity
+            self.direction = 'down'
 
         if self.vx != 0 and self.vy != 0:
             self.vx *= 0.7071
@@ -87,17 +95,17 @@ class Player(pygame.sprite.Sprite):
     def getPos(self):
         return (self.rect.x, self.rect.y)
 
-    def checkCooldown(self):
+    def checkCooldownHab1(self):
         if self.cooldown == 0:
             return True
 
     def setCooldown(self, n):
         self.cooldown = n
 
-    def getCooldown(self):
+    def getCooldownHab1(self):
         return self.cooldown
 
-    def goCooldown(self):
+    def goCooldownHab1(self):
         if self.cooldown == 0:
             pass
         else:
@@ -118,6 +126,20 @@ class Player(pygame.sprite.Sprite):
             self.direction = direction
             self.transformImgSide()
 
+    def resetLocation(self):
+        self.x = self.spawnX
+        self.y = self.spawnY
+
+    def dash(self):
+
+        if self.direction == "down":
+            self.y += self.dashM
+        elif self.direction == "up":
+            self.y -= self.dashM
+        elif self.direction == "left":
+            self.x -= self.dashM
+        elif self.direction == "right":
+            self.x += self.dashM
 
 class Wall(pygame.sprite.Sprite):
 

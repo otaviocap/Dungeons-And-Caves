@@ -1,11 +1,12 @@
 import pygame
 from Player import *
 from Bullet import *
-from interpreter import *
-from map import *
-from camera import *
-from hud import *
-from end import *
+from Interpreter import *
+from Map import *
+from Camera import *
+from Hud import *
+from End import *
+from Hole import *
 
 
 class game():
@@ -14,8 +15,7 @@ class game():
         #Variaveis iniciais
 
         pygame.init()
-        self.data = interpreter('configs')
-        self.hab1cooldown = 30
+        self.data = Interpreter('configs')
         self.speedB = 5
         self.velocity = 1
         self.screenSize = self.data.getParameter('screenSize')
@@ -27,10 +27,10 @@ class game():
         self.done = False
         self.mag = 10
         self.debugStatus = self.data.getParameter('debug')
-        self.mapsAlreadyPlayed = ['../Maps\\map1.tmx']
+        self.mapsAlreadyPlayed = ['../Maps\\map4.tmx']
         print(self.debugStatus)
 
-    def new(self, mapPath = '../Maps/map1.tmx'):
+    def new(self, mapPath = '../Maps/map2.tmx'):
         self.mapPath = mapPath
         self.map = tiledMap(mapPath)
         self.frontSprites = pygame.sprite.Group()
@@ -39,6 +39,7 @@ class game():
         self.mapRect = self.mapImg.get_rect()
         self.allSprites = pygame.sprite.Group()
         self.triggers = pygame.sprite.Group()
+        self.holes = pygame.sprite.Group()
         self.players = pygame.sprite.Group()
         self.walls = pygame.sprite.Group()
         self.bullets = pygame.sprite.Group()
@@ -50,6 +51,8 @@ class game():
                 Wall(self, i.x, i.y, i.width, i.height)
             if i.name == 'end':
                 End(self, i.x, i.y, i.width, i.height)
+            if i.name == 'hole':
+                Hole(self, i.x, i.y, i.width, i.height)
         self.hud = Hud(self)
         self.camera = Camera(self.mapRect.width, self.mapRect.height)
         print(self.walls)
@@ -84,21 +87,21 @@ class game():
 
 
 
-        if self.player.checkCooldown():
+        if self.player.checkCooldownHab1():
                 if key[pygame.K_LEFT]:
                     Bullet('left', self.speedB, self.screenSize, self)
                     self.player.setDirection('left')
-                    self.player.setCooldown(self.hab1cooldown)
+                    self.player.setCooldown(self.player.hab1cooldown)
                 elif key[pygame.K_RIGHT]:
                     Bullet('right', self.speedB, self.screenSize, self)
                     self.player.setDirection('right')
-                    self.player.setCooldown(self.hab1cooldown)
+                    self.player.setCooldown(self.player.hab1cooldown)
                 elif key[pygame.K_UP]:
                     Bullet('up', self.speedB, self.screenSize, self)
-                    self.player.setCooldown(self.hab1cooldown)
+                    self.player.setCooldown(self.player.hab1cooldown)
                 elif key[pygame.K_DOWN]:
                     Bullet('down', self.speedB, self.screenSize, self)
-                    self.player.setCooldown(self.hab1cooldown)
+                    self.player.setCooldown(self.player.hab1cooldown)
 
     def update(self):
         self.clock.tick(self.fps)
@@ -106,6 +109,7 @@ class game():
         self.camera.update(self.player)
         self.allSprites.update()
         self.triggers.update()
+        self.holes.update()
         pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps()))
 
     def draw(self):

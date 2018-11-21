@@ -581,14 +581,14 @@
   <object id="85" name="wall" x="752" y="624" width="16" height="48"/>
  </objectgroup>
  <objectgroup id="17" name="holes">
-  <object id="63" name="hole" x="448" y="496" width="48" height="16"/>
-  <object id="64" name="hole" x="448" y="512" width="16" height="96"/>
-  <object id="65" name="hole" x="464" y="592" width="80" height="32"/>
-  <object id="66" name="hole" x="544" y="560" width="16" height="48"/>
-  <object id="67" name="hole" x="480" y="528" width="16" height="48"/>
-  <object id="68" name="hole" x="496" y="560" width="48" height="16"/>
+  <object id="63" name="hole" x="448" y="496" width="48" height="8"/>
+  <object id="64" name="hole" x="448" y="504" width="16" height="96"/>
+  <object id="65" name="hole" x="464" y="592" width="80" height="24"/>
+  <object id="66" name="hole" x="544" y="560" width="16" height="40"/>
+  <object id="67" name="hole" x="480" y="528" width="16" height="40"/>
+  <object id="68" name="hole" x="496" y="560" width="48" height="8"/>
   <object id="69" name="hole" x="768" y="560" width="16" height="48"/>
-  <object id="70" name="hole" x="784" y="560" width="48" height="16"/>
+  <object id="70" name="hole" x="784" y="560" width="48" height="8"/>
   <object id="71" name="hole" x="784" y="592" width="48" height="16"/>
   <object id="72" name="hole" x="832" y="560" width="16" height="48"/>
  </objectgroup>
