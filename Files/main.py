@@ -7,6 +7,7 @@ from Camera import *
 from Hud import *
 from End import *
 from Hole import *
+from Spike import *
 
 
 class game():
@@ -15,6 +16,7 @@ class game():
         #Variaveis iniciais
 
         pygame.init()
+        self.eventDamage = pygame.USEREVENT + 1
         self.data = Interpreter('configs')
         self.speedB = 5
         self.velocity = 1
@@ -27,7 +29,7 @@ class game():
         self.done = False
         self.mag = 10
         self.debugStatus = self.data.getParameter('debug')
-        self.mapsAlreadyPlayed = ['../Maps\\map4.tmx']
+        self.mapsAlreadyPlayed = ['../Maps\\map1.tmx']
         print(self.debugStatus)
 
     def new(self, mapPath = '../Maps/map2.tmx'):
@@ -42,17 +44,22 @@ class game():
         self.holes = pygame.sprite.Group()
         self.players = pygame.sprite.Group()
         self.walls = pygame.sprite.Group()
+        self.spikes = pygame.sprite.Group()
         self.bullets = pygame.sprite.Group()
         self.camera = Camera(self.mapRect.x, self.mapRect.y)
         for i in self.map.tmdata.objects:
             if i.name == 'spawn':
                 self.player = Player(self, i.x, i.y)
-            if i.name == 'wall':
+            elif i.name == 'wall':
                 Wall(self, i.x, i.y, i.width, i.height)
-            if i.name == 'end':
+            elif i.name == 'end':
                 End(self, i.x, i.y, i.width, i.height)
-            if i.name == 'hole':
+            elif i.name == 'hole':
                 Hole(self, i.x, i.y, i.width, i.height)
+            elif i.name == 'spike' and i.type == 'on':
+                Spike(self, i.x, i.y, i.width, i.height)
+
+
         self.hud = Hud(self)
         self.camera = Camera(self.mapRect.width, self.mapRect.height)
         print(self.walls)
@@ -84,6 +91,8 @@ class game():
                 self.player.maxLife += 2
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_7:
                 self.player.maxLife -= 2
+            elif e.type == self.eventDamage:
+                self.player.life -= 1
 
 
 
@@ -110,6 +119,7 @@ class game():
         self.allSprites.update()
         self.triggers.update()
         self.holes.update()
+        self.spikes.update()
         pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps()))
 
     def draw(self):

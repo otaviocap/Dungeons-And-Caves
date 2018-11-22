@@ -43,26 +43,23 @@ class Player(pygame.sprite.Sprite):
         self.collideWall('y')
 
 
+
     def move(self):
         self.vx, self.vy, self.velocity = 0, 0, 2
 
         key = pygame.key.get_pressed()
         if key[pygame.K_LSHIFT]:
-            self.dash()
+            self.velocity = 3
         elif key[pygame.K_LCTRL]:
             self.velocity = 1
         if key[pygame.K_a]:
             self.vx = -self.velocity
-            self.direction = 'left'
         if key[pygame.K_d]:
             self.vx = self.velocity
-            self.direction = 'right'
         if key[pygame.K_w]:
             self.vy = -self.velocity
-            self.direction = 'up'
         if key[pygame.K_s]:
             self.vy = self.velocity
-            self.direction = 'down'
 
         if self.vx != 0 and self.vy != 0:
             self.vx *= 0.7071
