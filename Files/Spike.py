@@ -19,4 +19,4 @@ class Spike(pygame.sprite.Sprite):
             self.time = self.clock.tick()
             if self.time > 20:
                     self.game.player.life -= 1
-                    self.clock.tick
+                    self.clock.tick()
