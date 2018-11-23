@@ -18,13 +18,14 @@ class End(pygame.sprite.Sprite):
         self.bossMaps = glob('../Maps/mapBoss*.tmx')
 
     def update(self):
-        if pygame.sprite.spritecollide(self, self.game.players, False):
-            newMap = self.getChoosed()
-            self.game.new(newMap)
+        if len(self.game.enemies.sprites()) <= 0:
+            if pygame.sprite.spritecollide(self, self.game.players, False):
+                newMap = self.getChoosed()
+                self.game.new(newMap)
 
     def getChoosed(self):
         self.choosed = choice(self.maps)
-        if len(self.game.mapsAlreadyPlayed) == len(self.maps):
+        if len(self.game.mapsAlreadyPlayed) >= len(self.maps):
             self.game.mapsAlreadyPlayed.clear()
             self.choosed = choice(self.bossMaps)
             return self.choosed

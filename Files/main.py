@@ -31,10 +31,11 @@ class game():
         self.done = False
         self.mag = 10
         self.debugStatus = self.data.getParameter('debug')
-        self.mapsAlreadyPlayed = ['../Maps\\map1.tmx']
+        self.mapsAlreadyPlayed = ['../Maps/map1.tmx']
         print(self.debugStatus)
+        self.life = 5
 
-    def new(self, mapPath = '../Maps/map4.tmx'):
+    def new(self, mapPath = '../Maps/map1.tmx'):
 
         self.mapPath = mapPath
         self.map = tiledMap(mapPath)

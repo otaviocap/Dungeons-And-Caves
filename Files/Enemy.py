@@ -89,6 +89,25 @@ class Enemy(pygame.sprite.Sprite):
                 self.vy = 0
                 self.rect.y = self.y
 
+    def collideHoles(self, dir):
+        if dir == 'x':
+            hits = pygame.sprite.spritecollide(self, self.game.holes, False)
+            if hits:
+                if self.vx > 0:
+                    self.x = hits[0].rect.left - self.rect.width
+                if self.vx < 0:
+                    self.x = hits[0].rect.right
+                self.vx = 0
+                self.rect.x = self.x
+        if dir == 'y':
+            hits = pygame.sprite.spritecollide(self, self.game.holes, False)
+            if hits:
+                if self.vy > 0:
+                    self.y = hits[0].rect.top - self.rect.height
+                if self.vy < 0:
+                    self.y = hits[0].rect.bottom
+                self.vy = 0
+                self.rect.y = self.y
     def move(self):
         self.vx, self.vy, self.speed = 0, 0, 1
         self.x = self.rect.x
@@ -96,18 +115,22 @@ class Enemy(pygame.sprite.Sprite):
         if self.rect.x > self.game.player.rect.x:
             self.rect.x -= self.speed
             self.collideWall('x')
+            self.collideHoles('x')
             self.collideEnemy('x')
         elif self.rect.x < self.game.player.rect.x:
             self.rect.x += self.speed
             self.collideWall('x')
+            self.collideHoles('x')
             self.collideEnemy('x')
         if self.rect.y < self.game.player.rect.y:
             self.rect.y += self.speed
             self.collideWall('y')
+            self.collideHoles('y')
             self.collideEnemy('y')
         elif self.rect.y > self.game.player.rect.y:
             self.rect.y -= self.speed
             self.collideWall('y')
+            self.collideHoles('y')
             self.collideEnemy('y')
 
     def checkCooldown(self):
@@ -127,7 +150,7 @@ class Enemy(pygame.sprite.Sprite):
             if self.time > 17:
                 self.game.player.life -= 1
                 self.clock.tick()
-        if self.enemyType >= 4:
+        if self.enemyType >= 5:
             if self.checkCooldown():
                 if self.rect.x > self.game.player.rect.x:
                     Bullet('left', 3, self.game, self, True)

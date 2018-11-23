@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="83" height="83" tilewidth="16" tileheight="16" infinite="0" nextlayerid="29" nextobjectid="113">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="83" height="83" tilewidth="16" tileheight="16" infinite="0" nextlayerid="30" nextobjectid="120">
  <tileset firstgid="1" source="Dungeon3-16x16-itens2.tsx"/>
  <tileset firstgid="1025" source="Dungeon3-16x16.tsx"/>
  <tileset firstgid="1281" source="Dungeon3-16x16-itens.tsx"/>
@@ -585,5 +585,14 @@
   <object id="110" name="spike" type="off" x="624" y="592" width="16" height="8"/>
   <object id="111" name="spike" type="off" x="656" y="688" width="16" height="8"/>
   <object id="112" name="spike" type="off" x="640" y="736" width="16" height="8"/>
+ </objectgroup>
+ <objectgroup id="29" name="enemies">
+  <object id="113" name="enemy" x="560" y="640" width="16" height="16"/>
+  <object id="114" name="enemy" x="512" y="592" width="16" height="16"/>
+  <object id="115" name="enemy" x="576" y="720" width="16" height="16"/>
+  <object id="116" name="enemy" x="752" y="720" width="16" height="16"/>
+  <object id="117" name="enemy" x="656" y="496" width="16" height="16"/>
+  <object id="118" name="enemy" x="768" y="496" width="16" height="16"/>
+  <object id="119" name="enemy" x="576" y="464" width="16" height="16"/>
  </objectgroup>
 </map>

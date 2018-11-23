@@ -9,7 +9,7 @@ class Player(pygame.sprite.Sprite):
         self.game.allSprites.add(self)
         self.hab1cooldown = 30
         self.game.players.add(self)
-        self.life = 6
+        self.life = self.game.life
         self.maxLife = 8
         self.image = pygame.image.load('../Assets/character2.png')
         self.image = pygame.transform.scale(self.image, (self.image.get_size()[0], self.image.get_size()[1]))
@@ -41,6 +41,7 @@ class Player(pygame.sprite.Sprite):
         self.collideWall('x')
         self.rect.y = self.y
         self.collideWall('y')
+        self.game.life = self.life
 
 
 
