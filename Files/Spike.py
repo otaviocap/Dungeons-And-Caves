@@ -20,3 +20,9 @@ class Spike(pygame.sprite.Sprite):
             if self.time > 20:
                     self.game.player.life -= 1
                     self.clock.tick()
+        for i in self.game.enemies.sprites():
+            if pygame.sprite.collide_rect(self, i):
+                self.timeEnemy = self.clock.tick()
+                if self.timeEnemy > 20:
+                    i.life -= 1
+                    self.clock.tick()

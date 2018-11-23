@@ -3,14 +3,13 @@ import pygame
 
 class Bullet(pygame.sprite.Sprite):
 
-    def __init__(self, direction, speed, screenSize, game):
+    def __init__(self, direction, speed, game, where, enemyBullet=False):
         super().__init__()
         self.game = game
-        self.game.bullets.add(self)
         self.game.allSprites.add(self)
         self.direction = direction
         self.size = (10, 10)
-        self.screenSize = screenSize
+        self.screenSize = self.game.screenSize
         self.color = (0, 255, 0)
         self.image = pygame.image.load('../Assets/magic.png')
         self.image = pygame.transform.scale(self.image, self.size)
@@ -18,9 +17,13 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.speed = speed
         self.direction = direction
-        self.rect.x = self.game.player.rect.center[0]
-        self.rect.y = self.game.player.rect.center[1]
+        self.rect.x = where.x
+        self.rect.y = where.y
         self.starTime = pygame.time.get_ticks()
+        if enemyBullet:
+            self.game.enemyBullet.add(self)
+        else:
+            self.game.bullets.add(self)
 
     def update(self):
         if (pygame.time.get_ticks() - self.starTime) >= 30:
