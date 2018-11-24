@@ -10,8 +10,6 @@ from End import *
 from Hole import *
 from Spike import *
 from Enemy import *
-from Menu import Menu
-
 
 class game():
 
@@ -19,7 +17,6 @@ class game():
         #Variaveis iniciais
 
         pygame.init()
-        self.menu = Menu()
         self.eventDamage = pygame.USEREVENT + 1
         self.tempVar = 0
         self.data = Interpreter('configs')
@@ -90,7 +87,6 @@ class game():
             self.update()
             self.debug()
             self.draw()
-        pygame.quit()
 
 
     def events(self):
@@ -151,7 +147,6 @@ class game():
             pass
             self.screen.blit(i.getImg(), self.camera.apply(i))
         self.screen.blit(self.map.upperLayer, self.camera.apply_rect(self.mapRect))
-        self.screen.blit(self.menu.images[self.tempVar], (100, 100))
         self.hud.draw()
         pygame.display.flip()
 
