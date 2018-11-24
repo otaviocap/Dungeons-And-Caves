@@ -2,6 +2,7 @@ import pygame
 from Player import *
 from Bullet import *
 from Interpreter import *
+from os import name
 from Map import *
 from Camera import *
 from Hud import *
@@ -31,7 +32,10 @@ class game():
         self.done = False
         self.mag = 10
         self.debugStatus = self.data.getParameter('debug')
-        self.mapsAlreadyPlayed = ['../Maps/map1.tmx']
+        if name == 'nt':
+            self.mapsAlreadyPlayed = ['../Maps\\map1.tmx']
+        else:
+            self.mapsAlreadyPlayed = ['../Maps/map1.tmx']
         print(self.debugStatus)
         self.life = 5
 
@@ -142,9 +146,10 @@ class game():
         for i in self.enemies:
             self.screen.blit(i.enemiesTypes[i.enemyType], self.camera.apply(i))
         for i in self.allSprites.sprites():
-            self.screen.blit(i.getImg(), self.camera.apply(i))
+            pass
+            # self.screen.blit(i.getImg(), self.camera.apply(i))
         self.screen.blit(self.map.upperLayer, self.camera.apply_rect(self.mapRect))
-        self.hud.draw()
+        # self.hud.draw()
         pygame.display.flip()
 
     def debug(self):

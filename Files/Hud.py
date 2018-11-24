@@ -1,4 +1,5 @@
 import pygame
+from textEngine import *
 
 
 class Hud:
@@ -6,6 +7,8 @@ class Hud:
     def __init__(self, game):
         self.game = game
         self.heartImg = pygame.image.load('../Assets/heart.png')
+        self.textEngine = textGui()
+        self.testText = self.textEngine.text('apenas um teste')
         self.getStates()
 
     def getStates(self):
@@ -38,7 +41,6 @@ class Hud:
         for _ in range(self.emptyHearts):
             self.game.screen.blit(self.heartStages[2], (space, 0))
             space += 30
-
 
 
 
