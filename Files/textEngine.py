@@ -14,4 +14,7 @@ class textGui():
         tempText = pygame.font.Font.render(self.extraFonts[0], text, antialias, color)
         return tempText
 
+    def size(self, text):
+        return pygame.font.Font.size(text)
+
 

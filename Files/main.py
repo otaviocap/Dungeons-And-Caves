@@ -10,6 +10,7 @@ from End import *
 from Hole import *
 from Spike import *
 from Enemy import *
+from Menu import Menu
 
 
 class game():
@@ -18,6 +19,7 @@ class game():
         #Variaveis iniciais
 
         pygame.init()
+        self.menu = Menu()
         self.eventDamage = pygame.USEREVENT + 1
         self.tempVar = 0
         self.data = Interpreter('configs')
@@ -62,7 +64,7 @@ class game():
 
         for i in self.map.tmdata.objects:
             if i.name == 'spawn':
-                self.player = Player(self, i.x, i.y)
+                self.player = Player(self, 1, i.x, i.y)
             elif i.name == 'wall':
                 Wall(self, i.x, i.y, i.width, i.height)
             elif i.name == 'end':
@@ -147,9 +149,10 @@ class game():
             self.screen.blit(i.enemiesTypes[i.enemyType], self.camera.apply(i))
         for i in self.allSprites.sprites():
             pass
-            # self.screen.blit(i.getImg(), self.camera.apply(i))
+            self.screen.blit(i.getImg(), self.camera.apply(i))
         self.screen.blit(self.map.upperLayer, self.camera.apply_rect(self.mapRect))
-        # self.hud.draw()
+        self.screen.blit(self.menu.images[self.tempVar], (100, 100))
+        self.hud.draw()
         pygame.display.flip()
 
     def debug(self):
