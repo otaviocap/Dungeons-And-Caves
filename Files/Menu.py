@@ -142,9 +142,9 @@ class Menu():
             self.clear()
             self.backgroundMenu = True
             Button(self, 365, 70, image=[self.images[11], self.images[11]], text='Music')
-            Slider(self, 370, 155, 0, 100)
+            Slider(self, 370, 155, 0, 100, 'musicP')
             Button(self, 365, 200, image=[self.images[11], self.images[11]], text='Sound Effects')
-            Slider(self, 370, 285, 0, 100)
+            Slider(self, 370, 285, 0, 100, 'sfxP')
             Button(self, 365, 320, image=[self.images[11], self.images[11]], text='Difficulty')
             Button(self, 375, 400, image=[self.images[4], self.images[4]])
             Button(self, 385, 401, image=[self.images[0], self.images[0]], action='self.menu.difficulty("down")')
@@ -295,7 +295,7 @@ class menuButton:
 
 class Slider:
 
-    def __init__(self, menu, x, y, max, min):
+    def __init__(self, menu, x, y, max, min, keyForPos=None):
         self.menu = menu
         self.max = max
         self.min = min

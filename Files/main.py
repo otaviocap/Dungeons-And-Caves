@@ -1,7 +1,4 @@
-import pygame
 from Player import *
-from Bullet import *
-from Interpreter import *
 from os import name
 from Map import *
 from Camera import *
@@ -10,6 +7,7 @@ from End import *
 from Hole import *
 from Spike import *
 from Enemy import *
+from Chest import *
 
 class game():
 
@@ -58,6 +56,7 @@ class game():
         self.bullets = pygame.sprite.Group()
         self.enemies = pygame.sprite.Group()
         self.enemyBullet = pygame.sprite.Group()
+        self.chests = pygame.sprite.Group()
 
         for i in self.map.tmdata.objects:
             if i.name == 'spawn':
@@ -72,6 +71,8 @@ class game():
                 Spike(self, i.x, i.y, i.width, i.height)
             elif i.name == 'enemy':
                 Enemy(self, i.x, i.y, i.width, i.height)
+            elif i.name == 'chest':
+                Chest(self, i.x, i.y, i.width, i.height)
 
 
         self.hud = Hud(self)

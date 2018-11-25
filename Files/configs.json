@@ -1,6 +1,6 @@
 {
     "debug": false,
-    "difficulty": "easy",
+    "difficulty": "hard",
     "fps": 60,
     "fullscreen": false,
     "music": 0.7782101167315175,
@@ -8,6 +8,5 @@
         720,
         480
     ],
-    "sfx": 0.7782101167315175,
-    "volume": 100
+    "sfx": 0.7782101167315175
 }
