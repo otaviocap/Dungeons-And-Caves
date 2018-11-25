@@ -129,6 +129,10 @@ class Menu():
         if not self.menuPage['load']:
             self.clear()
             self.backgroundMenu = True
+            Button(self, 365, 70, image=[self.images[10], self.images[11]], text='Slot 1', selectable=True)
+            Button(self, 365, 155, image=[self.images[10], self.images[11]], text='Slot 2', selectable=True)
+            Button(self, 365, 240, image=[self.images[10], self.images[11]], text='Slot 3', selectable=True)
+            Button(self, 405, 355, image=[self.images[5], self.images[5]])
             self.menuPage['load'] = True
         else:
             self.menuPage['load'] = False
@@ -138,11 +142,9 @@ class Menu():
             self.clear()
             self.backgroundMenu = True
             Button(self, 365, 70, image=[self.images[11], self.images[11]], text='Music')
-            s1 = Slider(self, 370, 155, 0, 100)
-            s1.setPos('music')
+            Slider(self, 370, 155, 0, 100)
             Button(self, 365, 200, image=[self.images[11], self.images[11]], text='Sound Effects')
-            s2 = Slider(self, 370, 285, 0, 100)
-            s2.setPos('sfx')
+            Slider(self, 370, 285, 0, 100)
             Button(self, 365, 320, image=[self.images[11], self.images[11]], text='Difficulty')
             Button(self, 375, 400, image=[self.images[4], self.images[4]])
             Button(self, 385, 401, image=[self.images[0], self.images[0]], action='self.menu.difficulty("down")')
@@ -150,7 +152,6 @@ class Menu():
             self.texts['difficulty'] = ('', (461, 391))
             self.menuPage['options'] = True
         else:
-
             self.menuPage['options'] = False
 
     def creditsPage(self):
@@ -337,9 +338,6 @@ class Slider:
             outMin, outMax = self.max, self.min
         return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 
-    def setPos(self, para):
-        x = self.menu.data.getParameter(para)
-        return
 
 class bigButton:
 
@@ -409,13 +407,15 @@ class bigButton:
             self.menu.screen.blit(self.addImage[0], (self.x+45, self.y+40))
         self.menu.screen.blit(self.menu.textGui.text(self.text, color=(28, 17, 23)), (self.rect.center[0] - len(self.text) * 7.5, self.rect.center[1] + 60))
 
+
 class Button:
 
-    def __init__(self, menu, x, y, action='', image=None, text=None):
+    def __init__(self, menu, x, y, action='', image=None, text=None, selectable=False):
         self.menu = menu
         self.action = action
         self.menu.buttons.append(self)
         self.text = text
+        self.selectable = selectable
         if image == None:
             self.images = [self.menu.images[7], self.menu.images[9]]
         else:
@@ -438,6 +438,9 @@ class Button:
             self.setSelected(True)
             if self.cooldown <= 0:
                 if self.isClicked():
+                    if self.selectable:
+                        self.disarmOthers()
+                        self.clicked = not self.clicked
                     exec(self.action)
                     self.cooldown = 10
         else:
@@ -464,7 +467,7 @@ class Button:
     def disarmOthers(self):
         for button in self.menu.buttons:
             if button != self:
-             button.clicked = False
+                button.clicked = False
 
     def draw(self):
         self.menu.screen.blit(self.renderImage, (self.x, self.y))
