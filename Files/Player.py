@@ -12,7 +12,7 @@ class Player(pygame.sprite.Sprite):
         self.game.players.add(self)
         self.life = self.game.life
         self.maxLife = 8
-        self.image = pygame.image.load('../Assets/character'+str(n)+'.png').convert()
+        self.image = pygame.image.load('../Assets/character'+str(n)+'.png')
         self.image = pygame.transform.scale(self.image, (self.image.get_size()[0], self.image.get_size()[1]))
         self.rect = pygame.Rect(x, y, self.image.get_rect().width, self.image.get_rect().height)
         self.cooldown = 0

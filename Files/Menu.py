@@ -1,4 +1,5 @@
 '''
+WINDOWS
 00)  arrowLeft.png
 01)  arrowRight.png
 02)  character.png
@@ -14,12 +15,30 @@
 12)  slider.png
 13)  sliderBall.png
 14)  StartButton.png
+
+UNIX
+01) sliderBall.png
+02) logo.png
+03) characterSelected.png
+04) optionsSelected.png
+05) arrowLeft.png
+06) options.png
+07) menuSelected.png
+08) menuBackground.png
+09) slider.png
+10) character.png
+11) StartButton.png
+12) menu.png
+13) arrowRight.png
+14) loadButton.png
+15) difficulty.png
 '''
 
 import pygame
 from textEngine import textGui
 from glob import glob
 from Interpreter import Interpreter
+from os import name
 from main import game
 
 class Menu():
@@ -56,9 +75,20 @@ class Menu():
         self.backgroundMenu = False
 
     def loadImages(self):
-        for file in glob('..\Assets\menuAssets\*.png'):
-            self.images.append(pygame.image.load(file))
-            print(file)
+        if name == 'nt':
+            for file in glob('../Assets/menuAssets/*.png'):
+                self.images.append(pygame.image.load(file))
+                print(file)
+        else:
+            tempList = []
+            for file in glob('../Assets/menuAssets/*.png'):
+                tempList.append(file)
+            tempList.sort()
+            tempList.append(tempList[0])
+            tempList.pop(0)
+            for file in tempList:
+                self.images.append(pygame.image.load(file))
+                print(file)
 
     def mainMenu(self):
         menuButton(self, 0, 0, 'New Game', 'new', 'menuButtons')

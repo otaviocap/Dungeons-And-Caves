@@ -36,7 +36,7 @@ class game():
         print(self.debugStatus)
         self.life = 5
 
-    def new(self, mapPath = '../Maps/map1.tmx'):
+    def new(self, mapPath = '../Maps/map2.tmx'):
 
         self.mapPath = mapPath
         self.map = tiledMap(mapPath)
@@ -67,8 +67,8 @@ class game():
                 End(self, i.x, i.y, i.width, i.height)
             elif i.name == 'hole':
                 Hole(self, i.x, i.y, i.width, i.height)
-            elif i.name == 'spike' and i.type == 'on':
-                Spike(self, i.x, i.y, i.width, i.height)
+            elif i.name == 'spike':
+                Spike(self, i.x, i.y, i.width, i.height, i.type)
             elif i.name == 'enemy':
                 Enemy(self, i.x, i.y, i.width, i.height)
             elif i.name == 'chest':
@@ -99,8 +99,12 @@ class game():
                 self.done = True
             if e.type == pygame.KEYDOWN and e.key == pygame.K_0:
                 self.player.life += 1
+                for i in self.enemies:
+                    i.kill()
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_9:
                 self.player.life -= 1
+                for i in self.spikes:
+                    i.invert()
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_8:
                 self.player.maxLife += 2
                 self.tempVar += 1
@@ -137,15 +141,19 @@ class game():
         self.holes.update()
         self.spikes.update()
         self.enemies.update()
+        self.chests.update()
         pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps()))
 
     def draw(self):
         self.screen.fill((0, 0, 0))
         self.screen.blit(self.map.underLayer, self.camera.apply_rect(self.mapRect))
+        for i in self.spikes:
+            self.screen.blit(i.spikeStates[i.getRenderImg()], self.camera.apply(i))
         for i in self.enemies:
             self.screen.blit(i.enemiesTypes[i.enemyType], self.camera.apply(i))
+        for i in self.chests:
+            self.screen.blit(i.image, self.camera.apply(i))
         for i in self.allSprites.sprites():
-            pass
             self.screen.blit(i.getImg(), self.camera.apply(i))
         self.screen.blit(self.map.upperLayer, self.camera.apply_rect(self.mapRect))
         self.hud.draw()

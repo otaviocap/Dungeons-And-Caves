@@ -3,26 +3,36 @@ from Bullet import *
 
 class Enemy(pygame.sprite.Sprite):
 
-    def __init__(self, game, x, y, w, h):
+    def __init__(self, game, x, y, w, h, forceEnemy=None):
         super().__init__()
         self.game = game
-        self.enemiesImg = pygame.image.load('../Assets/Enemies.png')
         self.x = x
         self.y = y
         self.w = w
         self.h = h
+        self.life = 3
         self.spawnX = x
         self.spawnY = y
+        self.enemiesImg = pygame.image.load('../Assets/Enemies.png')
         self.getEnemiesImg()
-        self.enemyType = randint(0, len(self.enemiesTypes) -1)
-        self.rect = self.enemiesTypes[self.enemyType].get_rect()
+        if forceEnemy is None:
+            self.enemyType = randint(0, len(self.enemiesTypes) -1)
+            self.rect = self.enemiesTypes[self.enemyType].get_rect()
+        elif isinstance(forceEnemy, pygame.Surface):
+            self.enemiesTypes.append(forceEnemy)
+            self.enemyType = -1
+            self.rect = self.enemiesTypes[self.enemyType].get_rect()
+            self.life = 6
+        else:
+            self.enemiesTypes.append(pygame.image.load(forceEnemy))
+            self.enemyType = -1
+            self.rect = self.enemiesTypes[self.enemyType].get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
         self.game.enemies.add(self)
         self.clock = pygame.time.Clock()
         self.cooldown = 60
         self.time = 0
-        self.life = 3
 
     def getEnemiesImg(self):
         self.enemiesTypes = []
@@ -149,7 +159,7 @@ class Enemy(pygame.sprite.Sprite):
             if self.time > 17:
                 self.game.player.life -= 1
                 self.clock.tick()
-        if self.enemyType >= 5:
+        if self.enemyType >= 5 or self.enemyType <= -1:
             if self.checkCooldown():
                 if self.rect.x > self.game.player.rect.x:
                     Bullet('left', 3, self.game, self, True)
