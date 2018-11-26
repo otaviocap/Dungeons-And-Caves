@@ -3,7 +3,7 @@ from Bullet import *
 
 class Enemy(pygame.sprite.Sprite):
 
-    def __init__(self, game, x, y, w, h, forceEnemy=None):
+    def __init__(self, game, x, y, w, h, forceEnemy=None, str=None):
         super().__init__()
         self.game = game
         self.x = x
@@ -27,6 +27,13 @@ class Enemy(pygame.sprite.Sprite):
             self.enemiesTypes.append(pygame.image.load(forceEnemy))
             self.enemyType = -1
             self.rect = self.enemiesTypes[self.enemyType].get_rect()
+        if str != None:
+            self.strength = str
+        else:
+            if self.enemyType <= 3:
+                self.strength = self.enemyType
+            else:
+                self.strength = 1
         self.rect.x = self.x
         self.rect.y = self.y
         self.game.enemies.add(self)
@@ -157,7 +164,7 @@ class Enemy(pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(self, self.game.players, False):
             self.time = self.clock.tick()
             if self.time > 17:
-                self.game.player.life -= 1
+                self.game.player.life -= self.strength - self.game.players.sprites()[0].defense
                 self.clock.tick()
         if self.enemyType >= 5 or self.enemyType <= -1:
             if self.checkCooldown():
@@ -178,7 +185,7 @@ class Enemy(pygame.sprite.Sprite):
         for i in self.game.bullets.sprites():
             if pygame.sprite.collide_rect(self, i):
                 i.kill()
-                self.life -= 1
+                self.life -= self.game.players.sprites()[0].damage
         self.checkLife()
 
     def checkLife(self):

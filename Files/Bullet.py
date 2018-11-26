@@ -3,7 +3,7 @@ import pygame
 
 class Bullet(pygame.sprite.Sprite):
 
-    def __init__(self, direction, speed, game, where, enemyBullet=False):
+    def __init__(self, direction, speed, game, where, enemyBullet=False, damage=1):
         super().__init__()
         self.game = game
         self.game.allSprites.add(self)
@@ -20,6 +20,8 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.x = where.x
         self.rect.y = where.y
         self.starTime = pygame.time.get_ticks()
+        self.damage = damage
+        self.enemyBullet = enemyBullet
         if enemyBullet:
             self.game.enemyBullet.add(self)
         else:
@@ -28,6 +30,9 @@ class Bullet(pygame.sprite.Sprite):
     def update(self):
         if (pygame.time.get_ticks() - self.starTime) >= 30:
             if pygame.sprite.spritecollide(self, self.game.walls, False) or (pygame.time.get_ticks() - self.starTime) >= 1000:
+                self.kill()
+        if (pygame.time.get_ticks() - self.starTime) >= 30 and self.enemyBullet:
+            if pygame.sprite.spritecollide(self, self.game.players, False) or (pygame.time.get_ticks() - self.starTime) >= 1000:
                 self.kill()
         if self.direction == "down":
             self.rect.y += self.speed

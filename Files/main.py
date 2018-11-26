@@ -8,6 +8,9 @@ from Hole import *
 from Spike import *
 from Enemy import *
 from Chest import *
+from Upgrades import *
+from textEngine import *
+from saveGetter import *
 
 class game():
 
@@ -17,6 +20,7 @@ class game():
         pygame.init()
         self.eventDamage = pygame.USEREVENT + 1
         self.tempVar = 0
+        self.textGui = textGui()
         self.data = Interpreter('configs')
         self.speedB = 5
         self.velocity = 1
@@ -33,17 +37,13 @@ class game():
             self.mapsAlreadyPlayed = ['../Maps\\map1.tmx']
         else:
             self.mapsAlreadyPlayed = ['../Maps/map1.tmx']
-        print(self.debugStatus)
-        self.life = 5
 
     def new(self, mapPath = '../Maps/map2.tmx'):
-
         self.mapPath = mapPath
         self.map = tiledMap(mapPath)
         self.mapImg = self.map.makeMap(self)
         self.mapRect = self.mapImg.get_rect()
         self.camera = Camera(self.mapRect.x, self.mapRect.y)
-
 
         self.frontSprites = pygame.sprite.Group()
         self.backSprites = pygame.sprite.Group()
@@ -57,6 +57,8 @@ class game():
         self.enemies = pygame.sprite.Group()
         self.enemyBullet = pygame.sprite.Group()
         self.chests = pygame.sprite.Group()
+        self.upgrades = pygame.sprite.Group()
+        self.texts = {}
 
         for i in self.map.tmdata.objects:
             if i.name == 'spawn':
@@ -99,8 +101,6 @@ class game():
                 self.done = True
             if e.type == pygame.KEYDOWN and e.key == pygame.K_0:
                 self.player.life += 1
-                for i in self.enemies:
-                    i.kill()
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_9:
                 self.player.life -= 1
                 for i in self.spikes:
@@ -111,6 +111,9 @@ class game():
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_7:
                 self.player.maxLife -= 2
                 self.tempVar -= 1
+            elif e.type == pygame.KEYDOWN and e.key == pygame.K_p:
+                for i in self.enemies:
+                    i.kill()
             elif e.type == self.eventDamage:
                 self.player.life -= 1
 
@@ -142,6 +145,7 @@ class game():
         self.spikes.update()
         self.enemies.update()
         self.chests.update()
+        self.upgrades.update()
         pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps()))
 
     def draw(self):
@@ -156,6 +160,15 @@ class game():
         for i in self.allSprites.sprites():
             self.screen.blit(i.getImg(), self.camera.apply(i))
         self.screen.blit(self.map.upperLayer, self.camera.apply_rect(self.mapRect))
+        for i in self.upgrades.sprites():
+            self.screen.blit(i.itemImg, self.camera.apply(i))
+        # self.screen.blit(self.upgrade.items[self.tempVar], (100, 100))
+        for key, text in self.texts.items():
+            textSurface = self.textGui.text(text[0], color=(255, 255, 255))
+            textSize = self.textGui.size(text[0])
+            textSurface = pygame.transform.scale(textSurface, (int(textSize[0]/3), int(textSize[1]/3)))
+            textPos = [text[1][0], text[1][1]]
+            self.screen.blit(textSurface, self.camera.applyPos(textPos))
         self.hud.draw()
         pygame.display.flip()
 

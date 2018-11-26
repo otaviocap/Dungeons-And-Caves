@@ -8,7 +8,10 @@ class Interpreter():
             'screenSize': (720, 480),
             'volume': 100,
             'fullscreen': False,
-            'fps': 60
+            'fps': 60,
+            'music': 50,
+            'sfx': 50,
+            'difficulty': 'normal'
         }
         self.name = name
         try:

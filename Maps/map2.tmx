@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="111">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="112">
  <tileset firstgid="1" source="Dungeon3-16x16.tsx"/>
  <tileset firstgid="257" source="Dungeon3-16x16-itens.tsx"/>
  <tileset firstgid="513" source="Dungeon3-16x16-itens2.tsx"/>
@@ -773,7 +773,7 @@
   <object id="34" name="end" x="624" y="672" width="16" height="16"/>
   <object id="35" name="door" x="637.333" y="789.333" width="34.6667" height="13.3333"/>
   <object id="36" name="door" x="880" y="757.333" width="32" height="13.3333"/>
-  <object id="37" name="spawn" x="768" y="786.666">
+  <object id="37" name="spawn" x="768" y="789.333">
    <point/>
   </object>
  </objectgroup>

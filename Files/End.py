@@ -20,6 +20,7 @@ class End(pygame.sprite.Sprite):
     def update(self):
         if len(self.game.enemies.sprites()) <= 0:
             if pygame.sprite.spritecollide(self, self.game.players, False):
+                self.game.saves.update(self.game.player1)
                 newMap = self.getChoosed()
                 self.game.new(newMap)
 
@@ -28,9 +29,9 @@ class End(pygame.sprite.Sprite):
         if len(self.game.mapsAlreadyPlayed) >= len(self.maps):
             self.game.mapsAlreadyPlayed.clear()
             self.choosed = choice(self.bossMaps)
-            return self.choosed
-        while self.choosed in self.game.mapsAlreadyPlayed:
-            self.choosed = choice(self.maps)
+        else:
+            while self.choosed in self.game.mapsAlreadyPlayed:
+                self.choosed = choice(self.maps)
         self.game.mapsAlreadyPlayed.append(self.choosed)
         return self.choosed
 

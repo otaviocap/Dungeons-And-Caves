@@ -22,3 +22,6 @@ class Camera():
 
     def apply_rect(self, rect):
         return rect.move(self.camera.topleft)
+
+    def applyPos(self, pos):
+        return (pos[0] + self.camera.topleft[0], pos[1] + self.camera.topleft[1])

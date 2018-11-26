@@ -1,6 +1,7 @@
 import pygame
-from random import randrange
+from random import choice
 from Enemy import Enemy
+from Upgrades import Upgrade
 
 class Chest(pygame.sprite.Sprite):
 
@@ -14,7 +15,7 @@ class Chest(pygame.sprite.Sprite):
         self.game.chests.add(self)
         self.chestImg = pygame.image.load('../Assets/Chests.png')
         self.getStates()
-        self.chestChoosen = 4 #randrange(0, 4, 2)
+        self.chestChoosen = 2#choice([0,2,4])
         self.image = self.chestStates[self.chestChoosen]
         self.rect = self.image.get_rect()
         self.rect.x = self.x
@@ -27,8 +28,17 @@ class Chest(pygame.sprite.Sprite):
             self.openChest()
 
     def openChest(self):
-        self.image = self.chestStates[self.chestChoosen + 1]
-        if self.chestChoosen + 1 == 5 and not self.spawned:
+        if self.chestChoosen == 0 and not self.spawned:
+            self.image = self.chestStates[self.chestChoosen + 1]
+            self.spawned = True
+
+        elif self.chestChoosen == 2 and not self.spawned:
+            self.image = self.chestStates[self.chestChoosen + 1]
+            Upgrade(self.game, self.x, self.y)
+            self.spawned = True
+
+        elif self.chestChoosen == 4 and not self.spawned:
+            self.image = self.chestStates[self.chestChoosen + 1]
             Enemy(self.game, self.x, self.y, self.w, self.h, self.chestStates[5])
             self.spawned = True
             self.kill()

@@ -1,6 +1,7 @@
 import pygame
 
 
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, game, n, x=0, y=0, sizeX=10, sizeY=10):
         super().__init__()
@@ -10,7 +11,7 @@ class Player(pygame.sprite.Sprite):
         self.game.allSprites.add(self)
         self.hab1cooldown = 30
         self.game.players.add(self)
-        self.life = self.game.life
+        self.life = 4
         self.maxLife = 8
         self.image = pygame.image.load('../Assets/character'+str(n)+'.png')
         self.image = pygame.transform.scale(self.image, (self.image.get_size()[0], self.image.get_size()[1]))
@@ -27,6 +28,11 @@ class Player(pygame.sprite.Sprite):
         self.spawnY = y
         self.w = sizeX
         self.h = sizeY
+        self.damage = 1
+        self.speed = 1
+        self.useSpeed = 1
+        self.defense = 0
+        self.magicBook = 0
         # self.gunBarrel = [X , Y]
 
     def update(self):
@@ -42,26 +48,26 @@ class Player(pygame.sprite.Sprite):
         self.collideWall('x')
         self.rect.y = self.y
         self.collideWall('y')
+        self.hit()
         self.game.life = self.life
 
-
-
     def move(self):
-        self.vx, self.vy, self.velocity = 0, 0, 2
+        self.useSpeed = self.speed
+        self.vx, self.vy = 0, 0
 
         key = pygame.key.get_pressed()
         if key[pygame.K_LSHIFT]:
-            self.velocity = 3
+            self.useSpeed = self.useSpeed + 1
         elif key[pygame.K_LCTRL]:
-            self.velocity = 1
+            self.useSpeed = 1
         if key[pygame.K_a]:
-            self.vx = -self.velocity
+            self.vx = -self.useSpeed
         if key[pygame.K_d]:
-            self.vx = self.velocity
+            self.vx = self.useSpeed
         if key[pygame.K_w]:
-            self.vy = -self.velocity
+            self.vy = -self.useSpeed
         if key[pygame.K_s]:
-            self.vy = self.velocity
+            self.vy = self.useSpeed
 
         if self.vx != 0 and self.vy != 0:
             self.vx *= 0.7071
@@ -125,12 +131,17 @@ class Player(pygame.sprite.Sprite):
             self.direction = direction
             self.transformImgSide()
 
+    def setPos(self, x, y):
+        self.spawnY = y
+        self.spawnX = x
+        self.x = x
+        self.y = y
+
     def resetLocation(self):
         self.x = self.spawnX
         self.y = self.spawnY
 
     def dash(self):
-
         if self.direction == "down":
             self.y += self.dashM
         elif self.direction == "up":
@@ -139,6 +150,10 @@ class Player(pygame.sprite.Sprite):
             self.x -= self.dashM
         elif self.direction == "right":
             self.x += self.dashM
+
+    def hit(self):
+        if pygame.sprite.spritecollide(self, self.game.enemyBullet, False):
+            self.life -= self.game.enemyBullet.sprites()[0].damage
 
 class Wall(pygame.sprite.Sprite):
 

@@ -52,6 +52,8 @@ class Menu():
             'hard',
         ]
         self.difficultySelected = self.data.getParameter('difficulty')
+        self.musicValue = self.data.getParameter('music')
+        self.sfxValue =  self.data.getParameter('sfx')
         self.buttons = []
         self.menuButtons = []
         self.bigButtons = []
@@ -61,6 +63,8 @@ class Menu():
         self.logo = pygame.image.load('../Assets/menuAssets/logo.png')
         self.logoPos = [5,0]
         self.animBool = True
+        # self.sfxValue = self.data.getParameter('sfx')
+        # self.musicValue = self.data.getParameter('music')
         self.loadImages()
         self.mainMenu()
         self.textGui = textGui()
@@ -149,7 +153,7 @@ class Menu():
             self.backgroundMenu = True
             bigButton(self, 370, 70, ['../Assets/character1.png'], '1 Player')
             bigButton(self, 520, 70, ['../Assets/character1.png', '../Assets/character2.png'], '2 Players')
-            self.textGui.text('1 Player    2 Players')
+            self.texts['Text'] = ['         Unavaible', (385, 230)]
             Button(self, 410, 340, 'game().gameRun()', [self.images[14], self.images[14]])
             self.menuPage['new'] = True
         else:
@@ -279,11 +283,12 @@ class menuButton:
             if self.key == 'options' and self.helper:
                 print('sad')
                 for i in range(len(self.menu.sliders)):
-                    a = self.menu.sliders[i].getValue()
                     if i == 0:
-                        self.menu.data.updateParameter('music', a)
+                        self.musicValue = self.menu.sliders[i].getValue()
+                        self.menu.data.updateParameter('music', self.musicValue)
                     if i == 1:
-                        self.menu.data.updateParameter('sfx', a)
+                        self.sfxValue = self.menu.sliders[i].getValue()
+                        self.menu.data.updateParameter('sfx', self.sfxValue)
                 self.menu.data.updateParameter('difficulty', self.menu.difficulty('return'))
                 self.helper = False
 
@@ -508,15 +513,21 @@ class Button:
 
 if __name__ == '__main__':
     pygame.init()
-    a = Menu()
+    b = Menu()
     clock = pygame.time.Clock()
     while True:
         clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                for i in range(2):
+                    if i == 0:
+                        b.data.updateParameter('music', b.musicValue)
+                    if i == 1:
+                        b.data.updateParameter('sfx', b.sfxValue)
+                b.data.updateParameter('difficulty', b.difficulty('return'))
                 pygame.quit()
                 quit()
-        a.update()
-        a.draw()
+        b.update()
+        b.draw()
         pygame.display.flip()
 
