@@ -101,6 +101,7 @@ class game():
             self.update()
             self.debug()
             self.draw()
+        self.done = False
 
 
     def events(self):

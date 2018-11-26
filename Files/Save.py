@@ -27,10 +27,10 @@ class Save(pygame.sprite.Sprite):
         self.b.append(Button(self, 365, 70, image=[self.menu.images[10], self.menu.images[11]], text='Slot 1', selectable=True))
         self.b.append(Button(self, 365, 155, image=[self.menu.images[10], self.menu.images[11]], text='Slot 2', selectable=True))
         self.b.append(Button(self, 365, 240, image=[self.menu.images[10], self.menu.images[11]], text='Slot 3', selectable=True))
-        self.b.append(Button(self, 405, 355, image=[self.menu.images[15], self.menu.images[15]], action='self.menu.saveGame()'))
-        self.b.append(Button(self, 405, 355, image=[self.menu.images[15], self.menu.images[15]], action='self.menu.goingDown = 0'))
-        self.b.append(Button(self, 405, 355, image=[self.menu.images[15], self.menu.images[15]], action='self.menu.texts["text"] = ["Save Completed", [self.x, self.y]]'))
-        self.b.append(Button(self, 405, 355, image=[self.menu.images[15], self.menu.images[15]], action='self.menu.b.clear()'))
+        self.b.append(Button(self, 405, 355, image=[self.menu.images[14], self.menu.images[14]], action='self.menu.saveGame()'))
+        self.b.append(Button(self, 405, 355, image=[self.menu.images[14], self.menu.images[14]], action='self.menu.goingDown = 0'))
+        self.b.append(Button(self, 405, 355, image=[self.menu.images[14], self.menu.images[14]], action='self.menu.texts["text"] = ["Save Completed", [self.x, self.y]]'))
+        self.b.append(Button(self, 405, 355, image=[self.menu.images[14], self.menu.images[14]], action='self.menu.b.clear()'))
 
 
     def update(self):

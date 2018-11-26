@@ -15,7 +15,7 @@ class Chest(pygame.sprite.Sprite):
         self.game.chests.add(self)
         self.chestImg = pygame.image.load('../Assets/Chests.png')
         self.getStates()
-        self.chestChoosen = 2#choice([0,2,4])
+        self.chestChoosen = choice([0,2,4])
         self.image = self.chestStates[self.chestChoosen]
         self.rect = self.image.get_rect()
         self.rect.x = self.x

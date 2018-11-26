@@ -160,7 +160,7 @@ class Menu():
             bigButton(self, 370, 70, ['../Assets/character1.png'], '1 Player')
             bigButton(self, 520, 70, ['../Assets/character1.png', '../Assets/character2.png'], '2 Players')
             self.texts['Text'] = ['         Unavaible', (385, 230)]
-            Button(self, 410, 340, 'self.game.gameRun()', [self.images[14], self.images[14]])
+            Button(self, 410, 340, 'self.menu.game.gameRun()', [self.images[15], self.images[15]])
             self.menuPage['new'] = True
         else:
             self.menuPage['new'] = False
