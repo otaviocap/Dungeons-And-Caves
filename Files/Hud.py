@@ -41,6 +41,9 @@ class Hud:
         for _ in range(self.emptyHearts):
             self.game.screen.blit(self.heartStages[2], (space, 0))
             space += 30
+        bookImg = self.game.player.bookImg
+        bookImg = pygame.transform.scale(bookImg, (32, 32))
+        self.game.screen.blit(bookImg, (10, 440))
 
 
 

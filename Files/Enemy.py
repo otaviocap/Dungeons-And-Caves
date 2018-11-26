@@ -163,8 +163,11 @@ class Enemy(pygame.sprite.Sprite):
     def damage(self):
         if pygame.sprite.spritecollide(self, self.game.players, False):
             self.time = self.clock.tick()
+            damage = self.strength - self.game.players.sprites()[0].defense
+            if damage > 0:
+                damage = 0
             if self.time > 17:
-                self.game.player.life -= self.strength - self.game.players.sprites()[0].defense
+                self.game.player.life -= damage
                 self.clock.tick()
         if self.enemyType >= 5 or self.enemyType <= -1:
             if self.checkCooldown():

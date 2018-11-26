@@ -19,6 +19,7 @@ class game():
 
         pygame.init()
         self.eventDamage = pygame.USEREVENT + 1
+        self.action = False
         self.tempVar = 0
         self.textGui = textGui()
         self.data = Interpreter('configs')
@@ -37,6 +38,8 @@ class game():
             self.mapsAlreadyPlayed = ['../Maps\\map1.tmx']
         else:
             self.mapsAlreadyPlayed = ['../Maps/map1.tmx']
+        self.saves = saveGetter(self, 'slot0')
+
 
     def new(self, mapPath = '../Maps/map2.tmx'):
         self.mapPath = mapPath
@@ -75,6 +78,9 @@ class game():
                 Enemy(self, i.x, i.y, i.width, i.height)
             elif i.name == 'chest':
                 Chest(self, i.x, i.y, i.width, i.height)
+            elif i.name == 'save':
+                pass
+                # Save(self, i.x, i.y, i.width, i.height)
 
 
         self.hud = Hud(self)
@@ -114,6 +120,9 @@ class game():
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_p:
                 for i in self.enemies:
                     i.kill()
+            elif e.type == pygame.KEYDOWN and e.key == pygame.K_e:
+                if not self.action:
+                    self.action = True
             elif e.type == self.eventDamage:
                 self.player.life -= 1
 

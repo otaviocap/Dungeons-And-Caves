@@ -1,19 +1,33 @@
 import json
 
 class saveGetter:
-    def __init__(self, game, slot, player1):
+    def __init__(self, game, slot, loadind = False):
         self.name = slot
         self.game = game
-        self.player1 = player1
+        self.data = self.game.data
+        self.playerA1 = {}
 
-        self.playerA1 = {
-            'damage': self.player1.damage,
-            'defense': self.player1.defense,
-            'speed': self.player1.speed,
-            'life': self.player1.life,
-            'maxLife': self.player1.maxLife,
-            'magicBook': self.player1.magicBook
-        }
+        if not loadind:
+            self.playerA1 = {
+                'damage': 1,
+                'defense': 0,
+                'speed': 2,
+                'life': self.difficulty()[0],
+                'maxLife': self.difficulty()[1],
+                'magicBook': 0,
+                'cooldown': 30
+            }
+        else:
+            rawArchive = open((self.name + '.json'), 'r')
+            self.jsonArchive = json.load(rawArchive)
+            rawArchive.close()
+            for i in self.jsonArchive:
+                if isinstance(i, dict):
+                    for key, value in i.items():
+                        self.playerA1[key] = value
+                else:
+                    self.game.mapsAlreadyPlayed = i
+
 
         self.architecture = [self.playerA1, self.game.mapsAlreadyPlayed]
         try:
@@ -29,7 +43,7 @@ class saveGetter:
 
     def update(self, player1):
         self.updatePlayer1(player1)
-        self.architecture = [self.player1, self.game.mapsAlreadyPlayed, self.game.currentMap]
+        self.architecture = [self.playerA1, self.game.mapsAlreadyPlayed]
 
         rawArchive = open((self.name + '.json'), 'w')
         json.dump(self.architecture, rawArchive, indent=2, sort_keys=True)
@@ -42,11 +56,22 @@ class saveGetter:
             'speed': player.speed,
             'life': player.life,
             'maxLife': player.maxLife,
-            'magicBook': player.magicBook
+            'magicBook': player.magicBook,
+            'cooldown': player.hab1cooldown
         }
+    def difficulty(self):
+        self.difficultyGet = self.data.getParameter('difficulty')
+        if self.difficultyGet == 'easy':
+            return (8, 8)
+        elif self.difficultyGet == 'normal':
+            return  (6,6)
+        elif self.difficultyGet == 'hard':
+            return (4,4)
+        else:
+            return (10,10)
 
     def returnPlayer1(self):
-        return self.player1
+        return self.playerA1
 
     def returnMapsPlayed(self):
         return self.game.mapsAlreadyPlayed

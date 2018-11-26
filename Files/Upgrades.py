@@ -39,15 +39,15 @@ class Upgrade(pygame.sprite.Sprite):
         if self.itemType == 0:
             self.text = 'New Magic:\n'
             if self.itemStrenght == 0:
-                self.text += 'Wind Force\nInverse Knockback'
+                self.text += 'Wind Force\nInverse Knockback\n+1DPS'
             elif self.itemStrenght == 1:
-                self.text += 'Burning Fire from Hell\nDamage is multiplied by 2'
+                self.text += 'Burning Fire from Hell\nDamage is multiplied by 2\n+2DPS'
             elif self.itemStrenght == 2:
-                self.text += 'Dip of deep water\nEnemies are slowed'
+                self.text += 'Dip of deep water\nEnemies are slowed\n+3DPS'
             elif self.itemStrenght == 3:
-                self.text += 'Light from Heaven\nEnemies life is reduced by 2'
+                self.text += 'Light from Heaven\nEnemies life is reduced by 2\n+4DPS'
             elif self.itemStrenght == 4:
-                self.text += 'Darkest dark magic\nYour damage is higher when your life is lower'
+                self.text += 'Darkest dark magic\nYour damage is higher when your life is lower\n+5DPS'
 
         if self.itemType == 5:
             self.text = 'Defense UP:\n'
@@ -76,7 +76,7 @@ class Upgrade(pygame.sprite.Sprite):
                 self.text += '+5'
 
         if self.itemType == 15:
-            self.text = 'Speed UP:\n'
+            self.text = 'DPS UP:\n'
             if self.itemStrenght == 0:
                 self.text += '+1'
             elif self.itemStrenght == 1:
@@ -203,23 +203,23 @@ class Upgrade(pygame.sprite.Sprite):
 
             elif item == 15:
                 for player in self.game.players.sprites():
-                    player.speed += 1
+                    player.hab1cooldown -= 1
 
             elif item == 16:
                 for player in self.game.players.sprites():
-                    player.speed += 2
+                    player.hab1cooldown -= 2
 
             elif item == 17:
                 for player in self.game.players.sprites():
-                    player.speed += 3
+                    player.hab1cooldown -= 3
 
             elif item == 18:
                 for player in self.game.players.sprites():
-                    player.speed += 4
+                    player.hab1cooldown -= 4
 
             elif item == 19:
                 for player in self.game.players.sprites():
-                    player.speed += 5
+                    player.hab1cooldown -= 5
 
             elif item == 20:
                 for player in self.game.players.sprites():

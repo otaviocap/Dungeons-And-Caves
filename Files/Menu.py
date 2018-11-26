@@ -49,7 +49,7 @@ class Menu():
         self.difficulties = [
             'easy',
             'normal',
-            'hard',
+            'hard'
         ]
         self.difficultySelected = self.data.getParameter('difficulty')
         self.musicValue = self.data.getParameter('music')
@@ -240,6 +240,7 @@ class Menu():
         except:
             self.difficultySelected = self.difficulties[0]
         if up == 'return':
+            self.data.updateParameter('difficulty', self.difficulties[n])
             return self.difficulties[n]
 
 

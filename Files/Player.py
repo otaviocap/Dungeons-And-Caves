@@ -1,18 +1,19 @@
 import pygame
+from Upgrades import Upgrade
 
 
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, game, n, x=0, y=0, sizeX=10, sizeY=10):
         super().__init__()
-        self.dashM = 50
         self.direction = 'left'
         self.game = game
         self.game.allSprites.add(self)
-        self.hab1cooldown = 30
+        self.saves = self.game.saves
+        self.hab1cooldown = self.game.saves.playerA1['cooldown']
         self.game.players.add(self)
-        self.life = 4
-        self.maxLife = 8
+        self.life = self.game.saves.playerA1['life']
+        self.maxLife = self.game.saves.playerA1['maxLife']
         self.image = pygame.image.load('../Assets/character'+str(n)+'.png')
         self.image = pygame.transform.scale(self.image, (self.image.get_size()[0], self.image.get_size()[1]))
         self.rect = pygame.Rect(x, y, self.image.get_rect().width, self.image.get_rect().height)
@@ -21,18 +22,18 @@ class Player(pygame.sprite.Sprite):
         # self.original = pygame.transform.scale(self.original, (self.getSize()[0] ** 2, self.getSize()[1] ** 2))
         self.transformImgSide()
         self.gunBarrel = [100, 100]
-        self.velocity = 2
         self.x = x
         self.y = y
         self.spawnX = x
         self.spawnY = y
         self.w = sizeX
         self.h = sizeY
-        self.damage = 1
-        self.speed = 1
+        self.damage = self.game.saves.playerA1['damage']
+        self.speed = self.game.saves.playerA1['speed']
         self.useSpeed = 1
-        self.defense = 0
-        self.magicBook = 0
+        self.defense = self.game.saves.playerA1['defense']
+        self.magicBook = self.game.saves.playerA1['magicBook']
+        self.setMagic(self.magicBook)
         # self.gunBarrel = [X , Y]
 
     def update(self):
@@ -105,7 +106,7 @@ class Player(pygame.sprite.Sprite):
             return True
 
     def setCooldown(self, n):
-        self.cooldown = n
+        self.cooldown = self.hab1cooldown
 
     def getCooldownHab1(self):
         return self.cooldown
@@ -141,19 +142,24 @@ class Player(pygame.sprite.Sprite):
         self.x = self.spawnX
         self.y = self.spawnY
 
-    def dash(self):
-        if self.direction == "down":
-            self.y += self.dashM
-        elif self.direction == "up":
-            self.y -= self.dashM
-        elif self.direction == "left":
-            self.x -= self.dashM
-        elif self.direction == "right":
-            self.x += self.dashM
-
     def hit(self):
         if pygame.sprite.spritecollide(self, self.game.enemyBullet, False):
             self.life -= self.game.enemyBullet.sprites()[0].damage
+
+    def setMagic(self, n):
+        if n == 0:
+            self.bookImg = pygame.image.load('../Assets/originalBook.png')
+        elif n == 1:
+            self.bookImg = Upgrade(self.game, 0, 0).items[0]
+        elif n == 2:
+            self.bookImg = Upgrade(self.game, 0, 0).items[1]
+        elif n == 3:
+            self.bookImg = Upgrade(self.game, 0, 0).items[2]
+        elif n == 4:
+            self.bookImg = Upgrade(self.game, 0, 0).items[3]
+        elif n == 5:
+            self.bookImg = Upgrade(self.game, 0, 0).items[4]
+
 
 class Wall(pygame.sprite.Sprite):
 

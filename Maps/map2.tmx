@@ -760,12 +760,12 @@
   <object id="102" name="wall" x="912" y="754.667" width="32" height="29.3333"/>
  </objectgroup>
  <objectgroup id="10" name="holes">
-  <object id="26" name="hole" x="613.333" y="656" width="10.6667" height="68"/>
-  <object id="27" name="hole" x="624" y="704" width="80" height="20"/>
-  <object id="28" name="hole" x="736" y="656" width="10.6667" height="64"/>
-  <object id="29" name="hole" x="736" y="720" width="16" height="8"/>
-  <object id="30" name="hole" x="642.667" y="658.667" width="10.6667" height="5.333"/>
-  <object id="31" name="hole" x="658.667" y="690.667" width="10.6667" height="5.333"/>
+  <object id="26" name="hole" x="613.333" y="656" width="5.33367" height="68"/>
+  <object id="27" name="hole" x="624" y="712" width="72" height="12"/>
+  <object id="28" name="hole" x="741.333" y="656" width="5.33337" height="64"/>
+  <object id="29" name="hole" x="741.333" y="720" width="10.6667" height="8"/>
+  <object id="30" name="hole" x="642.667" y="661.333" width="10.6667" height="5.333"/>
+  <object id="31" name="hole" x="658.667" y="693.333" width="10.6667" height="5.333"/>
  </objectgroup>
  <objectgroup id="9" name="triggers">
   <object id="32" name="chest" x="880" y="672" width="16" height="16"/>

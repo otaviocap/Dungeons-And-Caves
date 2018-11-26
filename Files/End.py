@@ -20,7 +20,7 @@ class End(pygame.sprite.Sprite):
     def update(self):
         if len(self.game.enemies.sprites()) <= 0:
             if pygame.sprite.spritecollide(self, self.game.players, False):
-                self.game.saves.update(self.game.player1)
+                self.game.saves.update(self.game.player)
                 newMap = self.getChoosed()
                 self.game.new(newMap)
 
