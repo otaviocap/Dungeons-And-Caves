@@ -1,7 +1,7 @@
 import json
 
 class saveGetter:
-    def __init__(self, game, slot, loadind = False):
+    def __init__(self, game, slot, loadind=False):
         self.name = slot
         self.game = game
         self.data = self.game.data
@@ -18,7 +18,7 @@ class saveGetter:
                 'cooldown': 30
             }
         else:
-            rawArchive = open((self.name + '.json'), 'r')
+            rawArchive = open(('../SaveFiles/'+ self.name + '.json'), 'r')
             self.jsonArchive = json.load(rawArchive)
             rawArchive.close()
             for i in self.jsonArchive:
@@ -31,12 +31,12 @@ class saveGetter:
 
         self.architecture = [self.playerA1, self.game.mapsAlreadyPlayed]
         try:
-            rawArchive = open((self.name + '.json'), 'r')
+            rawArchive = open(('../SaveFiles/' + self.name + '.json'), 'r')
             self.jsonArchive = json.load(rawArchive)
             rawArchive.close()
 
         except Exception:
-            rawArchive = open((self.name + '.json'), 'w')
+            rawArchive = open(('../SaveFiles/' + self.name + '.json'), 'w')
             json.dump(self.architecture, rawArchive, indent=2, sort_keys=True)
             self.jsonArchive = json.load(rawArchive)
             rawArchive.close()
@@ -45,7 +45,7 @@ class saveGetter:
         self.updatePlayer1(player1)
         self.architecture = [self.playerA1, self.game.mapsAlreadyPlayed]
 
-        rawArchive = open((self.name + '.json'), 'w')
+        rawArchive = open(('../SaveFiles/' + self.name + '.json'), 'w')
         json.dump(self.architecture, rawArchive, indent=2, sort_keys=True)
         rawArchive.close()
 
@@ -59,16 +59,17 @@ class saveGetter:
             'magicBook': player.magicBook,
             'cooldown': player.hab1cooldown
         }
+
     def difficulty(self):
         self.difficultyGet = self.data.getParameter('difficulty')
         if self.difficultyGet == 'easy':
             return (8, 8)
         elif self.difficultyGet == 'normal':
-            return  (6,6)
+            return  (6, 6)
         elif self.difficultyGet == 'hard':
-            return (4,4)
+            return (4, 4)
         else:
-            return (10,10)
+            return (10, 10)
 
     def returnPlayer1(self):
         return self.playerA1
