@@ -11,13 +11,15 @@ from Chest import *
 from Upgrades import *
 from textEngine import *
 from saveGetter import *
+from Save import *
 
 class game():
 
-    def __init__(self):
+    def __init__(self, menu):
         #Variaveis iniciais
 
         pygame.init()
+        self.menu = menu
         self.eventDamage = pygame.USEREVENT + 1
         self.action = False
         self.tempVar = 0
@@ -38,10 +40,9 @@ class game():
             self.mapsAlreadyPlayed = ['../Maps\\map1.tmx']
         else:
             self.mapsAlreadyPlayed = ['../Maps/map1.tmx']
-        self.saves = saveGetter(self, 'slot0')
 
 
-    def new(self, mapPath = '../Maps/map2.tmx'):
+    def new(self, mapPath = '../Maps/map1.tmx'):
         self.mapPath = mapPath
         self.map = tiledMap(mapPath)
         self.mapImg = self.map.makeMap(self)
@@ -61,6 +62,7 @@ class game():
         self.enemyBullet = pygame.sprite.Group()
         self.chests = pygame.sprite.Group()
         self.upgrades = pygame.sprite.Group()
+        self.savers = pygame.sprite.Group()
         self.texts = {}
 
         for i in self.map.tmdata.objects:
@@ -79,8 +81,7 @@ class game():
             elif i.name == 'chest':
                 Chest(self, i.x, i.y, i.width, i.height)
             elif i.name == 'save':
-                pass
-                # Save(self, i.x, i.y, i.width, i.height)
+                Save(self, self.menu, i.x, i.y, i.width, i.height)
 
 
         self.hud = Hud(self)
@@ -89,7 +90,11 @@ class game():
         print(self.triggers)
         print(self.mapsAlreadyPlayed)
 
-    def gameRun(self):
+    def gameRun(self, loading=None):
+        if loading is None:
+            self.saves = saveGetter(self, 'slot0')
+        else:
+            self.saves = saveGetter(self, loading, loadind=True)
         self.new()
         while not self.done:
             self.events()
@@ -121,8 +126,7 @@ class game():
                 for i in self.enemies:
                     i.kill()
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_e:
-                if not self.action:
-                    self.action = True
+                self.action = True
             elif e.type == self.eventDamage:
                 self.player.life -= 1
 
@@ -155,6 +159,7 @@ class game():
         self.enemies.update()
         self.chests.update()
         self.upgrades.update()
+        self.savers.update()
         pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps()))
 
     def draw(self):
@@ -171,6 +176,8 @@ class game():
         self.screen.blit(self.map.upperLayer, self.camera.apply_rect(self.mapRect))
         for i in self.upgrades.sprites():
             self.screen.blit(i.itemImg, self.camera.apply(i))
+        for i in self.savers.sprites():
+            i.draw()
         # self.screen.blit(self.upgrade.items[self.tempVar], (100, 100))
         for key, text in self.texts.items():
             textSurface = self.textGui.text(text[0], color=(255, 255, 255))
@@ -186,7 +193,6 @@ class game():
             temp = pygame.Surface((self.player.rect.width, self.player.rect.height))
             temp.fill((255, 255, 255))
             self.screen.blit(temp, self.camera.apply(self.player))
-
 
 
 if __name__ == '__main__':

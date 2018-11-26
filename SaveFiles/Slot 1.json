@@ -1,0 +1,14 @@
+[
+  {
+    "cooldown": 30,
+    "damage": 1,
+    "defense": 0,
+    "life": 20,
+    "magicBook": 0,
+    "maxLife": 20,
+    "speed": 2
+  },
+  [
+    "../Maps\\map1.tmx"
+  ]
+]
