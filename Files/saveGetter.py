@@ -15,7 +15,9 @@ class saveGetter:
                 'life': self.difficulty()[0],
                 'maxLife': self.difficulty()[1],
                 'magicBook': 0,
-                'cooldown': 30
+                'cooldown': 30,
+                'magicCooldown': 0,
+                'effectTime': 0
             }
         else:
             rawArchive = open(('../SaveFiles/'+ self.name + '.json'), 'r')
@@ -57,7 +59,9 @@ class saveGetter:
             'life': player.life,
             'maxLife': player.maxLife,
             'magicBook': player.magicBook,
-            'cooldown': player.hab1cooldown
+            'cooldown': player.hab1cooldown,
+            'magicCooldown': player.bookMagicCooldown,
+            'effectTime': player.effectTime
         }
 
     def difficulty(self):

@@ -1,16 +1,17 @@
 [
   {
-    "cooldown": 0,
-    "damage": 110,
-    "defense": 110,
-    "life": 22,
+    "cooldown": 30,
+    "damage": 1.3377742608693866e-197,
+    "defense": 8,
+    "effectTime": 0,
+    "life": 6,
     "magicBook": 5,
-    "maxLife": 24,
-    "speed": 10
+    "magicCooldown": 970,
+    "maxLife": 9,
+    "speed": 2
   },
   [
-    "../Maps/mapBoss1.tmx",
-    "../Maps/map3.tmx",
-    "../Maps/map2.tmx"
+    "../Maps\\map1.tmx",
+    "../Maps\\map5.tmx"
   ]
 ]

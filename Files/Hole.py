@@ -13,11 +13,12 @@ class Hole(pygame.sprite.Sprite):
         self.rect = pygame.Rect(self.x, self.y, self.w, self.h)
 
     def update(self):
-        if pygame.sprite.spritecollide(self, self.game.players, False):
-            self.game.player.resetLocation()
-            self.game.player.life -= 2
-            for i in self.game.enemies.sprites():
-                i.resetLocation()
+        if not self.game.player.flying:
+            if pygame.sprite.spritecollide(self, self.game.players, False):
+                self.game.player.resetLocation()
+                self.game.player.life -= 2
+                for i in self.game.enemies.sprites():
+                    i.resetLocation()
         for i in self.game.enemies.sprites():
             if pygame.sprite.collide_rect(self, i):
                 # i.resetLocation()

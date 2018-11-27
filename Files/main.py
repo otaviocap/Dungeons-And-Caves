@@ -26,7 +26,6 @@ class game():
         self.textGui = textGui()
         self.data = Interpreter('configs')
         self.speedB = 5
-        self.velocity = 1
         self.screenSize = self.data.getParameter('screenSize')
         self.fps = self.data.getParameter('fps')
         self.screen = pygame.display.set_mode(self.screenSize)
@@ -42,7 +41,7 @@ class game():
             self.mapsAlreadyPlayed = ['../Maps/map1.tmx']
 
 
-    def new(self, mapPath = '../Maps/map5.tmx'):
+    def new(self, mapPath = '../Maps/map1.tmx'):
         self.mapPath = mapPath
         self.map = tiledMap(mapPath)
         self.mapImg = self.map.makeMap(self)
@@ -151,7 +150,7 @@ class game():
 
     def update(self):
         self.clock.tick(self.fps)
-        self.velocity = 2
+        self.savers.update()
         self.camera.update(self.player)
         self.allSprites.update()
         self.triggers.update()
@@ -160,7 +159,6 @@ class game():
         self.enemies.update()
         self.chests.update()
         self.upgrades.update()
-        self.savers.update()
         pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps()))
 
     def draw(self):

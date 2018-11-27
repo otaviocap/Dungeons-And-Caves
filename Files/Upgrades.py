@@ -13,7 +13,7 @@ class Upgrade(pygame.sprite.Sprite):
         self.spawnY = y
         self.image = pygame.image.load('../Assets/Items.png')
         self.getItems()
-        self.itemType = randrange(0, 25, 5)
+        self.itemType = randrange(0, 26, 5)
         self.itemStrenght = randrange(0, 4, 1)
         self.itemImg = self.items[self.itemType + self.itemStrenght]
         self.rect = self.itemImg.get_rect()
@@ -39,15 +39,15 @@ class Upgrade(pygame.sprite.Sprite):
         if self.itemType == 0:
             self.text = 'New Magic:\n'
             if self.itemStrenght == 0:
-                self.text += 'Wind Force\nInverse Knockback\n+1DPS'
+                self.text += 'Wind Force\nYou can fly\nActivable\n'
             elif self.itemStrenght == 1:
-                self.text += 'Burning Fire from Hell\nDamage is multiplied by 2\n+2DPS'
+                self.text += 'Burning Fire from Hell\nDamage is multiplied by 2 for 5 seconds\nCooldown: 30s\n'
             elif self.itemStrenght == 2:
-                self.text += 'Dip of deep water\nEnemies are slowed\n+3DPS'
+                self.text += 'Drop of deep water\nInverse Knockback\nActivable\n'
             elif self.itemStrenght == 3:
-                self.text += 'Light from Heaven\nEnemies life is reduced by 2\n+4DPS'
+                self.text += 'Light from Heaven\nEnemies life is reduced by 3\nCooldown: 45s\n'
             elif self.itemStrenght == 4:
-                self.text += 'Darkest dark magic\nYour damage is higher when your life is lower\n+5DPS'
+                self.text += 'Darkest dark magic\nYour consume 1 heart to get +2 damage for 10 seconds\nCooldown: 30s\n'
 
         if self.itemType == 5:
             self.text = 'Defense UP:\n'

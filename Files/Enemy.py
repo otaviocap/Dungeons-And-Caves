@@ -3,18 +3,20 @@ from Bullet import *
 
 class Enemy(pygame.sprite.Sprite):
 
-    def __init__(self, game, x, y, w, h, forceEnemy=None, str=None):
+    def __init__(self, game, x, y, w, h, forceEnemy=None, str=None, speed=1, life=3):
         super().__init__()
         self.game = game
+        self.speedDefault = speed
         self.x = x
         self.y = y
         self.w = w
         self.h = h
-        self.life = 3
+        self.life = life
         self.spawnX = x
         self.spawnY = y
         self.enemiesImg = pygame.image.load('../Assets/Enemies.png')
         self.getEnemiesImg()
+        self.timeSinceLastDmg = 0
         if forceEnemy is None:
             self.enemyType = randint(0, len(self.enemiesTypes) -1)
             self.rect = self.enemiesTypes[self.enemyType].get_rect()
@@ -125,7 +127,7 @@ class Enemy(pygame.sprite.Sprite):
                 self.vy = 0
                 self.rect.y = self.y
     def move(self):
-        self.vx, self.vy, self.speed = 0, 0, 1
+        self.vx, self.vy, self.speed = 0, 0, 2
         self.x = self.rect.x
         self.y = self.rect.y
         if self.rect.x > self.game.player.rect.x:
@@ -163,12 +165,13 @@ class Enemy(pygame.sprite.Sprite):
     def damage(self):
         if pygame.sprite.spritecollide(self, self.game.players, False):
             self.time = self.clock.tick()
-            damage = self.strength - self.game.players.sprites()[0].defense
-            if damage > 0:
+            self.timeSinceLastDmg += self.time
+            damage = self.strength - self.game.player.defense
+            if damage <= 0:
                 damage = 0
-            if self.time > 17:
+            if self.timeSinceLastDmg >= 1000:
                 self.game.player.life -= damage
-                self.clock.tick()
+                self.timeSinceLastDmg = 0
         if self.enemyType >= 5 or self.enemyType <= -1:
             if self.checkCooldown():
                 if self.rect.x > self.game.player.rect.x:
