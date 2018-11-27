@@ -61,7 +61,7 @@ class saveGetter:
             'magicBook': player.magicBook,
             'cooldown': player.hab1cooldown,
             'magicCooldown': player.bookMagicCooldown,
-            'effectTime': player.effectTime
+            'backToNormal': player.backToNormal
         }
 
     def difficulty(self):

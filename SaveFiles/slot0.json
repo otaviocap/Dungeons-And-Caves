@@ -1,7 +1,7 @@
 [
   {
     "cooldown": 30,
-    "damage": 6,
+    "damage": 1,
     "defense": 0,
     "effectTime": 0,
     "life": 6,
@@ -12,6 +12,6 @@
   },
   [
     "../Maps\\map1.tmx",
-    "../Maps\\map2.tmx"
+    "../Maps\\map4.tmx"
   ]
 ]

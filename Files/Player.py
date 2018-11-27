@@ -8,7 +8,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.direction = 'left'
         self.game = game
-        self.flying = False
+        self.flying = True
         self.inverseKnockback = False
         self.game.allSprites.add(self)
         self.saves = self.game.saves
@@ -35,10 +35,8 @@ class Player(pygame.sprite.Sprite):
         self.useSpeed = 1
         self.defense = self.game.saves.playerA1['defense']
         self.magicBook = self.game.saves.playerA1['magicBook']
+        self.action = False
         self.setMagic(self.magicBook)
-        self.magic = 0
-        self.bookMagicCooldown = self.game.saves.playerA1['magicCooldown']
-        self.effectTime = self.game.saves.playerA1['effectTime']
         # self.gunBarrel = [X , Y]
 
     def update(self):
@@ -69,6 +67,8 @@ class Player(pygame.sprite.Sprite):
             self.useSpeed = self.useSpeed + 1
         elif key[pygame.K_LCTRL]:
             self.useSpeed = 1
+        elif key[pygame.K_e]:
+            self.action = True
         if key[pygame.K_a]:
             self.vx = -self.useSpeed
         if key[pygame.K_d]:
@@ -155,87 +155,73 @@ class Player(pygame.sprite.Sprite):
             self.life -= self.game.enemyBullet.sprites()[0].damage
 
     def setMagic(self, n):
+        self.bookMagicCooldown = self.game.saves.playerA1['magicCooldown']
+        self.effectTime = 0
         if n == 0:
             self.bookImg = pygame.image.load('../Assets/originalBook.png')
             self.magic = 0
-            self.bookMagicCooldown = 0
             self.bookMagicCooldownDefault = 0
-            self.effectTime = 0
             self.effectTimeDefault = 0
         elif n == 1:
             self.bookImg = Upgrade(self.game, 0, 0).items[0]
             self.magic = 1
-            self.bookMagicCooldown = 0
             self.bookMagicCooldownDefault = 5
-            self.effectTime = 0
             self.effectTimeDefault = 0
         elif n == 2:
             self.bookImg = Upgrade(self.game, 0, 0).items[1]
             self.magic = 2
-            self.bookMagicCooldown = 0
             self.bookMagicCooldownDefault = 30 * 60
-            self.effectTime = 0
             self.effectTimeDefault = 5 * 60
         elif n == 3:
             self.bookImg = Upgrade(self.game, 0, 0).items[2]
             self.magic = 3
-            self.bookMagicCooldown = 0
             self.bookMagicCooldownDefault = 25 * 60
-            self.effectTime = 0
             self.effectTimeDefault = 0
         elif n == 4:
             self.bookImg = Upgrade(self.game, 0, 0).items[3]
             self.magic = 4
-            self.bookMagicCooldown = 0
             self.bookMagicCooldownDefault = 45 * 60
-            self.effectTime = 0
             self.effectTimeDefault = 0
         elif n == 5:
             self.bookImg = Upgrade(self.game, 0, 0).items[4]
             self.magic = 5
-            self.bookMagicCooldown = 0
             self.bookMagicCooldownDefault = 30 * 60
-            self.effectTime = 0
             self.effectTimeDefault = 10 * 60
+        self.backToNormal = self.game.saves.playerA1['magicCooldown']
 
     def magicEffect(self):
-        if self.bookMagicCooldown == 0 and self.game.action:
+        if self.bookMagicCooldown <= 0 and self.game.action:
             if self.magic == 0:
-                print(0)
                 pass
 
             elif self.magic == 1:
-                print(1)
                 self.flying = not self.flying
                 self.bookMagicCooldown = self.bookMagicCooldownDefault
                 self.effectTime = self.effectTimeDefault
 
             elif self.magic == 2:
-                print(2)
-                self.damage *= 2
+                self.damage = self.damage * 2
                 self.bookMagicCooldown = self.bookMagicCooldownDefault
                 self.effectTime = self.effectTimeDefault
 
             elif self.magic == 3:
-                print(3)
                 self.inverseKnockback = not self.inverseKnockback
                 self.bookMagicCooldown = self.bookMagicCooldownDefault
                 self.effectTime = self.effectTimeDefault
 
             elif self.magic == 4:
-                print(4)
                 for i in self.game.enemies.sprites():
                     i.life -= 2
                 self.bookMagicCooldown = self.bookMagicCooldownDefault
                 self.effectTime = self.effectTimeDefault
 
             elif self.magic == 5:
-                print(5)
                 self.damage += 2
                 self.life -= 2
                 self.bookMagicCooldown = self.bookMagicCooldownDefault
                 self.effectTime = self.effectTimeDefault
             self.game.action = False
+            self.backToNormal = False
         else:
             if self.bookMagicCooldown <= 0:
                 self.bookMagicCooldown = 0
@@ -244,10 +230,13 @@ class Player(pygame.sprite.Sprite):
 
             if self.effectTime <= 0:
                 self.effectTime = 0
-                if self.magic == 2:
-                    self.damage /= 2
-                elif self.magic == 5:
-                    self.damage -= 2
+                if not self.backToNormal:
+                    if self.magic == 2:
+                        self.damage = self.damage / 2
+                        self.backToNormal = True
+                    elif self.magic == 5:
+                        self.damage -= 2
+                        self.backToNormal = True
             else:
                 self.effectTime -= 1
             print('Cooldown = ', self.bookMagicCooldown)
