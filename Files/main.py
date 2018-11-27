@@ -42,7 +42,7 @@ class game():
             self.mapsAlreadyPlayed = ['../Maps/map1.tmx']
 
 
-    def new(self, mapPath = '../Maps/map1.tmx'):
+    def new(self, mapPath = '../Maps/map5.tmx'):
         self.mapPath = mapPath
         self.map = tiledMap(mapPath)
         self.mapImg = self.map.makeMap(self)

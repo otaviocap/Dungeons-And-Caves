@@ -1,14 +1,16 @@
 [
   {
-    "cooldown": 30,
-    "damage": 1,
-    "defense": 0,
-    "life": 2,
-    "magicBook": 0,
-    "maxLife": 21,
-    "speed": 2
+    "cooldown": 0,
+    "damage": 110,
+    "defense": 110,
+    "life": 22,
+    "magicBook": 5,
+    "maxLife": 24,
+    "speed": 10
   },
   [
-    "../Maps/mapBoss1.tmx"
+    "../Maps/mapBoss1.tmx",
+    "../Maps/map3.tmx",
+    "../Maps/map2.tmx"
   ]
 ]
