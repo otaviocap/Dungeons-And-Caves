@@ -8,10 +8,15 @@ class Hud:
         self.game = game
         self.heartImg = pygame.image.load('../Assets/heart.png')
         self.textEngine = textGui()
-        self.testText = self.textEngine.text('apenas um teste')
+        dieText = self.textEngine.text('You Died', color=(140, 0, 0), antialias=False, background=(255,255,255))
+        dieText.set_colorkey((255,255,255))
+        self.dieText = pygame.transform.scale(dieText, (200, 120))
+        self.dieText.convert_alpha()
         self.cooldownRect = pygame.Rect((10, 475), (3, 3))
         self.effectRect = pygame.Rect((10, 435), (3, 3))
+        self.deathAlpha = 0
         self.getStates()
+        self.counter = 0
 
     def getStates(self):
         self.heartStages = []
@@ -64,6 +69,14 @@ class Hud:
             pass
         else:
             pygame.draw.rect(self.game.screen, (0, 255, 0), self.cooldownRect)
+        if self.game.player.life == 0:
+            pass
+            '''
+            self.deathScreen()
+            if self.counter == 30:
+                self.game.done = True
+                self.game.gameRun(self.game.saveName)
+            '''
 
     def getValue(self, x, inMax):
         x = x
@@ -73,4 +86,15 @@ class Hud:
         outMax = 30
         return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin
 
+    def deathScreen(self):
+        if self.deathAlpha < 200:
+            self.deathAlpha += 2
+        else:
+            self.counter += 1
+        deathSurface = pygame.Surface((self.game.screenSize[0], self.game.screenSize[1] -340))
+        deathSurface.fill((0,0,0))
+        deathSurface.set_alpha(self.deathAlpha)
+        self.dieText.set_alpha(self.deathAlpha)
+        self.game.screen.blit(deathSurface, (0, 175))
+        self.game.screen.blit(self.dieText, (275, 175))
 

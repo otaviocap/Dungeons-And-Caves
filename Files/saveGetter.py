@@ -29,6 +29,7 @@ class saveGetter:
                         self.playerA1[key] = value
                 else:
                     self.game.mapsAlreadyPlayed = i
+            self.name = 'Slot 0'
 
 
         self.architecture = [self.playerA1, self.game.mapsAlreadyPlayed]

@@ -91,8 +91,10 @@ class game():
 
     def gameRun(self, loading=None):
         if loading is None:
-            self.saves = saveGetter(self, 'slot0')
+            self.saveName = 'Slot 0'
+            self.saves = saveGetter(self, 'Slot 0')
         else:
+            self.saveName = loading
             self.saves = saveGetter(self, loading, loadind=True)
         self.new()
         while not self.done:
