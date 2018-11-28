@@ -48,7 +48,6 @@ class Save(pygame.sprite.Sprite):
             if self.goingDown == -20:
                 self.texts.clear()
                 break
-        print(self.texts)
 
     def saveGame(self):
         for button in self.b:

@@ -127,7 +127,7 @@ class Slider:
     def mapping(self, x, inMin, inMax, outMin=None, outMax=None):
         if outMin == None and outMax == None:
             outMin, outMax = self.max, self.min
-        return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+        return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin
 
 
 class bigButton:

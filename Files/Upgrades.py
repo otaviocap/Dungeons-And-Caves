@@ -4,7 +4,7 @@ from random import randrange
 
 class Upgrade(pygame.sprite.Sprite):
 
-    def __init__(self, game, x, y):
+    def __init__(self, game, x, y, justImg=False):
         super().__init__()
         self.x = x
         self.y = y
@@ -13,21 +13,22 @@ class Upgrade(pygame.sprite.Sprite):
         self.spawnY = y
         self.image = pygame.image.load('../Assets/Items.png')
         self.getItems()
-        self.itemType = randrange(0, 26, 5)
+        self.itemType = 0#randrange(0, 26, 5)
         self.itemStrenght = randrange(0, 4, 1)
         self.itemImg = self.items[self.itemType + self.itemStrenght]
         self.rect = self.itemImg.get_rect()
         self.textGui = textGui()
-        self.game.upgrades.add(self)
+        self.game.allUpgrades.add(self)
         self.makeText()
         self.rect.x = self.x
         self.rect.y = self.y
         self.actionDone = False
+        self.justImg = justImg
 
     def getItems(self):
         self.items = []
         pos = [-16, 0]
-        for i in range(30):
+        for i in range(35):
             if pos[0] == 64:
                 pos[0] = 0
                 pos[1] += 16
@@ -39,15 +40,15 @@ class Upgrade(pygame.sprite.Sprite):
         if self.itemType == 0:
             self.text = 'New Magic:\n'
             if self.itemStrenght == 0:
-                self.text += 'Wind Force\nYou can fly\nActivable\n'
+                self.text += 'Wind Force\nYou can fly for 2 seconds\nCooldown: 10s'
             elif self.itemStrenght == 1:
-                self.text += 'Burning Fire from Hell\nDamage is multiplied by 2 for 5 seconds\nCooldown: 30s\n'
+                self.text += 'Burning Fire from Hell\nDamage is multiplied by 2 for 5 seconds\nCooldown: 30s'
             elif self.itemStrenght == 2:
-                self.text += 'Drop of deep water\nInverse Knockback\nActivable\n'
+                self.text += 'Drop of deep water\nInverse Knockback\nActivable'
             elif self.itemStrenght == 3:
-                self.text += 'Light from Heaven\nEnemies life is reduced by 3\nCooldown: 45s\n'
+                self.text += 'Light from Heaven\nEnemies life is reduced by 3\nCooldown: 45s'
             elif self.itemStrenght == 4:
-                self.text += 'Darkest dark magic\nYour consume 1 heart to get +2 damage for 10 seconds\nCooldown: 30s\n'
+                self.text += 'Darkest dark magic\nYour consume 1 heart to get +2 damage for 10 seconds\nCooldown: 30s'
 
         if self.itemType == 5:
             self.text = 'Defense UP:\n'
@@ -115,27 +116,31 @@ class Upgrade(pygame.sprite.Sprite):
                 self.text += '+4'
 
     def update(self):
-        text = ''
-        nText = 0
-        textPos = 10
-        for character in self.text:
-            if character == "\n":
-                self.game.texts['Upgrade' + str(nText)] = (text, (self.x, self.y + textPos))
-                text = ''
-                nText += 1
-                textPos += 10
+        if not self.justImg:
+            text = ''
+            nText = 0
+            textPos = 10
+            for character in self.text:
+                if character == "\n":
+                    self.game.texts['Upgrade' + str(nText)] = (text, (self.x, self.y + textPos))
+                    text = ''
+                    nText += 1
+                    textPos += 10
+                else:
+                    text += character
+            self.game.texts['Upgrade'] = (text, (self.x, self.y+textPos))
+            self.rect.y = self.y
+            if self.y - self.spawnY > -50:
+                self.y -= .5
             else:
-                text += character
-        self.game.texts['Upgrade'] = (text, (self.x, self.y+textPos))
-        self.rect.y = self.y
-        if self.y - self.spawnY > -50:
-            self.y -= .5
+                for i in range(nText):
+                    self.game.texts.pop('Upgrade' + str(i))
+                self.game.texts.pop('Upgrade')
+                self.kill()
+            if not self.justImg:
+                self.itemAction()
         else:
-            for i in range(nText):
-                self.game.texts.pop('Upgrade' + str(i))
-            self.game.texts.pop('Upgrade')
-            self.kill()
-        self.itemAction()
+            pass
 
     def itemAction(self):
         if not self.actionDone:

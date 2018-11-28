@@ -60,7 +60,7 @@ class game():
         self.enemies = pygame.sprite.Group()
         self.enemyBullet = pygame.sprite.Group()
         self.chests = pygame.sprite.Group()
-        self.upgrades = pygame.sprite.Group()
+        self.allUpgrades = pygame.sprite.Group()
         self.savers = pygame.sprite.Group()
         self.texts = {}
 
@@ -158,7 +158,8 @@ class game():
         self.spikes.update()
         self.enemies.update()
         self.chests.update()
-        self.upgrades.update()
+        self.allUpgrades.update()
+        self.hud.update()
         pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps()))
 
     def draw(self):
@@ -173,7 +174,7 @@ class game():
         for i in self.allSprites.sprites():
             self.screen.blit(i.getImg(), self.camera.apply(i))
         self.screen.blit(self.map.upperLayer, self.camera.apply_rect(self.mapRect))
-        for i in self.upgrades.sprites():
+        for i in self.allUpgrades.sprites():
             self.screen.blit(i.itemImg, self.camera.apply(i))
         for i in self.savers.sprites():
             i.draw()

@@ -89,6 +89,7 @@ class Menu():
                 self.images.append(pygame.image.load(file))
                 print(str(n) + ') ' + file)
                 n += 1
+            self.images[14], self.images[15] = self.images[15], self.images[14]
         else:
             tempList = []
             for file in glob('../Assets/menuAssets/*.png'):
@@ -201,6 +202,9 @@ class Menu():
             Button(self, 365, 70, image=[self.images[11], self.images[11]], text='Made By:')
             self.texts['credit1'] = ('Otávio H. G. C.', (410, 150))
             self.texts['credit2'] = ('(otaviocap)', (435, 180))
+            a = pygame.image.load('../Assets/me.png')
+            a = pygame.transform.scale(a, (int(a.get_rect().width/3), int(a.get_rect().height/3)))
+            Button(self, 410, 200, image=[a, a])
             self.menuPage['credits'] = True
         else:
             self.menuPage['credits'] = False

@@ -1,9 +1,9 @@
 [
   {
+    "backToNormal": true,
     "cooldown": 30,
     "damage": 1,
     "defense": 0,
-    "effectTime": 0,
     "life": 6,
     "magicBook": 0,
     "magicCooldown": 0,
@@ -12,6 +12,6 @@
   },
   [
     "../Maps\\map1.tmx",
-    "../Maps\\map4.tmx"
+    "../Maps\\map5.tmx"
   ]
 ]

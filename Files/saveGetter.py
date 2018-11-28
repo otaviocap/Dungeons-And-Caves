@@ -14,10 +14,10 @@ class saveGetter:
                 'speed': 2,
                 'life': self.difficulty()[0],
                 'maxLife': self.difficulty()[1],
+                'backToNormal': True,
                 'magicBook': 0,
                 'cooldown': 30,
-                'magicCooldown': 0,
-                'effectTime': 0
+                'magicCooldown': 0
             }
         else:
             rawArchive = open(('../SaveFiles/'+ self.name + '.json'), 'r')
@@ -45,10 +45,13 @@ class saveGetter:
 
     def update(self, player1):
         self.updatePlayer1(player1)
+        print(self.playerA1)
         self.architecture = [self.playerA1, self.game.mapsAlreadyPlayed]
+        print(self.playerA1)
 
         rawArchive = open(('../SaveFiles/' + self.name + '.json'), 'w')
         json.dump(self.architecture, rawArchive, indent=2, sort_keys=True)
+        print(self.playerA1)
         rawArchive.close()
 
     def updatePlayer1(self, player):
@@ -58,7 +61,7 @@ class saveGetter:
             'speed': player.speed,
             'life': player.life,
             'maxLife': player.maxLife,
-            'magicBook': player.magicBook,
+            'magicBook': player.magic,
             'cooldown': player.hab1cooldown,
             'magicCooldown': player.bookMagicCooldown,
             'backToNormal': player.backToNormal

@@ -127,7 +127,7 @@ class Enemy(pygame.sprite.Sprite):
                 self.vy = 0
                 self.rect.y = self.y
     def move(self):
-        self.vx, self.vy, self.speed = 0, 0, 2
+        self.vx, self.vy, self.speed = 0, 0, self.speedDefault
         self.x = self.rect.x
         self.y = self.rect.y
         if self.rect.x > self.game.player.rect.x:
@@ -190,8 +190,50 @@ class Enemy(pygame.sprite.Sprite):
     def hit(self):
         for i in self.game.bullets.sprites():
             if pygame.sprite.collide_rect(self, i):
-                i.kill()
+                if not self.game.player.inverseKnockback:
+                    if i.direction == "down":
+                        self.rect.y += 5
+                        self.collideWall('y')
+                        self.collideEnemy('y')
+
+                    elif i.direction == "up":
+                        self.rect.y -= 5
+                        self.collideWall('y')
+                        self.collideEnemy('y')
+
+                    elif i.direction == "left":
+                        self.rect.x -= 5
+                        self.collideWall('x')
+                        self.collideEnemy('x')
+
+                    elif i.direction == "right":
+                        self.rect.x += 5
+                        self.collideWall('x')
+                        self.collideEnemy('x')
+                else:
+                    if i.direction == "down":
+                        self.rect.y -= 5
+                        self.collideWall('y')
+                        self.collideEnemy('y')
+
+                    elif i.direction == "up":
+                        self.rect.y += 5
+                        self.collideWall('y')
+                        self.collideEnemy('y')
+
+                    elif i.direction == "left":
+                        self.rect.x += 5
+                        self.collideWall('x')
+                        self.collideEnemy('x')
+
+                    elif i.direction == "right":
+                        self.rect.x -= 5
+                        self.collideWall('x')
+                        self.collideEnemy('x')
+
                 self.life -= self.game.players.sprites()[0].damage
+                i.kill()
+
         self.checkLife()
 
     def checkLife(self):

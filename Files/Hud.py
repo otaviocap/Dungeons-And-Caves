@@ -9,6 +9,8 @@ class Hud:
         self.heartImg = pygame.image.load('../Assets/heart.png')
         self.textEngine = textGui()
         self.testText = self.textEngine.text('apenas um teste')
+        self.cooldownRect = pygame.Rect((10, 475), (3, 3))
+        self.effectRect = pygame.Rect((10, 435), (3, 3))
         self.getStates()
 
     def getStates(self):
@@ -19,10 +21,10 @@ class Hud:
         for i in range(3):
             self.heartStages[i] = pygame.transform.scale(self.heartStages[i], (26, 24))
 
-    def draw(self):
+    def update(self):
         self.life = self.game.player.life
-        self.fullHearts, self.halfHearts, self.emptyHearts, space = 0, 0, 0, 0
-        for i in range(int(self.game.player.maxLife/2)):
+        self.fullHearts, self.halfHearts, self.emptyHearts = 0, 0, 0
+        for i in range(int(self.game.player.maxLife / 2)):
             if self.life >= 2:
                 self.fullHearts += 1
                 self.life -= 2
@@ -31,7 +33,12 @@ class Hud:
                 self.life -= 1
             else:
                 self.emptyHearts += 1
+        self.cooldownRect.width = self.getValue(self.game.player.bookMagicCooldown, self.game.player.bookMagicCooldownDefault)
+        self.effectRect.width = self.getValue(self.game.player.effectTime, self.game.player.effectTimeDefault)
 
+
+    def draw(self):
+        space = 0
         for _ in range(self.fullHearts):
             self.game.screen.blit(self.heartStages[0], (space, 0))
             space += 30
@@ -41,9 +48,29 @@ class Hud:
         for _ in range(self.emptyHearts):
             self.game.screen.blit(self.heartStages[2], (space, 0))
             space += 30
-        bookImg = self.game.player.bookImg
+        if self.game.player.effectTime != 0:
+            bookImg = self.game.player.bookImg[1]
+        else:
+            bookImg = self.game.player.bookImg[0]
         bookImg = pygame.transform.scale(bookImg, (32, 32))
         self.game.screen.blit(bookImg, (10, 440))
 
+        if self.effectRect.width == 1:
+            pass
+        else:
+            pygame.draw.rect(self.game.screen, (255, 0, 0), self.effectRect)
+
+        if self.cooldownRect.width == 1:
+            pass
+        else:
+            pygame.draw.rect(self.game.screen, (0, 255, 0), self.cooldownRect)
+
+    def getValue(self, x, inMax):
+        x = x
+        inMin = 0
+        inMax = inMax
+        outMin = 1
+        outMax = 30
+        return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin
 
 
