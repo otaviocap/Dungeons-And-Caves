@@ -1,5 +1,6 @@
 import pygame
 from Upgrades import Upgrade
+from Bullet import *
 
 
 
@@ -59,29 +60,30 @@ class Player(pygame.sprite.Sprite):
         self.game.life = self.life
 
     def move(self):
-        self.useSpeed = self.speed
-        self.vx, self.vy = 0, 0
+        if self.life > 0:
+            self.useSpeed = self.speed
+            self.vx, self.vy = 0, 0
 
-        key = pygame.key.get_pressed()
-        if key[pygame.K_LSHIFT]:
-            self.useSpeed = self.useSpeed + 1
-        elif key[pygame.K_LCTRL]:
-            self.useSpeed = 1
-        if key[pygame.K_e]:
-            if self.bookMagicCooldown <= 0:
-                self.action = True
-        if key[pygame.K_a]:
-            self.vx = -self.useSpeed
-        if key[pygame.K_d]:
-            self.vx = self.useSpeed
-        if key[pygame.K_w]:
-            self.vy = -self.useSpeed
-        if key[pygame.K_s]:
-            self.vy = self.useSpeed
+            key = pygame.key.get_pressed()
+            if key[pygame.K_LSHIFT]:
+                self.useSpeed = self.useSpeed + 1
+            elif key[pygame.K_LCTRL]:
+                self.useSpeed = 1
+            if key[pygame.K_e]:
+                if self.bookMagicCooldown <= 0:
+                    self.action = True
+            if key[pygame.K_a]:
+                self.vx = -self.useSpeed
+            if key[pygame.K_d]:
+                self.vx = self.useSpeed
+            if key[pygame.K_w]:
+                self.vy = -self.useSpeed
+            if key[pygame.K_s]:
+                self.vy = self.useSpeed
 
-        if self.vx != 0 and self.vy != 0:
-            self.vx *= 0.7071
-            self.vy *= 0.7071
+            if self.vx != 0 and self.vy != 0:
+                self.vx *= 0.7071
+                self.vy *= 0.7071
 
     def collideWall(self, dir):
         if dir == 'x':
@@ -254,6 +256,27 @@ class Player(pygame.sprite.Sprite):
                         self.backToNormal = True
             else:
                 self.effectTime -= 1
+
+    def events(self):
+        if self.life > 0:
+            key = pygame.key.get_pressed()
+
+            if self.checkCooldownHab1():
+                if key[pygame.K_LEFT]:
+                    Bullet('left', self.game.speedB, self.game, self)
+                    self.setDirection('left')
+                    self.setCooldown(self.hab1cooldown)
+                elif key[pygame.K_RIGHT]:
+                    Bullet('right', self.game.speedB, self.game, self)
+                    self.setDirection('right')
+                    self.setCooldown(self.hab1cooldown)
+                elif key[pygame.K_UP]:
+                    Bullet('up', self.game.speedB, self.game, self)
+                    self.setCooldown(self.hab1cooldown)
+                elif key[pygame.K_DOWN]:
+                    Bullet('down', self.game.speedB, self.game, self)
+                    self.setCooldown(self.hab1cooldown)
+
 
 class Wall(pygame.sprite.Sprite):
 

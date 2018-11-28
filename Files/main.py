@@ -41,7 +41,7 @@ class game():
             self.mapsAlreadyPlayed = ['../Maps/map1.tmx']
 
 
-    def new(self, mapPath = '../Maps/map1.tmx'):
+    def new(self, mapPath = '../Maps/map2.tmx'):
         self.mapPath = mapPath
         self.map = tiledMap(mapPath)
         self.mapImg = self.map.makeMap(self)
@@ -61,6 +61,7 @@ class game():
         self.enemyBullet = pygame.sprite.Group()
         self.chests = pygame.sprite.Group()
         self.allUpgrades = pygame.sprite.Group()
+        self.allDrops = pygame.sprite.Group()
         self.savers = pygame.sprite.Group()
         self.texts = {}
 
@@ -131,24 +132,7 @@ class game():
                 self.action = True
             elif e.type == self.eventDamage:
                 self.player.life -= 1
-
-
-
-        if self.player.checkCooldownHab1():
-                if key[pygame.K_LEFT]:
-                    Bullet('left', self.speedB, self, self.player)
-                    self.player.setDirection('left')
-                    self.player.setCooldown(self.player.hab1cooldown)
-                elif key[pygame.K_RIGHT]:
-                    Bullet('right', self.speedB, self, self.player)
-                    self.player.setDirection('right')
-                    self.player.setCooldown(self.player.hab1cooldown)
-                elif key[pygame.K_UP]:
-                    Bullet('up', self.speedB, self, self.player)
-                    self.player.setCooldown(self.player.hab1cooldown)
-                elif key[pygame.K_DOWN]:
-                    Bullet('down', self.speedB, self, self.player)
-                    self.player.setCooldown(self.player.hab1cooldown)
+        self.player.events()
 
     def update(self):
         self.clock.tick(self.fps)
@@ -162,6 +146,7 @@ class game():
         self.chests.update()
         self.allUpgrades.update()
         self.hud.update()
+        self.allDrops.update()
         pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps()))
 
     def draw(self):
@@ -178,9 +163,12 @@ class game():
         self.screen.blit(self.map.upperLayer, self.camera.apply_rect(self.mapRect))
         for i in self.allUpgrades.sprites():
             self.screen.blit(i.itemImg, self.camera.apply(i))
+        for i in self.allDrops.sprites():
+            i.draw()
         for i in self.savers.sprites():
             i.draw()
-        # self.screen.blit(self.upgrade.items[self.tempVar], (100, 100))
+        # if len(self.allDrops.sprites()) != 0:
+        #     self.screen.blit(self.allDrops.sprites()[0].drops[self.tempVar], (100, 100))
         for key, text in self.texts.items():
             textSurface = self.textGui.text(text[0], color=(255, 255, 255))
             textSize = self.textGui.size(text[0])

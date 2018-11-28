@@ -1,5 +1,6 @@
 from random import randint
 from Bullet import *
+from Drop import Drop
 
 class Enemy(pygame.sprite.Sprite):
 
@@ -238,6 +239,8 @@ class Enemy(pygame.sprite.Sprite):
 
     def checkLife(self):
         if self.life <= 0:
+            if 0 % 20 == 0:
+                Drop(self.game, self.x, self.y)
             self.kill()
         else:
             pass

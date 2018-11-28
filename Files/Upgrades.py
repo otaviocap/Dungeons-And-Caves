@@ -13,7 +13,7 @@ class Upgrade(pygame.sprite.Sprite):
         self.spawnY = y
         self.image = pygame.image.load('../Assets/Items.png')
         self.getItems()
-        self.itemType = 0#randrange(0, 26, 5)
+        self.itemType = randrange(0, 26, 5)
         self.itemStrenght = randrange(0, 4, 1)
         self.itemImg = self.items[self.itemType + self.itemStrenght]
         self.rect = self.itemImg.get_rect()
