@@ -30,7 +30,7 @@ class game():
         self.fps = self.data.getParameter('fps')
         self.screen = pygame.display.set_mode(self.screenSize)
         self.screen.set_alpha(128)
-        pygame.display.set_caption("My Game")
+        pygame.display.set_caption("Dungeons And Caves")
         self.clock = pygame.time.Clock()
         self.done = False
         self.mag = 10
@@ -41,7 +41,7 @@ class game():
             self.mapsAlreadyPlayed = ['../Maps/map1.tmx']
 
 
-    def new(self, mapPath = '../Maps/map2.tmx'):
+    def new(self, mapPath = '../Maps/map1.tmx'):
         self.mapPath = mapPath
         self.map = tiledMap(mapPath)
         self.mapImg = self.map.makeMap(self)
@@ -112,7 +112,9 @@ class game():
             if e.type == pygame.QUIT:
                 self.done = True
             if e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE:
-                self.done = True
+                if len(self.savers.sprites()) > 0:
+                    if not self.savers.sprites()[0].opened:
+                        self.done = True
             if e.type == pygame.KEYDOWN and e.key == pygame.K_0:
                 self.player.life += 1
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_9:
@@ -147,7 +149,7 @@ class game():
         self.allUpgrades.update()
         self.hud.update()
         self.allDrops.update()
-        pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps()))
+        pygame.display.set_caption('Dungeons And Caves') #str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps())
 
     def draw(self):
         self.screen.fill((0, 0, 0))

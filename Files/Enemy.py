@@ -239,7 +239,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def checkLife(self):
         if self.life <= 0:
-            if 0 % 20 == 0:
+            if randint(0, 201) % 20 == 0:
                 Drop(self.game, self.x, self.y)
             self.kill()
         else:

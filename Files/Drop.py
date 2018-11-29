@@ -79,9 +79,6 @@ class Drop(pygame.sprite.Sprite):
             if self.itemRect.y - self.spawnY > -30:
                 self.itemRect.y -= .5
             else:
-                for i in range(nText):
-                    self.game.texts.pop('Drop' + str(i))
-                self.game.texts.pop('Drop')
                 self.game.texts.clear()
                 self.kill()
             self.itemAction()

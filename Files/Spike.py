@@ -47,7 +47,7 @@ class Spike(pygame.sprite.Sprite):
             pos[0] += 17
 
     def update(self):
-        if pygame.sprite.spritecollide(self, self.game.players, False) and self.active:
+        if pygame.sprite.spritecollide(self, self.game.players, False) and self.active and not self.game.player.flying:
             self.time = self.clock.tick()
             if self.time > 20:
                 self.game.player.life -= 1

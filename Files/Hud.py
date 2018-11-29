@@ -8,9 +8,9 @@ class Hud:
         self.game = game
         self.heartImg = pygame.image.load('../Assets/heart.png')
         self.textEngine = textGui()
-        dieText = self.textEngine.text('You Died', color=(140, 0, 0), antialias=False, background=(255,255,255))
+        dieText = self.textEngine.text('Wasted', color=(140, 0, 0), antialias=False, background=(255,255,255))
         dieText.set_colorkey((255,255,255))
-        self.dieText = pygame.transform.scale(dieText, (200, 120))
+        self.dieText = pygame.transform.scale(dieText, (295, 120))
         self.dieText.convert_alpha()
         self.cooldownRect = pygame.Rect((10, 475), (3, 3))
         self.effectRect = pygame.Rect((10, 435), (3, 3))
@@ -94,5 +94,5 @@ class Hud:
         deathSurface.set_alpha(self.deathAlpha)
         self.dieText.set_alpha(self.deathAlpha)
         self.game.screen.blit(deathSurface, (0, 175))
-        self.game.screen.blit(self.dieText, (275, 175))
+        self.game.screen.blit(self.dieText, (225, 175))
 

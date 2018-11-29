@@ -69,9 +69,7 @@ class Player(pygame.sprite.Sprite):
                 self.useSpeed = self.useSpeed + 1
             elif key[pygame.K_LCTRL]:
                 self.useSpeed = 1
-            if key[pygame.K_e]:
-                if self.bookMagicCooldown <= 0:
-                    self.action = True
+
             if key[pygame.K_a]:
                 self.vx = -self.useSpeed
             if key[pygame.K_d]:
@@ -195,6 +193,9 @@ class Player(pygame.sprite.Sprite):
 
     def magicEffect(self):
         if self.bookMagicCooldown <= 0 and self.action:
+            if len(self.game.savers.sprites()) > 0:
+                if not self.game.saver.sprites()[0].opened:
+                    pass
             if self.magic == 0:
                 pass
 
@@ -276,6 +277,9 @@ class Player(pygame.sprite.Sprite):
                 elif key[pygame.K_DOWN]:
                     Bullet('down', self.game.speedB, self.game, self)
                     self.setCooldown(self.hab1cooldown)
+            if key[pygame.K_e]:
+                if self.bookMagicCooldown <= 0:
+                    self.action = True
 
 
 class Wall(pygame.sprite.Sprite):
