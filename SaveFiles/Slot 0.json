@@ -1,17 +1,20 @@
 [
   {
     "backToNormal": true,
-    "cooldown": 30,
-    "damage": 1,
-    "defense": 0,
-    "life": 6,
-    "magicBook": 0,
+    "cooldown": 26,
+    "damage": 4,
+    "defense": 1,
+    "life": 12,
+    "magicBook": 4,
     "magicCooldown": 0,
-    "maxLife": 6,
+    "maxLife": 12,
     "speed": 2
   },
   [
-    "../Maps/map1.tmx",
-    "../Maps/map2.tmx"
+    "../Maps\\map1.tmx",
+    "../Maps\\map5.tmx",
+    "../Maps\\map3.tmx",
+    "../Maps\\map2.tmx",
+    "../Maps\\map4.tmx"
   ]
 ]

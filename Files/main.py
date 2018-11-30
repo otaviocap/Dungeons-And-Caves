@@ -12,6 +12,7 @@ from Upgrades import *
 from textEngine import *
 from saveGetter import *
 from Save import *
+from Boss import *
 
 class game():
 
@@ -41,7 +42,7 @@ class game():
             self.mapsAlreadyPlayed = ['../Maps/map1.tmx']
 
 
-    def new(self, mapPath = '../Maps/map1.tmx'):
+    def new(self, mapPath = '../Maps\\mapBoss1.tmx'):
         self.mapPath = mapPath
         self.map = tiledMap(mapPath)
         self.mapImg = self.map.makeMap(self)
@@ -64,10 +65,21 @@ class game():
         self.allDrops = pygame.sprite.Group()
         self.savers = pygame.sprite.Group()
         self.texts = {}
+        self.hasBoss = False
+        if name == 'nt':
+            if mapPath == '../Maps\\mapBoss1.tmx':
+                self.hasBoss = True
+        else:
+            if mapPath == '../Maps/mapBoss1.tmx':
+                self.hasBoss = True
+        if self.hasBoss:
+            self.boss = Boss(self, 0, 0)
 
         for i in self.map.tmdata.objects:
             if i.name == 'spawn':
                 self.player = Player(self, 1, i.x, i.y)
+                if self.hasBoss:
+                    self.boss.setSpawn(i.x, i.y)
             elif i.name == 'wall':
                 Wall(self, i.x, i.y, i.width, i.height)
             elif i.name == 'end':
@@ -77,11 +89,22 @@ class game():
             elif i.name == 'spike':
                 Spike(self, i.x, i.y, i.width, i.height, i.type)
             elif i.name == 'enemy':
-                Enemy(self, i.x, i.y, i.width, i.height)
+                if not self.hasBoss:
+                    Enemy(self, i.x, i.y, i.width, i.height)
+                else:
+                    self.boss.addEnemiesArena(i.x, i.y, i.width, i.height)
             elif i.name == 'chest':
                 Chest(self, i.x, i.y, i.width, i.height)
             elif i.name == 'save':
                 Save(self, self.menu, i.x, i.y, i.width, i.height)
+            elif i.name == 'boss':
+                self.boss.setPos(i.x, i.y)
+            elif i.name == 'bossCopy':
+                self.boss.addCopy(i.x, i.y)
+            elif i.name == 'spawn1':
+                self.boss.setSpawn1(i.x, i.y)
+            elif i.name == 'spawn2':
+                self.boss.setSpawn2(i.x, i.y)
 
 
         self.hud = Hud(self)
@@ -149,6 +172,8 @@ class game():
         self.allUpgrades.update()
         self.hud.update()
         self.allDrops.update()
+        if self.hasBoss:
+            self.boss.update()
         pygame.display.set_caption('Dungeons And Caves') #str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps())
 
     def draw(self):
@@ -162,6 +187,8 @@ class game():
             self.screen.blit(i.image, self.camera.apply(i))
         for i in self.allSprites.sprites():
             self.screen.blit(i.getImg(), self.camera.apply(i))
+        if self.hasBoss:
+            self.boss.draw()
         self.screen.blit(self.map.upperLayer, self.camera.apply_rect(self.mapRect))
         for i in self.allUpgrades.sprites():
             self.screen.blit(i.itemImg, self.camera.apply(i))

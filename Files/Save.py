@@ -36,7 +36,8 @@ class Save(pygame.sprite.Sprite):
     def update(self):
         if pygame.sprite.spritecollide(self, self.game.players, False):
             if self.game.action and not self.opened:
-                self.game.player.bookMagicCooldown += 10
+                if not self.game.player.magicBook == 0:
+                    self.game.player.bookMagicCooldown += 10
                 self.openMenu()
                 self.opened = True
                 self.game.player.action = False

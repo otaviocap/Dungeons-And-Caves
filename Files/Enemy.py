@@ -178,6 +178,9 @@ class Enemy(pygame.sprite.Sprite):
                 if self.rect.x > self.game.player.rect.x:
                     Bullet('left', 3, self.game, self, True)
                     self.cooldown = 60
+                elif self.rect.y > self.game.player.rect.y:
+                    Bullet('up', 3, self.game, self, True)
+                    self.cooldown = 60
                 elif self.rect.x < self.game.player.rect.x:
                     Bullet('right', 3, self.game, self, True)
                     self.cooldown = 60
@@ -185,9 +188,6 @@ class Enemy(pygame.sprite.Sprite):
                     Bullet('down', 3, self.game, self, True)
                     self.cooldown = 60
 
-                elif self.rect.y > self.game.player.rect.y:
-                    Bullet('up', 3, self.game, self, True)
-                    self.cooldown = 60
     def hit(self):
         for i in self.game.bullets.sprites():
             if pygame.sprite.collide_rect(self, i):

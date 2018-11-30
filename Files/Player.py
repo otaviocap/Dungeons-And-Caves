@@ -193,9 +193,6 @@ class Player(pygame.sprite.Sprite):
 
     def magicEffect(self):
         if self.bookMagicCooldown <= 0 and self.action:
-            if len(self.game.savers.sprites()) > 0:
-                if not self.game.saver.sprites()[0].opened:
-                    pass
             if self.magic == 0:
                 pass
 

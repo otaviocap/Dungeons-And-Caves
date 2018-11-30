@@ -53,4 +53,32 @@
  <tile id="163" terrain="0,0,0,0"/>
  <tile id="193" terrain="0,0,0,0"/>
  <tile id="194" terrain="0,0,0,0"/>
+ <tile id="737">
+  <animation>
+   <frame tileid="737" duration="100"/>
+   <frame tileid="739" duration="100"/>
+   <frame tileid="741" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="738">
+  <animation>
+   <frame tileid="738" duration="100"/>
+   <frame tileid="740" duration="100"/>
+   <frame tileid="742" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="769">
+  <animation>
+   <frame tileid="769" duration="100"/>
+   <frame tileid="771" duration="100"/>
+   <frame tileid="773" duration="100"/>
+  </animation>
+ </tile>
+ <tile id="770">
+  <animation>
+   <frame tileid="770" duration="100"/>
+   <frame tileid="772" duration="100"/>
+   <frame tileid="774" duration="100"/>
+  </animation>
+ </tile>
 </tileset>
