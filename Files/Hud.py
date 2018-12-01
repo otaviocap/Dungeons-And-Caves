@@ -18,6 +18,7 @@ class Hud:
         self.deathAlpha = 0
         self.getStates()
         self.counter = 0
+        self.youDied = False
 
     def getStates(self):
         self.heartStages = []
@@ -78,7 +79,10 @@ class Hud:
             pygame.draw.rect(self.game.screen, (0, 255, 0), self.cooldownRect)
         if self.game.player.life == 0:
             self.deathScreen()
-            if self.counter == 30:
+            if not self.youDied:
+                self.game.menu.sound.playSfx(2)
+                self.youDied = True
+            if self.counter == 70:
                 self.game.done = True
                 self.game.gameRun(self.game.saveName)
 

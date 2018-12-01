@@ -83,6 +83,7 @@ class Menu():
         self.screen = pygame.display.set_mode((720, 480))
         self.backgroundMenu = False
         self.sound = Sound()
+        self.sound.playMusic(0, 2)
 
     def loadImages(self):
         n = 0
@@ -131,9 +132,13 @@ class Menu():
                 self.screen.blit(self.textGui.text(self.difficulty('return'), color=(28, 17, 23)), text[1])
             else:
                 self.screen.blit(self.textGui.text(text[0], color=(28, 17, 23)), text[1])
+        self.data.updateParameter('music', self.musicValue)
+        self.data.updateParameter('sfx', self.sfxValue)
         self.screen.blit(self.logo, self.logoPos)
 
     def update(self):
+        if self.sound.musicChannel.get_sound() != self.sound.musics[2]:
+            self.sound.playMusic(0, 2)
         for button in self.menuButtons:
             button.update()
         for button in self.bigButtons:
@@ -155,6 +160,12 @@ class Menu():
         if x:
             self.clear()
             self.backgroundMenu = False
+        if len(self.sliders) > 0:
+            self.musicValue = self.sMusic.getValue()
+            self.sfxValue = self.sSfx.getValue()
+            self.data.updateParameter('music', self.musicValue)
+            self.data.updateParameter('sfx', self.sfxValue)
+        self.sound.update()
 
     def newPage(self):
         if not self.menuPage['new']:
@@ -185,9 +196,9 @@ class Menu():
             self.clear()
             self.backgroundMenu = True
             Button(self, 365, 70, image=[self.images[11], self.images[11]], text='Music')
-            Slider(self, 370, 155, 0, 100, 'musicP')
+            self.sMusic = Slider(self, 370, 155, 0, 100)
             Button(self, 365, 200, image=[self.images[11], self.images[11]], text='Sound Effects')
-            Slider(self, 370, 285, 0, 100, 'sfxP')
+            self.sSfx = Slider(self, 370, 285, 0, 100)
             Button(self, 365, 320, image=[self.images[11], self.images[11]], text='Difficulty')
             Button(self, 375, 400, image=[self.images[4], self.images[4]])
             Button(self, 385, 401, image=[self.images[0], self.images[0]], action='self.menu.difficulty("down")')
@@ -273,11 +284,6 @@ if __name__ == '__main__':
         clock.tick(60)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                for i in range(2):
-                    if i == 0:
-                        b.data.updateParameter('music', b.musicValue)
-                    if i == 1:
-                        b.data.updateParameter('sfx', b.sfxValue)
                 b.data.updateParameter('difficulty', b.difficulty('return'))
                 pygame.quit()
                 quit()

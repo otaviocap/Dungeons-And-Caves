@@ -7,6 +7,7 @@ class Bullet(pygame.sprite.Sprite):
         super().__init__()
         self.game = game
         self.game.allSprites.add(self)
+        self.game.menu.sound.playSfx(1)
         self.direction = direction
         self.size = (10, 10)
         self.screenSize = self.game.screenSize

@@ -237,11 +237,10 @@ class Enemy(pygame.sprite.Sprite):
 
     def checkLife(self):
         if self.life <= 0:
+            self.game.menu.sound.playSfx(5)
             if randint(0, 201) % 20 == 0:
                 Drop(self.game, self.x, self.y)
             self.kill()
-        else:
-            pass
 
 
     def resetLocation(self):

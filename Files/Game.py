@@ -22,7 +22,6 @@ class game():
         pygame.init()
         self.menu = menu
         self.eventDamage = pygame.USEREVENT + 1
-        self.resetMusic = pygame.USEREVENT + 2
         self.action = False
         self.tempVar = 0
         self.textGui = textGui()
@@ -43,7 +42,7 @@ class game():
             self.mapsAlreadyPlayed = ['../Maps/map1.tmx']
 
 
-    def new(self, mapPath = '../Maps\\map1.tmx'):
+    def new(self, mapPath):
         self.mapPath = mapPath
         self.map = tiledMap(mapPath)
         self.mapImg = self.map.makeMap(self)
@@ -119,13 +118,22 @@ class game():
         print(self.mapsAlreadyPlayed)
 
     def gameRun(self, loading=None):
+        a = randint(0, 1)
+        mapPath = '../Maps\\map5.tmx'
+        if a == 0:
+            self.menu.sound.playMusic(0,0)
+        else:
+            self.menu.sound.playMusic(0,1)
+
         if loading is None:
             self.saveName = 'Slot 0'
             self.saves = saveGetter(self, 'Slot 0')
         else:
             self.saveName = loading
             self.saves = saveGetter(self, loading, loadind=True)
-        self.new()
+            mapPath = self.mapsAlreadyPlayed[-1]
+
+        self.new(mapPath=mapPath)
         while not self.done:
             self.events()
             self.update()
@@ -167,8 +175,6 @@ class game():
                 self.action = True
             elif e.type == self.eventDamage:
                 self.player.life -= 1
-            elif e.type == self.resetMusic:
-                self.menu.sound.playMusic(0,0)
         self.player.events()
 
     def update(self):
@@ -184,6 +190,7 @@ class game():
         self.allUpgrades.update()
         self.hud.update()
         self.allDrops.update()
+        self.menu.sound.update()
         if self.hasBoss:
             self.boss.update()
         pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps())) #str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps())

@@ -25,19 +25,21 @@ class Chest(pygame.sprite.Sprite):
 
     def update(self):
         if pygame.sprite.spritecollide(self, self.game.players, False):
-            self.openChest()
+            if not self.spawned:
+                self.openChest()
 
     def openChest(self):
-        if self.chestChoosen == 0 and not self.spawned:
+        self.game.menu.sound.playSfx(4)
+        if self.chestChoosen == 0:
             self.image = self.chestStates[self.chestChoosen + 1]
             self.spawned = True
 
-        elif self.chestChoosen == 2 and not self.spawned:
+        elif self.chestChoosen == 2:
             self.image = self.chestStates[self.chestChoosen + 1]
             Upgrade(self.game, self.x, self.y)
             self.spawned = True
 
-        elif self.chestChoosen == 4 and not self.spawned:
+        elif self.chestChoosen == 4:
             self.image = self.chestStates[self.chestChoosen + 1]
             Enemy(self.game, self.x, self.y, self.w, self.h, self.chestStates[5])
             self.spawned = True

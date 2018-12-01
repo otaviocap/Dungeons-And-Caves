@@ -40,13 +40,6 @@ class menuButton:
             self.setSelected(False)
             if self.key == 'options' and self.helper:
                 print('sad')
-                for i in range(len(self.menu.sliders)):
-                    if i == 0:
-                        self.musicValue = self.menu.sliders[i].getValue()
-                        self.menu.data.updateParameter('music', self.musicValue)
-                    if i == 1:
-                        self.sfxValue = self.menu.sliders[i].getValue()
-                        self.menu.data.updateParameter('sfx', self.sfxValue)
                 self.menu.data.updateParameter('difficulty', self.menu.difficulty('return'))
                 self.helper = False
 
@@ -119,7 +112,7 @@ class Slider:
                 self.rectBall.x = self.mouse[0]
 
     def getValue(self):
-        return self.mapping(self.rectBall.x-self.spawnX, -2, 255, 0, 100)
+        return self.mapping(self.rectBall.x-self.spawnX, -2, 255, 0.0, 1.0)
 
     def draw(self):
         self.menu.screen.blit(self.images[0], (self.x, self.y))

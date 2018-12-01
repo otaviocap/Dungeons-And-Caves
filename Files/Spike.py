@@ -28,6 +28,7 @@ class Spike(pygame.sprite.Sprite):
             self.active = False
 
     def invert(self):
+        self.game.menu.sound.playSfx(3)
         self.active = not self.active
 
 

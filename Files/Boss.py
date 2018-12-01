@@ -7,8 +7,8 @@ class BossController(pygame.sprite.Sprite):
 
     def __init__(self, game):
         super().__init__()
-        Sound().bossMusics[0].play()
         self.game = game
+        self.sound = self.game.menu.sound
         self.wave = 0
         self.copies = pygame.sprite.Group()
         self.bossGroup = pygame.sprite.Group()
@@ -17,6 +17,7 @@ class BossController(pygame.sprite.Sprite):
         self.alive = False
         self.enemies = []
         self.enemiesAfter = []
+        self.sound.playMusic(1, 0)
 
     def setPos(self, x, y):
         self.x = x
@@ -42,6 +43,7 @@ class BossController(pygame.sprite.Sprite):
             self.alive = True
             self.game.player.setPos(self.spawn2[0], self.spawn2[1])
             self.boss = Boss(self, self.bossSpawn[0], self.bossSpawn[1])
+            self.sound.playMusic(1, 1)
             self.wave = 0
         elif len(self.copies.sprites()) == 0 and len(self.game.enemies.sprites()) == 0 and not self.changedPos and not self.alive:
             self.game.player.setPos(self.spawn1[0], self.spawn1[1])
