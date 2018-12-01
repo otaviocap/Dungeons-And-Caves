@@ -73,7 +73,7 @@ class game():
             if mapPath == '../Maps/mapBoss1.tmx':
                 self.hasBoss = True
         if self.hasBoss:
-            self.boss = Boss(self, 0, 0)
+            self.boss = BossController(self)
 
         for i in self.map.tmdata.objects:
             if i.name == 'spawn':
@@ -105,6 +105,8 @@ class game():
                 self.boss.setSpawn1(i.x, i.y)
             elif i.name == 'spawn2':
                 self.boss.setSpawn2(i.x, i.y)
+            elif i.name == 'bossSpawn':
+                self.boss.setBossSpawn(i.x, i.y)
 
 
         self.hud = Hud(self)
@@ -147,11 +149,16 @@ class game():
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_8:
                 self.player.maxLife += 2
                 self.tempVar += 1
+                if self.tempVar == 3:
+                    self.tempVar = 0
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_7:
                 self.player.maxLife -= 2
                 self.tempVar -= 1
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_p:
                 for i in self.enemies:
+                    i.kill()
+            elif e.type == pygame.KEYDOWN and e.key == pygame.K_o:
+                for i in self.boss.copies:
                     i.kill()
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_e:
                 self.action = True
@@ -174,7 +181,7 @@ class game():
         self.allDrops.update()
         if self.hasBoss:
             self.boss.update()
-        pygame.display.set_caption('Dungeons And Caves') #str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps())
+        pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps())) #str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps())
 
     def draw(self):
         self.screen.fill((0, 0, 0))
@@ -197,7 +204,7 @@ class game():
         for i in self.savers.sprites():
             i.draw()
         # if len(self.allDrops.sprites()) != 0:
-        #     self.screen.blit(self.allDrops.sprites()[0].drops[self.tempVar], (100, 100))
+        # self.screen.blit(Boss(0,0).attack[self.tempVar], (100, 100))
         for key, text in self.texts.items():
             textSurface = self.textGui.text(text[0], color=(255, 255, 255))
             textSize = self.textGui.size(text[0])

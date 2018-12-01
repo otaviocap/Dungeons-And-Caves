@@ -153,9 +153,7 @@ class Enemy(pygame.sprite.Sprite):
             self.collideEnemy('y')
 
     def checkCooldown(self):
-        if self.cooldown == 0:
-            return True
-        return False
+        return self.cooldown == 0
 
     def goCooldown(self):
         if self.cooldown <= 0:

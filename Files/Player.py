@@ -9,7 +9,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.direction = 'left'
         self.game = game
-        self.flying = False
+        self.flying = True
         self.inverseKnockback = False
         self.game.allSprites.add(self)
         self.saves = self.game.saves

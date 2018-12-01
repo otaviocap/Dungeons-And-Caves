@@ -3,7 +3,7 @@ import pygame
 
 class Bullet(pygame.sprite.Sprite):
 
-    def __init__(self, direction, speed, game, where, enemyBullet=False, damage=1):
+    def __init__(self, direction, speed, game, where, enemyBullet=False, damage=1, bulletImage='../Assets/magic.png'):
         super().__init__()
         self.game = game
         self.game.allSprites.add(self)
@@ -11,7 +11,7 @@ class Bullet(pygame.sprite.Sprite):
         self.size = (10, 10)
         self.screenSize = self.game.screenSize
         self.color = (0, 255, 0)
-        self.image = pygame.image.load('../Assets/magic.png')
+        self.image = pygame.image.load(bulletImage)
         self.image = pygame.transform.scale(self.image, self.size)
         self.transformImgSide()
         self.rect = self.image.get_rect()
