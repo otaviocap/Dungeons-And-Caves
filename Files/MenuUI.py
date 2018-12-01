@@ -1,4 +1,5 @@
 import pygame
+from Sounds import Sound
 
 class menuButton:
 
@@ -28,6 +29,7 @@ class menuButton:
             self.setSelected(True)
             if self.cooldown <= 0:
                 if self.isClicked():
+                    self.menu.sound.playSfx(0)
                     self.disarmOthers()
                     self.clicked = not self.clicked
                     exec('self.menu.'+self.key+'Page()')
@@ -160,6 +162,7 @@ class bigButton:
             self.setSelected(True)
             if self.cooldown <= 0:
                 if self.isClicked():
+                    self.menu.sound.playSfx(0)
                     self.disarmOthers()
                     self.clicked = not self.clicked
                     self.cooldown = 10
@@ -229,6 +232,7 @@ class Button:
             self.setSelected(True)
             if self.cooldown <= 0:
                 if self.isClicked():
+                    self.menu.sound.playSfx(0)
                     if self.selectable:
                         self.disarmOthers()
                         self.clicked = not self.clicked

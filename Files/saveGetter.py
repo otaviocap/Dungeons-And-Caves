@@ -34,6 +34,8 @@ class saveGetter:
 
         self.architecture = [self.playerA1, self.game.mapsAlreadyPlayed]
         try:
+            if self.name == 'Slot 0' and loadind is None:
+                rawArchive = open(('../SaveFiles/' + self.name + '.json'), 'w')
             rawArchive = open(('../SaveFiles/' + self.name + '.json'), 'r')
             self.jsonArchive = json.load(rawArchive)
             rawArchive.close()

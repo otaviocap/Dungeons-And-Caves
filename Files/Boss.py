@@ -1,11 +1,13 @@
 import pygame
 from Enemy import *
 from random import randint
+from Sounds import Sound
 
 class BossController(pygame.sprite.Sprite):
 
     def __init__(self, game):
         super().__init__()
+        Sound().bossMusics[0].play()
         self.game = game
         self.wave = 0
         self.copies = pygame.sprite.Group()
@@ -14,6 +16,7 @@ class BossController(pygame.sprite.Sprite):
         self.changedPos = False
         self.alive = False
         self.enemies = []
+        self.enemiesAfter = []
 
     def setPos(self, x, y):
         self.x = x
@@ -35,21 +38,23 @@ class BossController(pygame.sprite.Sprite):
 
     def update(self):
         self.copies.update()
-        if self.wave == 3:
+        if self.wave == 2:
             self.alive = True
             self.game.player.setPos(self.spawn2[0], self.spawn2[1])
             self.boss = Boss(self, self.bossSpawn[0], self.bossSpawn[1])
             self.wave = 0
-        elif len(self.copies.sprites()) == 0 and not self.changedPos and not self.alive:
+        elif len(self.copies.sprites()) == 0 and len(self.game.enemies.sprites()) == 0 and not self.changedPos and not self.alive:
             self.game.player.setPos(self.spawn1[0], self.spawn1[1])
             self.changedPos = True
             self.wave += 1
-            if self.wave != 3:
+            if self.wave != 2:
                 for i in self.enemies:
                     Enemy(self.game, i[0], i[1], 16, 16)
         elif len(self.game.enemies.sprites()) == 0 and self.changedPos and not self.alive:
             self.game.player.setPos(self.spawn[0], self.spawn[1])
             self.spawnCopies()
+            if self.wave == 1:
+                self.spawnAfterEnemies()
             self.changedPos = False
         if len(self.bossGroup.sprites()) > 0:
             self.boss.update()
@@ -71,6 +76,13 @@ class BossController(pygame.sprite.Sprite):
         for i in self.copiesRespawn:
             self.copies.add(bossCopy(self.game, i[0], i[1]))
 
+    def spawnAfterEnemies(self):
+        for i in self.enemiesAfter:
+            self.game.enemies.add(Enemy(self.game, i[0], i[1], 16, 16))
+
+    def addEnemiesAfter(self, x, y):
+        self.enemiesAfter.append([x, y])
+
 class bossCopy(pygame.sprite.Sprite):
 
     def __init__(self, game, x, y):
@@ -83,6 +95,8 @@ class bossCopy(pygame.sprite.Sprite):
         self.rect = self.img.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
+        self.strength = 2
+        self.timeSinceLastDmg = 0
 
     def draw(self):
         self.game.screen.blit(self.img, self.game.camera.apply(self))
@@ -90,8 +104,22 @@ class bossCopy(pygame.sprite.Sprite):
     def update(self):
         for i in self.game.bullets.sprites():
             if pygame.sprite.collide_rect(self, i):
+                if self.life == 0:
+                    self.kill()
+                self.life -= self.game.player.damage
                 i.kill()
-                self.kill()
+        self.damage()
+
+    def damage(self):
+        if pygame.sprite.spritecollide(self, self.game.players, False):
+            self.time = self.damageClock.tick()
+            self.timeSinceLastDmg += self.time
+            damage = int(self.strength - self.game.player.defense/2)
+            if damage <= 0:
+                damage = 0
+            if self.timeSinceLastDmg >= 1000:
+                self.controller.game.player.life -= damage
+                self.timeSinceLastDmg = 0
 
 class Boss(pygame.sprite.Sprite):
 
@@ -101,7 +129,7 @@ class Boss(pygame.sprite.Sprite):
         self.controller.bossGroup.add(self)
         self.x = x
         self.y = y
-        self.life = 100
+        self.life = 500
         self.alive = False
         self.getStates()
         self.state = 9
@@ -164,6 +192,8 @@ class Boss(pygame.sprite.Sprite):
             self.move()
             self.damage()
             self.hit()
+        if self.life <= 50:
+            self.strength = 4
 
     def move(self):
         self.speed = randint(0, 4)
@@ -182,7 +212,7 @@ class Boss(pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(self, self.controller.game.players, False):
             self.time = self.damageClock.tick()
             self.timeSinceLastDmg += self.time
-            damage = int(self.strength - self.controller.game.player.defense/2)
+            damage = int(self.strength - self.controller.game.player.defense)
             if damage <= 0:
                 damage = 0
             if self.timeSinceLastDmg >= 1000:

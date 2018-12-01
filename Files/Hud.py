@@ -7,8 +7,9 @@ class Hud:
     def __init__(self, game):
         self.game = game
         self.heartImg = pygame.image.load('../Assets/heart.png')
+        self.heartBossImg = pygame.image.load('../Assets/heartBoss.png')
         self.textEngine = textGui()
-        dieText = self.textEngine.text('Wasted', color=(140, 0, 0), antialias=False, background=(255,255,255))
+        dieText = self.textEngine.text('You Died', color=(140, 0, 0), antialias=False, background=(255,255,255))
         dieText.set_colorkey((255,255,255))
         self.dieText = pygame.transform.scale(dieText, (295, 120))
         self.dieText.convert_alpha()
@@ -25,6 +26,12 @@ class Hud:
         self.heartStages.append(self.heartImg.subsurface((32, 0, 13, 12)))
         for i in range(3):
             self.heartStages[i] = pygame.transform.scale(self.heartStages[i], (26, 24))
+        self.heartBossStages = []
+        self.heartBossStages.append(self.heartBossImg.subsurface((0, 0, 13, 12)))
+        self.heartBossStages.append(self.heartBossImg.subsurface((16, 0, 13, 12)))
+        self.heartBossStages.append(self.heartBossImg.subsurface((32, 0, 13, 12)))
+        for i in range(3):
+            self.heartBossStages[i] = pygame.transform.scale(self.heartBossStages[i], (26, 24))
 
     def update(self):
         self.life = self.game.player.life
