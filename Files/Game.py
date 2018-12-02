@@ -119,7 +119,7 @@ class game():
 
     def gameRun(self, loading=None):
         a = randint(0, 1)
-        mapPath = '../Maps\\map5.tmx'
+        mapPath = '../Maps\\map1.tmx'
         if a == 0:
             self.menu.sound.playMusic(0,0)
         else:
