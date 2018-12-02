@@ -935,12 +935,12 @@
  </objectgroup>
  <objectgroup id="9" name="holes">
   <object id="302" name="hole" x="493.333" y="463.997" width="26.6666" height="1301.34"/>
-  <object id="303" name="hole" x="533.333" y="1554.67" width="53.3333" height="224"/>
+  <object id="303" name="hole" x="533.333" y="1541.33" width="53.3333" height="237.337"/>
   <object id="304" name="hole" x="536" y="1466.67" width="208" height="74.67"/>
   <object id="305" name="hole" x="536" y="1176" width="64" height="64"/>
-  <object id="306" name="hole" x="533.333" y="1258.67" width="101.333" height="189.334"/>
+  <object id="306" name="hole" x="533.333" y="1258.67" width="101.333" height="205.33"/>
   <object id="307" name="hole" x="680" y="1256" width="128" height="192"/>
-  <object id="308" name="hole" x="757.333" y="1464" width="69.3333" height="32.0033"/>
+  <object id="308" name="hole" x="757.333" y="1450.67" width="69.3333" height="45.3366"/>
   <object id="309" name="hole" x="728" y="1146.67" width="80" height="90.6667"/>
   <object id="310" name="hole" x="816" y="1264" width="48" height="32"/>
   <object id="311" name="hole" x="632" y="1592" width="112" height="80"/>
@@ -949,24 +949,24 @@
   <object id="314" name="hole" x="693.333" y="1685.33" width="85.3333" height="18.6666"/>
   <object id="315" name="hole" x="792" y="1546.67" width="160" height="42.6667"/>
   <object id="316" name="hole" x="866.667" y="1701.33" width="154.667" height="24"/>
-  <object id="317" name="hole" x="872" y="1600" width="80" height="90.6667"/>
+  <object id="317" name="hole" x="872" y="1600" width="80" height="101.333"/>
   <object id="318" name="hole" x="821.333" y="1413.33" width="37.3333" height="37.3333"/>
   <object id="319" name="hole" x="874.667" y="1416" width="250.667" height="112"/>
   <object id="320" name="hole" x="1061.33" y="1370.67" width="101.333" height="26.6667"/>
   <object id="321" name="hole" x="1064" y="1021.33" width="112" height="170.667"/>
-  <object id="322" name="hole" x="1061.33" y="1202.67" width="53.3333" height="154.667"/>
-  <object id="323" name="hole" x="1160" y="1205.33" width="16" height="117.333"/>
+  <object id="322" name="hole" x="1061.33" y="1194.67" width="53.3333" height="162.67"/>
+  <object id="323" name="hole" x="1160" y="1192" width="16" height="130.663"/>
   <object id="324" name="hole" x="1184" y="1269.33" width="16" height="53.3333"/>
   <object id="325" name="hole" x="1205.33" y="1272" width="101.333" height="128"/>
   <object id="326" name="hole" x="1221.33" y="1210.67" width="85.3333" height="42.6667"/>
-  <object id="327" name="hole" x="1253.33" y="1413.33" width="53.3333" height="117.333"/>
+  <object id="327" name="hole" x="1253.33" y="1400" width="53.3333" height="130.663"/>
   <object id="328" name="hole" x="1317.33" y="1432" width="37.3333" height="96"/>
   <object id="329" name="hole" x="997.333" y="1576" width="101.333" height="80"/>
   <object id="330" name="hole" x="1061.33" y="1704" width="69.3333" height="48"/>
   <object id="332" name="hole" x="832" y="1765.33" width="1034.67" height="16"/>
   <object id="333" name="hole" x="1106.67" y="1578.67" width="26.6667" height="32"/>
   <object id="334" name="hole" x="1141.33" y="1578.67" width="133.333" height="178.667"/>
-  <object id="335" name="hole" x="1173.33" y="1445.33" width="37.3333" height="117.333"/>
+  <object id="335" name="hole" x="1173.33" y="1445.33" width="37.3333" height="133.337"/>
   <object id="336" name="hole" x="1280" y="1578.67" width="42.6667" height="80"/>
   <object id="337" name="hole" x="1330.67" y="1576" width="138.667" height="32"/>
   <object id="338" name="hole" x="1280" y="1706.67" width="74.6667" height="50.6667"/>
@@ -975,16 +975,16 @@
   <object id="341" name="hole" x="1552" y="1749.33" width="32" height="16"/>
   <object id="342" name="hole" x="1512" y="1576" width="224" height="85.3333"/>
   <object id="344" name="hole" x="856" y="1336" width="160" height="32"/>
-  <object id="346" name="hole" x="853.333" y="1221.33" width="85.3333" height="5.33333"/>
+  <object id="346" name="hole" x="856" y="1221.33" width="82.6663" height="5.33333"/>
   <object id="347" name="hole" x="901.333" y="1237.33" width="37.3333" height="82.6667"/>
-  <object id="348" name="hole" x="952" y="1146.67" width="64" height="168"/>
+  <object id="348" name="hole" x="952" y="1146.67" width="64" height="186.663"/>
   <object id="349" name="hole" x="952" y="970.667" width="64" height="42.6667"/>
-  <object id="350" name="hole" x="997.333" y="1032" width="21.3333" height="96"/>
+  <object id="350" name="hole" x="997.333" y="1032" width="21.3333" height="114.667"/>
   <object id="351" name="hole" x="725.333" y="1064" width="229.333" height="32"/>
-  <object id="352" name="hole" x="856" y="1112" width="48" height="96"/>
+  <object id="352" name="hole" x="856" y="1096" width="48" height="125.333"/>
   <object id="353" name="hole" x="693.333" y="1080" width="21.3333" height="16"/>
   <object id="354" name="hole" x="645.333" y="1082.67" width="37.3333" height="125.333"/>
-  <object id="355" name="hole" x="728" y="968" width="176" height="80"/>
+  <object id="355" name="hole" x="728" y="968" width="176" height="96"/>
   <object id="356" name="hole" x="693.333" y="965.333" width="21.3333" height="21.3333"/>
   <object id="357" name="hole" x="645.333" y="968" width="37.3333" height="64"/>
   <object id="358" name="hole" x="568" y="858.667" width="32" height="266.667"/>
@@ -1017,12 +1017,12 @@
   <object id="386" name="hole" x="994.667" y="901.333" width="122.667" height="21.3333"/>
   <object id="387" name="hole" x="1061.33" y="933.333" width="53.3333" height="37.3333"/>
   <object id="388" name="hole" x="1224" y="1018.67" width="128" height="138.667"/>
-  <object id="389" name="hole" x="1285.33" y="981.333" width="69.3333" height="21.3333"/>
+  <object id="389" name="hole" x="1285.33" y="968" width="66.67" height="50.6667"/>
   <object id="390" name="hole" x="1125.33" y="856" width="229.333" height="112"/>
-  <object id="391" name="hole" x="1128" y="789.333" width="112" height="53.3333"/>
+  <object id="391" name="hole" x="1128" y="789.333" width="112" height="66.667"/>
   <object id="392" name="hole" x="997.333" y="664" width="85.3333" height="144"/>
   <object id="393" name="hole" x="1093.33" y="664" width="21.3333" height="80"/>
-  <object id="394" name="hole" x="1125.33" y="664" width="69.3333" height="112"/>
+  <object id="394" name="hole" x="1125.33" y="664" width="69.3333" height="125.333"/>
   <object id="395" name="hole" x="1141.33" y="629.333" width="101.333" height="21.3333"/>
   <object id="396" name="hole" x="1205.33" y="664" width="37.3333" height="80"/>
   <object id="397" name="hole" x="1250.67" y="600" width="74.6667" height="32"/>
@@ -1065,12 +1065,12 @@
   <object id="435" name="hole" x="1666.67" y="1197.33" width="26.6667" height="32"/>
   <object id="436" name="hole" x="1637.33" y="1096" width="21.3333" height="160"/>
   <object id="437" name="hole" x="1477.33" y="1096" width="37.3333" height="64"/>
-  <object id="439" name="hole" x="1525.33" y="1064" width="21.3333" height="48"/>
+  <object id="439" name="hole" x="1525.33" y="1045.33" width="21.3333" height="66.6667"/>
   <object id="440" name="hole" x="1557.33" y="1061.33" width="37.3333" height="213.333"/>
   <object id="441" name="hole" x="1605.33" y="1064" width="21.3333" height="160"/>
   <object id="442" name="hole" x="1400" y="874.667" width="64" height="170.667"/>
   <object id="443" name="hole" x="1509.33" y="874.667" width="69.3333" height="170.667"/>
-  <object id="444" name="hole" x="1477.33" y="1002.67" width="21.3333" height="42.6667"/>
+  <object id="444" name="hole" x="1464" y="1002.67" width="34.6633" height="42.6667"/>
   <object id="445" name="hole" x="1586.67" y="1016" width="26.6667" height="32"/>
   <object id="446" name="hole" x="1749.33" y="933.333" width="5.33333" height="149.333"/>
   <object id="447" name="hole" x="1634.67" y="952" width="106.667" height="128"/>
