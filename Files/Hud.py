@@ -78,8 +78,6 @@ class Hud:
         else:
             pygame.draw.rect(self.game.screen, (0, 255, 0), self.cooldownRect)
         if self.game.player.life == 0:
-            pass
-            '''
             self.deathScreen()
             if not self.youDied:
                 self.game.menu.sound.playSfx(2)
@@ -87,7 +85,6 @@ class Hud:
             if self.counter == 70:
                 self.game.done = True
                 self.game.gameRun(self.game.saveName)
-            '''
 
     def getValue(self, x, inMax):
         x = x
