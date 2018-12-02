@@ -213,11 +213,19 @@ class Menu():
             self.clear()
             self.backgroundMenu = True
             Button(self, 365, 70, image=[self.images[11], self.images[11]], text='Made By:')
-            self.texts['credit1'] = ('Otávio H. G. C.', (410, 150))
-            self.texts['credit2'] = ('(otaviocap)', (435, 180))
+            self.texts['credit1'] = ('Otaviocap', (390, 150))
+            self.texts['credit2'] = ('(Menu, code,', (390, 180))
+            self.texts['credit3'] = ('level design)', (390, 210))
             a = pygame.image.load('../Assets/me.png')
-            a = pygame.transform.scale(a, (int(a.get_rect().width/3), int(a.get_rect().height/3)))
-            Button(self, 410, 200, image=[a, a])
+            a = pygame.transform.scale(a, (int(a.get_rect().width/7), int(a.get_rect().height/7)))
+            # Button(self, 580, 135, image=[a, a])
+            self.texts['credit4'] = ('J_Giaco', (390, 250))
+            self.texts['credit5'] = ('(Boss design)', (390, 280))
+            self.texts['credit6'] = ('0x72', (390, 320))
+            self.texts['credit7'] = ('(Tilesets)', (390, 350))
+            self.texts['credit8'] = ('Kryse', (560, 320))
+            self.texts['credit9'] = ('(Itens)', (560, 350))
+            self.texts['credit10'] = ('opengamearts music', (360, 390))
             self.menuPage['credits'] = True
         else:
             self.menuPage['credits'] = False

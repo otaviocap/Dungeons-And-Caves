@@ -119,7 +119,7 @@ class game():
 
     def gameRun(self, loading=None):
         a = randint(0, 1)
-        mapPath = '../Maps\\map1.tmx'
+        mapPath = '../Maps\\mapBoss1.tmx'
         if a == 0:
             self.menu.sound.playMusic(0,0)
         else:
@@ -151,7 +151,7 @@ class game():
                 if len(self.savers.sprites()) > 0:
                     if not self.savers.sprites()[0].opened:
                         self.done = True
-            '''
+
             if e.type == pygame.KEYDOWN and e.key == pygame.K_0:
                 self.player.life += 1
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_9:
@@ -172,7 +172,6 @@ class game():
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_o:
                 for i in self.boss.copies:
                     i.kill()
-            '''
             if e.type == pygame.KEYDOWN and e.key == pygame.K_e:
                 self.action = True
             elif e.type == self.eventDamage:
@@ -195,7 +194,7 @@ class game():
         self.menu.sound.update()
         if self.hasBoss:
             self.boss.update()
-        pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps())) #str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps())
+        # pygame.display.set_caption(str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps())) #str(self.player.getPos()) + 'FPS = ' + str(self.clock.get_fps())
 
     def draw(self):
         self.screen.fill((0, 0, 0))
