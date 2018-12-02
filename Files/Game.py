@@ -151,7 +151,7 @@ class game():
                 if len(self.savers.sprites()) > 0:
                     if not self.savers.sprites()[0].opened:
                         self.done = True
-
+            '''
             if e.type == pygame.KEYDOWN and e.key == pygame.K_0:
                 self.player.life += 1
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_9:
@@ -172,6 +172,7 @@ class game():
             elif e.type == pygame.KEYDOWN and e.key == pygame.K_o:
                 for i in self.boss.copies:
                     i.kill()
+            '''
             if e.type == pygame.KEYDOWN and e.key == pygame.K_e:
                 self.action = True
             elif e.type == self.eventDamage:
