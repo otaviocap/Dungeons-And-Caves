@@ -1,10 +1,9 @@
 [
   {
-    "backToNormal": false,
+    "backToNormal": true,
     "cooldown": 30,
     "damage": 1,
     "defense": 0,
-    "effectTime": 0,
     "life": 6,
     "magicBook": 0,
     "magicCooldown": 0,

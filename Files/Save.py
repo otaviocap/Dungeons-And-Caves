@@ -56,7 +56,8 @@ class Save(pygame.sprite.Sprite):
     def saveGame(self):
         for button in self.b:
             if button.clicked:
-                saveGetter(self.game, button.text)
+                a = saveGetter(self.game, button.text)
+                a.update(self.game.player)
 
     def draw(self):
         for button in self.b:
