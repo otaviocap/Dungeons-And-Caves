@@ -44,9 +44,6 @@ class Bullet(pygame.sprite.Sprite):
         elif self.direction == "right":
             self.rect.x += self.speed
 
-    def getColor(self):
-        return self.color
-
     def getSize(self):
         if self.direction == "down":
             return (self.size[0], self.size[1])

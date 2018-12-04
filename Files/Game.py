@@ -220,8 +220,6 @@ class game():
             i.draw()
         for i in self.savers.sprites():
             i.draw()
-        # if len(self.allDrops.sprites()) != 0:
-        # self.screen.blit(Boss(0,0).attack[self.tempVar], (100, 100))
         for key, text in self.texts.items():
             textSurface = self.textGui.text(text[0], color=(255, 255, 255))
             textSize = self.textGui.size(text[0])
