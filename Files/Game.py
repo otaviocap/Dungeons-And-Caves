@@ -132,9 +132,14 @@ class game():
             self.saveName = 'Slot 0'
             self.saves = saveGetter(self, 'Slot 0')
         else:
-            self.saveName = loading
-            self.saves = saveGetter(self, loading, loadind=True)
-            mapPath = self.mapsAlreadyPlayed[-1]
+            if loading == 'Slot 0':
+                self.saveName = 'Slot 0'
+                self.mapsAlreadyPlayed.clear()
+                self.saves = saveGetter(self, 'Slot 0')
+            else:
+                self.saveName = loading
+                self.saves = saveGetter(self, loading, loadind=True)
+                mapPath = self.mapsAlreadyPlayed[-1]
 
         self.new(mapPath=mapPath)
         while not self.done:

@@ -51,5 +51,6 @@ class Sound():
     def equalization(self):
         self.effects[1].set_volume(0.2)
         self.effects[2].set_volume(1)
-        self.effects[3].set_volume(0.7)
+        self.effects[3].set_volume(0.3)
+        self.effects[5].set_volume(0.5)
 
