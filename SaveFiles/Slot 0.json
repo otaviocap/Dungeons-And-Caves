@@ -10,5 +10,7 @@
     "maxLife": 6,
     "speed": 2
   },
-  []
+  [
+    "../Maps/map1.tmx"
+  ]
 ]
