@@ -22,6 +22,7 @@ class Save(pygame.sprite.Sprite):
         self.screen = self.game.screen
         self.textGui = textGui()
         self.goingDown = 0
+        self.sound = self.menu.sound
 
     def openMenu(self):
         self.b.append(Button(self, 365, 70, image=[self.menu.images[10], self.menu.images[11]], text='Slot 1', selectable=True))
