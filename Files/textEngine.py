@@ -14,7 +14,8 @@ class textGui():
         return pygame.font.Font.render(self.extraFonts[0], text, antialias, color, background)
 
     def size(self, text):
-        return pygame.font.Font.size(self.extraFonts[0], text)
-
-
-
+        try:
+            return pygame.font.Font.size(self.extraFonts[0], text)
+        except IndexError as exc:
+            print("Error in {path}: {error}".format(path=__file__, error=str(exc)))
+            raise IndexError
